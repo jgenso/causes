@@ -1,3 +1,27 @@
 <div lift="surround?with=settings-wrap;at=content">
-  <div lift="ProfileScreen?ajax=true"></div>
+  <div lift="Profile">
+    <form role="form" data-lift="form.ajax">
+      <div class="form-group">
+        <label for="photo">Photo</label>
+        <input type="file" class="form-control" id="photo" placeholder="Choose a file">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select class="form-control" id="country"></select>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="cellphone">Cell Phone</label>
+        <input type="text" class="form-control" id="cellphone" placeholder="Cell Phone">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
 </div>

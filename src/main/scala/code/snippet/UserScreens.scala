@@ -3,12 +3,13 @@ package snippet
 
 import config.Site
 import model._
+import net.liftweb.http.js.JsCmds.RedirectTo
 
 import scala.xml._
 
 import net.liftweb._
 import common._
-import http.{LiftScreen, S}
+import net.liftweb.http.{SHtml, LiftScreen, S}
 import util.FieldError
 import util.Helpers._
 
@@ -77,30 +78,23 @@ object PasswordScreen extends BaseCurrentUserScreen with BasePasswordScreen {
 /*
  * Use for editing the currently logged in user only.
  */
-object ProfileScreen extends BaseCurrentUserScreen {
-  def gravatarHtml =
-    <span>
-      <div class="gravatar">
-        {Gravatar.imgTag(userVar.is.email.get, 60)}
-      </div>
-      <div class="gravatar">
-        <h4>Change your avatar at <a href="http://gravatar.com" target="_blank">Gravatar.com</a></h4>
-        <p>
-          We're using {userVar.is.email.get}. It may take time for changes made on gravatar.com to appear on our site.
-        </p>
-      </div>
-    </span>
+object Profile {
 
-  val gravatar = displayOnly("Picture", gravatarHtml)
-
-  addFields(() => userVar.is.profileScreenFields)
-
-  def finish() {
-    userVar.is.saveBox match {
-      case Empty => S.warning("Empty save")
-      case Failure(msg, _, _) => S.error(msg)
-      case Full(_) => S.notice("Profile settings saved")
-    }
+  def render = {
+    "*" #> User.currentUser.map(user => {
+      "#photo" #> user.photo.toForm &
+      "#name"  #> user.name.toForm &
+      "#country" #> user.country.toForm &
+      "#location" #> user.location.toForm &
+      "#cellphone" #> user.cellPhone.toForm &
+      "type=submit" #> SHtml.ajaxOnSubmit(() => {
+        user.saveBox() match {
+          case Empty => S.warning("Empty save")
+          case Failure(msg, _, _) => S.error(msg)
+          case Full(_) => RedirectTo(Site.account.url, () => S.notice("Profile settings saved"))
+        }
+      })
+    })
   }
 }
 
