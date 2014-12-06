@@ -4,6 +4,7 @@ package model
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{EnumNameField, IntField, StringField}
+import com.foursquare.rogue.LiftRogue._
 
 /**
  * Created by andrea on 12/6/14.
@@ -37,6 +38,14 @@ class CommittedResource private() extends MongoRecord[CommittedResource] with Ob
 }
 
 object CommittedResource extends  CommittedResource with MongoMetaRecord[CommittedResource] {
+
+  def findAllByCausePaginate(cause: Cause, page: Int, limit: Int = 10): List[CommittedResource] = {
+    CommittedResource.where(_.cause eqs cause.id.get).paginate(limit).setPage(page).fetch()
+  }
+
+  def countAllByCause(cause: Cause): Long = {
+    CommittedResource.where(_.cause eqs cause.id.get).count()
+  }
 
 }
 
