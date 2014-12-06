@@ -15,6 +15,10 @@
       ServerFuncs.contribute({quantity: quantity, resource: resource});
     };
 
+    $scope.follow = function(sms, email) {
+      ServerFuncs.follow({sms: sms, email: email});
+    };
+
     $scope.$on('after-fetch-cause', function (event, data) {
       $scope.$apply(function () {
         $scope.cause = data;
@@ -23,7 +27,13 @@
 
     $scope.$on('after-contribute', function (event, data) {
       $scope.$apply(function () {
-        $scope.cause = data;
+        //$scope.cause = data;
+      });
+    });
+
+    $scope.$on('after-follow', function (event, data) {
+      $scope.$apply(function () {
+        //$scope.cause = data;
       });
     });
   });

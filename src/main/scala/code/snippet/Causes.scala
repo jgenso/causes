@@ -32,6 +32,19 @@ object Causes extends SnippetHelper {
       }
     }
 
+    def follow(json: JValue) = {
+      for {
+        allowSms <- tryo((json \ "sms").extract[Boolean])
+        allowEmail <- tryo((json \ "email").extract[Boolean])
+        cause <- CauseMenus.causeMenu.currentValue
+        user <- User.currentUser
+      } yield {
+        val res = CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
+          .cause(cause.id.get).follower(user.id.get).saveBox().map(_.asJValue)
+        NgBroadcast(elementId, "after-follow", res)
+      }
+    }
+
     def contribute(json: JValue) = {
       for {
         quantity <- tryo((json \ "quantity").extract[Int])
@@ -55,7 +68,8 @@ object Causes extends SnippetHelper {
 
     val funcs = JsObj(
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),
-      "contribute" -> JsExtras.JsonCallbackAnonFunc(contribute)
+      "contribute" -> JsExtras.JsonCallbackAnonFunc(contribute),
+      "follow" -> JsExtras.JsonCallbackAnonFunc(follow)
     )
 
     val onload =
