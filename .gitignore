@@ -19,3 +19,4 @@ project/plugins/project/
 # IntelliJ
 .idea/*
 .idea_modules/*
+projectFilesBackup/
