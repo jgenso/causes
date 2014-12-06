@@ -6,6 +6,7 @@ import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{EnumNameField, IntField, StringField}
 import com.foursquare.rogue.LiftRogue._
+import org.joda.time.DateTime
 
 /**
  * Created by andrea on 12/6/14.
@@ -25,12 +26,15 @@ class CommittedResource private() extends MongoRecord[CommittedResource] with Ob
   }
 
   object registerDate extends DateField(this) {
+    override def defaultValue = DateTime.now().toDate
     override def displayName = "Register date"
     override def asJValue: JValue = valueBox
       .map(v => JObject(JField("$dt", JString(formats.dateFormat.format(v))) :: Nil)) openOr (JNothing: JValue)
   }
 
-  object status extends EnumNameField(this, CommittedResourceStatus)
+  object status extends EnumNameField(this, CommittedResourceStatus) {
+    override def defaultValue = CommittedResourceStatus.Committed
+  }
 
   object cause extends ObjectIdRefField(this, Cause)
 
