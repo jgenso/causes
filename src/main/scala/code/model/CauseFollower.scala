@@ -4,6 +4,7 @@ package model
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefListField, ObjectIdPk, ObjectIdRefField}
 import net.liftweb.record.field.BooleanField
+import com.foursquare.rogue.LiftRogue._
 
 /**
  * Created by andrea on 12/6/14.
@@ -26,4 +27,11 @@ class CauseFollower private() extends MongoRecord[CauseFollower] with ObjectIdPk
 }
 
 object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {
+  def findAllByCausePaginate(cause: Cause, page: Int, limit: Int = 10): List[CauseFollower] = {
+    CauseFollower.where(_.cause eqs cause.id.get).paginate(limit).setPage(page).fetch()
+  }
+
+  def countAllByCause(cause: Cause): Long = {
+    CauseFollower.where(_.cause eqs cause.id.get).count()
+  }
 }
