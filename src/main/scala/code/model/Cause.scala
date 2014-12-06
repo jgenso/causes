@@ -4,12 +4,15 @@ package model
 import com.mongodb.gridfs.GridFS
 import net.liftweb.common.Full
 import net.liftweb.http.{FileParamHolder, SHtml}
+import net.liftweb.json.JsonAST.JObject
 import net.liftweb.mongodb.MongoDB
 import net.liftweb.mongodb.record.field.{MongoListField, DateField, ObjectIdPk}
 import net.liftweb.mongodb.record.{MongoRecord, MongoMetaRecord}
 import net.liftweb.record.field._
 import net.liftweb.util.DefaultConnectionIdentifier
 import org.bson.types.ObjectId
+import net.liftweb.json.JsonDSL._
+import net.liftweb.json._
 
 import scala.xml.NodeSeq
 
@@ -122,6 +125,10 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 }
 
 object Cause extends Cause with MongoMetaRecord[Cause] {
+
+  override def asJValue(inst: Cause): JObject = {
+    super.asJValue(inst) ~ ("resources" -> Resource.findAllByCause(inst).map(_.asJValue))
+  }
 
 }
 

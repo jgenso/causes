@@ -27,5 +27,4 @@
       });
     });
   });
-  $scope.fetchCause();
 })
