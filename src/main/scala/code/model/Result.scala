@@ -1,4 +1,5 @@
-package code.model
+package code
+package model
 
 import code.model.Cause.photo._
 import com.mongodb.gridfs.GridFS
@@ -9,7 +10,6 @@ import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{OptionalStringField, TextareaField, StringField}
 import net.liftweb.util.DefaultConnectionIdentifier
-
 import scala.xml.NodeSeq
 
 /**

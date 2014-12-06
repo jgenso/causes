@@ -54,28 +54,30 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
     override def displayName = "End coordination date"
   }
 
-  object startExeDate extends DateField(this){
+  object startExeDate extends DateField(this) {
     override def displayName = "Start execution date"
   }
 
-  object endExeDate extends DateField(this){
+  object endExeDate extends DateField(this) {
     override def displayName = "End execution date"
   }
 
-  object isInmedCoor extends BooleanField(this){
+  object isInmedCoor extends BooleanField(this) {
     override def displayName = "Inmediately coordination"
   }
 
-  object isInmedExe extends  BooleanField(this){
+  object isInmedExe extends  BooleanField(this) {
     override def displayName = "Inmediately execution"
   }
 
-  object registerDate extends DateField(this){
+  object registerDate extends DateField(this) {
     override def displayName = "Register date"
   }
 
-  object beneficiary extends StringField(this, 500){
+  object beneficiary extends StringField(this, 500) {
     override  def displayName = "Benficiary"
+
+    override  def optional_? = true
 
     override def validations =
       valMaxLen(1000, "Beneficiary must be 500 characters or less") _ ::
@@ -125,5 +127,5 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
 
 object CauseStatus extends Enumeration {
   type CauseStatus  = Value
-  val Active, Complete = Value
+  val Active, Complete, Canceled = Value
 }

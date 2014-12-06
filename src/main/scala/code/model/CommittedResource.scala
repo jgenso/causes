@@ -1,4 +1,5 @@
-package code.model
+package code
+package model
 
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
@@ -21,11 +22,11 @@ class CommittedResource private() extends MongoRecord[CommittedResource] with Ob
         super.validations
   }
 
-  object registerDate extends DateField(this){
+  object registerDate extends DateField(this) {
     override def displayName = "Register date"
   }
 
-  object status extends EnumNameField(this, CommittesResourceStatus)
+  object status extends EnumNameField(this, CommittedResourceStatus)
 
   object cause extends ObjectIdRefField(this, Cause)
 
@@ -39,7 +40,7 @@ object CommittedResource extends  CommittedResource with MongoMetaRecord[Committ
 
 }
 
-object CommittesResourceStatus extends Enumeration {
+object CommittedResourceStatus extends Enumeration {
   type CommittedResourceStatus  = Value
   val Committed, WaitingExecuted, Executed = Value
 }

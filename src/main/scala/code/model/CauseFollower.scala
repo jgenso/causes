@@ -1,7 +1,8 @@
-package code.model
+package code
+package model
 
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
-import net.liftweb.mongodb.record.field.{ObjectIdPk, ObjectIdRefField}
+import net.liftweb.mongodb.record.field.{ObjectIdRefListField, ObjectIdPk, ObjectIdRefField}
 import net.liftweb.record.field.BooleanField
 
 /**
@@ -11,17 +12,18 @@ import net.liftweb.record.field.BooleanField
 class CauseFollower private() extends MongoRecord[CauseFollower] with ObjectIdPk[CauseFollower]{
   def meta = CauseFollower
 
-  object receiptSms extends BooleanField(this){
+  object receiptSms extends BooleanField(this) {
     override def displayName = "Receipt sms notification"
   }
 
-  object receiptEmail extends  BooleanField(this){
+  object receiptEmail extends  BooleanField(this) {
     override def displayName = "Receipt email notificacion"
   }
 
   object cause extends ObjectIdRefField(this, Cause)
+
+  object follower extends ObjectIdRefListField(this, User)
 }
 
-object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower]{
-
+object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {
 }

@@ -1,4 +1,5 @@
-package code.model
+package code
+package model
 
 import code.model.Result.photo._
 import com.mongodb.gridfs.GridFS
@@ -15,8 +16,8 @@ import scala.xml.NodeSeq
 /**
  * Created by andrea on 12/6/14.
  */
-class New private() extends MongoRecord[New] with ObjectIdPk[New] {
-  def meta = New
+class News private() extends MongoRecord[News] with ObjectIdPk[News] {
+  def meta = News
 
   object description extends TextareaField(this, 1000) {
     override def displayName = "Description"
@@ -26,7 +27,7 @@ class New private() extends MongoRecord[New] with ObjectIdPk[New] {
         super.validations
   }
 
-  object registerDate extends DateField(this){
+  object registerDate extends DateField(this) {
     override def displayName = "Register date"
   }
 
@@ -34,7 +35,7 @@ class New private() extends MongoRecord[New] with ObjectIdPk[New] {
     override def displayName = "Photo"
     private def photoHtml =
       <div class="image">
-        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${id.get}'s new photo"}/>
+        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${id.get}'s news photo"}/>
       </div>
     private def elem = {
       (value.headOption.map(v => v).getOrElse("").trim match {
@@ -65,6 +66,6 @@ class New private() extends MongoRecord[New] with ObjectIdPk[New] {
 
 }
 
-object New extends New with MongoMetaRecord[New] {
+object News extends News with MongoMetaRecord[News] {
 
 }

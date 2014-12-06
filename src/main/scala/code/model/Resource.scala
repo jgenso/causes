@@ -1,6 +1,6 @@
-package code.model
+package code
+package model
 
-import code.model.Cause.name._
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{IntField, StringField}
@@ -26,7 +26,7 @@ class Resource private() extends MongoRecord[Resource] with ObjectIdPk[Resource]
     override def displayName = "Unit"
 
     override def validations =
-      valMaxLen(50, "Name must be 50 characters or less") _ ::
+      valMaxLen(50, "Unit must be 50 characters or less") _ ::
         super.validations
   }
 
