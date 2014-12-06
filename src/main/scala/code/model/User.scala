@@ -1,7 +1,10 @@
 package code
 package model
 
+import com.mongodb.gridfs.GridFS
 import lib.RogueMetaRecord
+import net.liftweb
+import net.liftweb.mongodb.MongoDB
 
 import org.bson.types.ObjectId
 import org.joda.time.DateTime
@@ -11,11 +14,12 @@ import common._
 import http.{StringField => _, BooleanField => _, _}
 import mongodb.record.field._
 import record.field._
-import util.FieldContainer
+import net.liftweb.util.{DefaultConnectionIdentifier, FieldContainer}
 
 import net.liftmodules.mongoauth._
 import net.liftmodules.mongoauth.field._
 import net.liftmodules.mongoauth.model._
+import scala.xml._
 
 class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
   def meta = User
@@ -38,6 +42,9 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
       valMaxLen(64, "Name must be 64 characters or less") _ ::
       super.validations
   }
+  object country extends CountryField(this) {
+    override def displayName = "Country"
+  }
   object location extends StringField(this, 64) {
     override def displayName = "Location"
 
@@ -45,12 +52,40 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
       valMaxLen(64, "Location must be 64 characters or less") _ ::
       super.validations
   }
-  object bio extends TextareaField(this, 160) {
-    override def displayName = "Bio"
+  object cellPhone extends LongField(this) {
+    override def displayName = "Cell Phone"
+  }
 
-    override def validations =
-      valMaxLen(160, "Bio must be 160 characters or less") _ ::
-      super.validations
+  object photo extends StringField(this, 500) {
+    override def displayName = "Photo"
+    private def photoHtml =
+      <div class="image">
+        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${owner.name.get}'s photo"}/>
+      </div>
+    private def elem = {
+      (value.trim match {
+        case "" =>
+          NodeSeq.Empty
+        case other =>
+          photoHtml
+      }) ++
+        SHtml.fileUpload(
+          fph => {
+            set(savePhoto(fph))
+          }
+        )
+    }
+    override def toForm = Full(elem)
+    override def asHtml = photoHtml
+    private def savePhoto(fph: FileParamHolder): String = {
+      println("AAAAAAAAAAAAA")
+      MongoDB.use(DefaultConnectionIdentifier) { db =>
+        val fs = new GridFS(db)
+        val mongoFile = fs.createFile(fph.fileStream, fph.fileName + " - " + org.apache.commons.codec.digest.DigestUtils.md5Hex(fph.fileStream))
+        mongoFile.save()
+        mongoFile.getFilename
+      }
+    }
   }
 
   /*
@@ -61,7 +96,7 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
   }
 
   def profileScreenFields = new FieldContainer {
-    def allFields = List(name, location, bio)
+    def allFields = List(photo, name, country, cellPhone, location)
   }
 
   def registerScreenFields = new FieldContainer {

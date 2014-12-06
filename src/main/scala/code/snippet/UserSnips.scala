@@ -92,7 +92,6 @@ object ProfileLocUser extends UserSnippet {
     "#id_name *" #> <h3>{user.name.get}</h3> &
     "#id_location *" #> user.location.get &
     "#id_whencreated" #> df.format(user.whenCreated.toDate).toString &
-    "#id_bio *" #> user.bio.get &
     "#id_editlink *" #> editLink
   }
 }
