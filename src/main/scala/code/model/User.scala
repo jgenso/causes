@@ -58,7 +58,7 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
 
   object photo extends StringField(this, 500) {
     override def displayName = "Photo"
-    private def photoHtml =
+    def photoHtml =
       <div class="image">
         <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${owner.name.get}'s photo"}/>
       </div>
@@ -78,7 +78,6 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
     override def toForm = Full(elem)
     override def asHtml = photoHtml
     private def savePhoto(fph: FileParamHolder): String = {
-      println("AAAAAAAAAAAAA")
       MongoDB.use(DefaultConnectionIdentifier) { db =>
         val fs = new GridFS(db)
         val mongoFile = fs.createFile(fph.fileStream, fph.fileName + " - " + org.apache.commons.codec.digest.DigestUtils.md5Hex(fph.fileStream))

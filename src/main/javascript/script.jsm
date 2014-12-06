@@ -12,3 +12,6 @@ App.js
 
 # views
 views/user/Login.js
+
+# fileuplad
+libs/fileupload.js

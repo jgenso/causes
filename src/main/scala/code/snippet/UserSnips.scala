@@ -38,7 +38,7 @@ sealed trait UserSnippet extends SnippetHelper with Loggable {
 
   def header(xhtml: NodeSeq): NodeSeq = serve { user =>
     <div id="user-header">
-      {gravatar(xhtml)}
+      {user.photo.photoHtml}
       <h3>{name(xhtml)}</h3>
     </div>
   }
