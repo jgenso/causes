@@ -144,10 +144,11 @@ p:last-child {
     $FORMS
 \*------------------------------*/
 
-input {
+input,
+textarea {
     background: #fff;
-    border: none;
-    border-radius:50px;
+    border: 1px solid #ccc;
+    border-radius:5px;
     color: #3B3B3D;
     height: 35px;
     min-width: 300px;
@@ -175,10 +176,12 @@ a:visited {
     color: #7C7C7C
 }
 
-a.gs-button {
+a.gs-button,
+.gs-button {
     background: #00A5D5 ;
     border:1px solid #0086B3;
     border-radius: 5px;
+    cursor: pointer;
     display: inline-block;
     color: #ffffff;
     min-height: 40px;
@@ -379,6 +382,11 @@ body > header .gs-usermenu img.gs-avatar {
 }
 body > header .gs-usermenu img.gs-arrow {
     margin-bottom: 10px;
+}
+
+body > header input {
+    border: none;
+    border-radius:50px;
 }
 
 /*------------------------------------*\
@@ -595,7 +603,7 @@ body > header .gs-usermenu img.gs-arrow {
     $PAGE - CAUSE - LOGBOOK
 \*----------------------------*/
 
-.gs-logbook .gs-imgtxtlist li > img {
+.gs-logbook .gs-imgtxtlist li > a img {
     border-radius: 5px;
     width: 150px;
     padding: 3px;
@@ -604,6 +612,27 @@ body > header .gs-usermenu img.gs-arrow {
 
 .gs-logbook .gs-imgtxtlist li > div {
     width: 355px;
+}
+
+/*----------------------------*\
+    $PAGE - CAUSE - LOGBOOK - ALBUM
+\*----------------------------*/
+.gs-logbook.gs-album .gs-imgtxtlist li {
+    border: none;
+    margin-bottom: 10px;
+    padding: 0;
+}
+.gs-logbook.gs-album .gs-imgtxtlist li img {
+    width: 85px;
+}
+
+.gs-logbook.gs-album .gs-imgtxtlist li {
+    display: inline-block;
+}
+
+.gs-logbook.gs-album .gs-imgtxtlist li  img,
+.gs-logbook.gs-album .gs-imgtxtlist li  div {
+    float: none;
 }
 
 /*----------------------------*\
@@ -730,6 +759,93 @@ body > header .gs-usermenu img.gs-arrow {
     text-align: center;
 
 }
+
+/*----------------------------*\
+    $PAGE - CRUD CAUSES
+\*----------------------------*/
+
+.gs-crudcause form > div {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gs-crudcause form label,
+.gs-crudcause form input {
+    float: left;
+    width: 200px;
+}
+
+.gs-crudcause form input,
+.gs-crudcause form textarea {
+    width: 500px;
+}
+
+.gs-crudcause form textarea {
+    height: 300px;
+    padding: 10px;
+}
+
+.gs-crudcause .gs-items .gs-item {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.gs-crudcause .gs-items .gs-item label,
+.gs-crudcause .gs-items .gs-item input {
+    min-width: 100% !important;
+    width: 100%;
+}
+
+.gs-crudcause .gs-items .gs-item label {
+    text-align: center;
+}
+
+
+.gs-crudcause .gs-items .gs-item > div {
+    float: left;
+    margin-left: 10px;
+}
+
+.gs-crudcause .gs-items .gs-item > div.gs-number {
+    width: 150px;
+    margin-left: 0;
+}
+
+.gs-crudcause .gs-items .gs-item > div.gs-itemname {
+    width: 350px;
+}
+
+.gs-crudcause .gs-items .gs-item > div .gs-button {
+    background: #e14646;
+    border: medium none;
+    margin-top: 20px;
+    min-height: 10px;
+    min-width: 75px;
+    padding: 5px;
+}
+
+.gs-crudcause .gs-formbuttons {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.gs-crudcause input[type="submit"],
+.gs-crudcause input[type="reset"] {
+    display: inline-block;
+    width: 200px;
+    margin-right: 10px;
+    float: none;
+}
+
+.gs-crudcause input[type="reset"] {
+    margin-right: 0;
+    background: none repeat scroll 0 0 #e14646;
+    border: medium none;
+    padding: 5px;
+}
+
+
+
 
 /*------------------------------------*\
     $FOOTER
