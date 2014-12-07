@@ -13,6 +13,7 @@ import net.liftweb.util.DefaultConnectionIdentifier
 import org.bson.types.ObjectId
 import net.liftweb.json.JsonDSL._
 import net.liftweb.json._
+import com.foursquare.rogue.LiftRogue._
 
 import scala.xml.NodeSeq
 
@@ -128,6 +129,10 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
 
   override def asJValue(inst: Cause): JObject = {
     super.asJValue(inst) ~ ("resources" -> Resource.findAllByCause(inst).map(_.asJValue))
+  }
+
+  def isFollower(user: User, inst: Cause): Boolean = {
+    CauseFollower.where(_.follower eqs user.id.get).and(_.cause eqs inst.id.get).count() > 0
   }
 
 }

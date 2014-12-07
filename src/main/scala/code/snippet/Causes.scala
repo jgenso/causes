@@ -39,9 +39,10 @@ object Causes extends SnippetHelper {
         cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
       } yield {
-        val res = CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
+        val inst = CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
           .cause(cause.id.get).follower(user.id.get).saveBox().map(_.asJValue)
-        NgBroadcast(elementId, "after-follow", res)
+        val res = "isFollower" -> (inst.map(s => JBool(Cause.isFollower(user, cause))) openOr JBool(false))
+        NgBroadcast(elementId, "after-follow", Full(res))
       }
     }
 
@@ -53,7 +54,7 @@ object Causes extends SnippetHelper {
         user <- User.currentUser
         cr <- createCommittedResource(quantity, resourceId, cause, user)
       } yield {
-        NgBroadcast(elementId, "after-contribute", Full(cr.asJValue))
+        NgBroadcast(elementId, "after-contribute", Empty)
       }
     }
 
@@ -64,7 +65,8 @@ object Causes extends SnippetHelper {
     }
 
     val params: JValue =
-      ("cause" -> CauseMenus.causeMenu.currentValue.map(_.asJValue))
+      ("cause" -> CauseMenus.causeMenu.currentValue.map(_.asJValue)) ~
+        ("isFollower" -> CauseMenus.causeMenu.currentValue.dmap(false)(cause => User.currentUser.dmap(false)(Cause.isFollower(_, cause))))
 
     val funcs = JsObj(
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),

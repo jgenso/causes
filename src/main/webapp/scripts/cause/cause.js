@@ -6,6 +6,7 @@
   appContributors.controller("CauseController", function($scope, ServerParams, ServerFuncs, $filter, $log) {
     $log.log("CALLED");
     $scope.cause = ServerParams.cause;
+    $scope.isFollower = ServerParams.isFollower;
 
     $scope.fetchCause = function() {
       ServerFuncs.fetchCause(ServerParams.cause);
@@ -26,14 +27,12 @@
     });
 
     $scope.$on('after-contribute', function (event, data) {
-      $scope.$apply(function () {
-        //$scope.cause = data;
-      });
+      $log.log(data);
     });
 
     $scope.$on('after-follow', function (event, data) {
       $scope.$apply(function () {
-        //$scope.cause = data;
+        $scope.isFollower = data.isFollower;
       });
     });
   });
