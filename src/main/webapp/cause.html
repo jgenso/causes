@@ -129,16 +129,16 @@
                     <div class="gs-barcontainer">
                         <div>Committed</div>
                         <div class="gs-progressbar">
-                            <span></span>
+                            <span ng-style="{'width': calcTotalPercentageCommitted()+'%'}"></span>
                         </div>
-                        <div>50%</div>
+                        <div>{{calcTotalPercentageCommitted()}}%</div>
                     </div>
                     <div class="gs-barcontainer">
                         <div>Delivered</div>
                         <div class="gs-progressbar">
-                            <span style="width: 50%"></span>
+                            <span ng-style="{'width': calcTotalPercentageDelivered()+'%'}"></span>
                         </div>
-                        <div>50%</div>
+                        <div>{{calcTotalPercentageDelivered()}}%</div>
                     </div>
                 </div>
                 <h3>Specific</h3>

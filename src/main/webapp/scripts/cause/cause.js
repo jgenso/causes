@@ -12,7 +12,7 @@
     $scope.email = false;
 
     $scope.calcPercentageCommitted = function(resource) {
-     return _.reduce(
+      return _.reduce(
         _.filter(
           $scope.cause.committedResources, function(cr){ return cr.resource === resource._id; }
         ), function(base, cr){ return base  + cr.quantity}, 0
@@ -20,11 +20,25 @@
     };
 
     $scope.calcPercentageDelivered = function(resource) {
-     return _.reduce(
+      return _.reduce(
         _.filter(
           $scope.cause.committedResources, function(cr){ return cr.resource === resource._id && cr.status === 'Executed'; }
         ), function(base, cr){ return base  + cr.quantity}, 0
       ) * 100.0 / resource.quantity;
+    };
+
+    $scope.calcTotalPercentageCommitted = function() {
+      return _.reduce(
+          $scope.cause.committedResources, function(base, cr){ return base  + cr.quantity}, 0
+      ) * 100.0 / _.reduce($scope.cause.resources, function(base, r) { return base + r.quantity;}, 0);
+    };
+
+    $scope.calcTotalPercentageDelivered = function() {
+     return _.reduce(
+        _.filter(
+          $scope.cause.committedResources, function(cr){ return  cr.status === 'Executed'; }
+        ), function(base, cr){ return base  + cr.quantity}, 0
+      ) * 100.0 / _.reduce($scope.cause.resources, function(base, r) { return base + r.quantity}, 0);
     };
 
     $scope.showDetails = function(resource, $event) {
