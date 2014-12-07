@@ -101,13 +101,8 @@ object UserLogin extends Loggable {
   def render = {
     // form vars
     var password = ""
-    var hasPassword = false
+    var hasPassword = true
     var remember = User.loginCredentials.is.isRememberMe
-
-    val radios = SHtml.radioElem[Boolean](
-      Seq(false, true),
-      Full(hasPassword)
-    )(it => it.foreach(hasPassword = _))
 
     def doSubmit(): JsCmd = {
       S.param("email").map(e => {
@@ -122,7 +117,7 @@ object UserLogin extends Loggable {
               User.logUserIn(user, true)
               if (remember) User.createExtSession(user.id.get)
               else ExtSession.deleteExtCookie()
-              RedirectTo(LoginRedirect.openOr(Site.home.url))
+              RedirectTo(LoginRedirect.openOr(Site.profileLoc.calcDefaultHref))
             case _ =>
               S.error("Invalid credentials")
               Noop
@@ -162,13 +157,15 @@ object UserLogin extends Loggable {
         Noop
       }
     }
-
-    "#id_email [value]" #> User.loginCredentials.is.email &
-    "#id_password" #> SHtml.password(password, password = _) &
-    "#no_password" #> radios(0) &
-    "#yes_password" #> radios(1) &
-    "name=remember" #> SHtml.checkbox(remember, remember = _) &
-    "#id_submit" #> SHtml.hidden(doSubmit)
+    User.currentUser match {
+      case Full(_) =>
+        "*" #> NodeSeq.Empty
+      case _ =>
+        "#id_email [value]" #> User.loginCredentials.is.email &
+        "#id_password" #> SHtml.password(password, password = _) &
+        "name=remember" #> SHtml.checkbox(remember, remember = _) &
+        "#id_submit" #> SHtml.hidden(doSubmit)
+    }
   }
 }
 

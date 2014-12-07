@@ -7,21 +7,24 @@
         </div>
       </div>
       <div class="gs-fright">
-        <div class="gs-generic">
+        <div class="gs-generic" lift="UserLogin">
                   <span>
-                      Ingresa
+                      Login
                   </span>
-          <form action="" class="gs-txtcenter">
-            <input type="text" class="gs-block gs-big" placeholder="Email"/>
-            <input type="password" class="gs-block gs-big" placeholder="Password"/>
-            <input type="button" class="gs-big gs-bgblue" value="Ingresar"/>
+          <form action="" class="gs-txtcenter" data-lift="Form.ajax">
+            <input class="gs-block gs-big" maxlength="254" id="id_email" size="32" name="email" type="text" value="" placeholder="Email" />
+            <span data-alertid="id_email_err" form-alert=""></span>
+            <input class="gs-block gs-big" id="id_password" placeholder="Password"/>
+            <span data-alertid="id_password_err" form-alert=""></span>
+            <input id="id_submit" />
+            <input type="submit" class="gs-big gs-bgblue" value="Login"/>
           </form>
           <div class="gs-txtcenter">
             <div>
-              <span><a href="#">¿olvidaste tu contraseña?</a></span>
+              <span><a href="#"> Forgot your password?</a></span>
             </div>
             <div>
-              <span>¿No tienes cuenta? <a href="#">Crea una cuenta</a></span>
+              <span> Don't have an account? <a href="/register">Sign Up</a></span>
             </div>
           </div>
         </div>
