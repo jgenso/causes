@@ -1,8 +1,6 @@
 /*------------------------------------*\
-* Company: Genso S.R.L.
-* Project: Tigo Web 2.0
+* Project: gs-participant
 * Version: 1.0
-* Author: Marcelo Rodríguez Claros
 \*------------------------------------*/
 
 /*------------------------------------*\
@@ -230,7 +228,6 @@ table td {
 }
 
 .gs-breadcumb li:first-child a {
-    background: url("../images/home.png") no-repeat;
     height: 13px;
     width: 16px;
 }
