@@ -1,20 +1,66 @@
 <div data-lift="surround?with=base-wrap;at=content">
-  <lift:head>
-    <title data-lift="Menu.title">causes: %*%</title>
-  </lift:head>
-  <div class="main-content">
-    <div data-lift="Notices"></div>
-    <div class="jumbotron">
-      <div class="inner">
-        <h1>causes</h1>
-        <p>
-          <span data-lift="HelloWorld">
-          Welcome to your Lift app at <span id="time">Time goes here</span>
-          </span>
-        </p>
-        <p><span data-lift="Menu.item?name=About;donthide=true;linktoself=true;a:class=btn primary large">Learn More &raquo;</span></p>
+  <div class="gs-body gs-container gs-home">
+    <div class="gs-logincontent">
+      <div class="gs-fleft">
+        <div class="gs-calltoaction">
+          Frase que ayude a indentificar rápidamente el uso de la aplicación
+        </div>
       </div>
+      <div class="gs-fright">
+        <div class="gs-generic">
+                  <span>
+                      Ingresa
+                  </span>
+          <form action="" class="gs-txtcenter">
+            <input type="text" class="gs-block gs-big" placeholder="Email"/>
+            <input type="password" class="gs-block gs-big" placeholder="Password"/>
+            <input type="button" class="gs-big gs-bgblue" value="Ingresar"/>
+          </form>
+          <div class="gs-txtcenter">
+            <div>
+              <span><a href="#">¿olvidaste tu contraseña?</a></span>
+            </div>
+            <div>
+              <span>¿No tienes cuenta? <a href="#">Crea una cuenta</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gs-clearboth"></div>
     </div>
+    <h2 class="gs-txtcenter">
+      Causes
+    </h2>
+    <div class="gs-causelist">
+      <div class="gs-cause">
+        <div>
+          <a href="#">Nombre de la causa</a>
+        </div>
+        <img src="images/sample/causeimage.jpg" alt=""/>
+        <div>
+          Descripción corta
+        </div>
+      </div>
+      <div class="gs-cause">
+        <div>
+          <a href="#">Nombre de la causa</a>
+        </div>
+        <img src="images/sample/causeimage.jpg" alt=""/>
+        <div>
+          Descripción corta
+        </div>
+      </div>
+      <div class="gs-cause">
+        <div>
+          <a href="#">Nombre de la causa</a>
+        </div>
+        <img src="images/sample/causeimage.jpg" alt=""/>
+        <div>
+          Descripción corta
+        </div>
+      </div>
+      <a href="#" class="gs-button">Ver más</a>
+    </div>
+
   </div>
-  <span data-lift="embed?what=/templates-hidden/parts/footer"></span>
 </div>

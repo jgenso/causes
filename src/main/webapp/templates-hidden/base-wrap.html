@@ -1,53 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="causes">
-    <meta name="Copyright" content="Copyright causes 2013. All Rights Reserved.">
-
-    <!-- css -->
-    <link href="/css/styles.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!-- fav and touch icons -->
-    <!--
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    -->
-  </head>
-  <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/index">causes</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav" data-lift="Menus.group?group=topbar"></ul>
-          <span data-lift="UserTopbar"></span>
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  <link rel="stylesheet" href="/css/html5reset-1.6.1.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/css/custom-styles.css" type="text/css" media="screen" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div data-lift="embed?what=/templates-hidden/parts/header"></div>
+<div class="gs-body gs-container gs-home" id="content">
+  <div class="gs-logincontent">
+    <div class="gs-fleft">
+      <div class="gs-calltoaction">
+        Frase que ayude a indentificar rápidamente el uso de la aplicación
+      </div>
+    </div>
+    <div class="gs-fright">
+      <div class="gs-generic">
+                <span>
+                    Ingresa
+                </span>
+        <form action="" class="gs-txtcenter">
+          <input type="text" class="gs-block gs-big" placeholder="Email"/>
+          <input type="password" class="gs-block gs-big" placeholder="Password"/>
+          <input type="button" class="gs-big gs-bgblue" value="Ingresar"/>
+        </form>
+        <div class="gs-txtcenter">
+          <div>
+            <span><a href="#">¿olvidaste tu contraseña?</a></span>
+          </div>
+          <div>
+            <span>¿No tienes cuenta? <a href="#">Crea una cuenta</a></span>
+          </div>
         </div>
       </div>
     </div>
-    <div id="content" class="container"></div><!-- /container -->
-    <!-- javascript -->
-    <script src="/js/script.js"></script>
-    <script src="/scripts/angular.js"></script>
-    <script src="/scripts/angular-animate.js"></script>
-    <script src="/scripts/angular-route.js"></script>
-    <script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
-    <script src="/scripts/cause/contributors.js"></script>
-    <script src="/scripts/cause/followers.js"></script>
-  </body>
+    <div class="gs-clearboth"></div>
+  </div>
+  <h2 class="gs-txtcenter">
+    Causes
+  </h2>
+  <div class="gs-causelist">
+    <div class="gs-cause">
+      <div>
+        <a href="#">Nombre de la causa</a>
+      </div>
+      <img src="images/sample/causeimage.jpg" alt=""/>
+      <div>
+        Descripción corta
+      </div>
+    </div>
+    <div class="gs-cause">
+      <div>
+        <a href="#">Nombre de la causa</a>
+      </div>
+      <img src="images/sample/causeimage.jpg" alt=""/>
+      <div>
+        Descripción corta
+      </div>
+    </div>
+    <div class="gs-cause">
+      <div>
+        <a href="#">Nombre de la causa</a>
+      </div>
+      <img src="images/sample/causeimage.jpg" alt=""/>
+      <div>
+        Descripción corta
+      </div>
+    </div>
+    <a href="#" class="gs-button">Ver más</a>
+  </div>
+
+</div>
+<div data-lift="embed?what=/templates-hidden/parts/footer" ></div>
+<script src="/js/script.js"></script>
+<script src="/scripts/angular.js"></script>
+<script src="/scripts/angular-animate.js"></script>
+<script src="/scripts/angular-route.js"></script>
+<script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="/scripts/underscore.js"></script>
+<script src="/scripts/cause/cause.js"></script>
+<script src="/scripts/cause/contributors.js"></script>
+<script src="/scripts/cause/followers.js"></script>
+</body>
 </html>
