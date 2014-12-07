@@ -99,7 +99,7 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
   }
 
   def registerScreenFields = new FieldContainer {
-    def allFields = List(username, email)
+    def allFields = List(name, username, email, country, cellPhone)
   }
 
   def whenCreated: DateTime = new DateTime(id.get.getDate)
