@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/css/html5reset-1.6.1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/custom-styles.css" type="text/css" media="screen" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<header>
+    <div class="gs-container">
+        <div class="gs-fleft">
+            <div>App Name</div>
+            <div>
+                <a href="" class="gs-button">Crear</a>
+            </div>
+        </div>
+        <div class="gs-fright">
+            <div>
+                <input type="search"/>
+            </div>
+            <div class="gs-usermenu">
+                <div>
+                    <img src="/images/sample/avatar.jpg" alt="" class="gs-avatar"/>
+                    <img src="/images/arrow-down.png" class="gs-arrow" alt=""/>
+                </div>
+            </div>
+
+        </div>
+        <div class="gs-clearboth"></div>
+    </div>
+</header>
+<div class="gs-body gs-crudcause" data-lift="CausesManagement.add">
+    <h1 class="gs-container">
+        Create cause
+    </h1>
+    <div class="gs-container">
+        <form method="post" enctype="multipart/form-data" class="form-horizontal">
+            <h2>General information</h2>
+            <div>
+                <label for="name">Name of cause:</label>
+                <input type="text" data-name="name">
+            </div>
+            <div>
+                <label for="slogan">Slogan</label>
+                <input type="text" data-name="slogan">
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <!--<textarea name="" id="" cols="30" rows="10"> </textarea>-->
+                <input type="text" data-name="description">
+            </div>
+            <div>
+                <label for="photo">Photo</label>
+                <input type="text" data-name="photo">
+            </div>
+            <div>
+                <label for="country">Country</label>
+                <input type="text" data-name="country">
+            </div>
+            <div>
+                <label for="location">Location</label>
+                <input type="text" data-name="location">
+            </div>
+            <div>
+                <label for="tags">Tags</label>
+                <input type="text" data-name="tags">
+            </div>
+            <div>
+                <label for="coordination">Coordination date</label>
+                <input type="date" data-name="start-coord-date">
+                <input type="date" data-name="end-coord-date">
+                <input type="checkbox" data-name="inmed-coord-date">
+            </div>
+            <div>
+                <label for="execution">Execution date</label>
+                <input type="date" data-name="start-exe-date">
+                <input type="date" data-name="end-exe-date">
+                <input type="checkbox" data-name="inmed-exe-date">
+            </div>
+            <h2>Items</h2>
+            <div data-name="item-memo">
+                <div class="gs-items" data-name="items">
+                    <div class="gs-item">
+                        <div class="gs-itemname">
+                            <label for="name">Name of item</label>
+                            <input type="text" data-name="resource-name" placeholder="Example.: Computers"/>
+                        </div>
+                        <div class="gs-number">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" data-name="resource-quantity" placeholder="Example.: 13, when you dont need quantity write -1"/>
+                        </div>
+                        <div class="gs-itemname">
+                            <label for="unit">Unit</label>
+                            <input type="text" data-name="resource-unit" placeholder="Example.: KG when you dont need unit dont write nothing"/>
+                        </div>
+                        <div class="gs-deletebutton">
+                            <a href="#" class="gs-button gs-bgred" data-name="remove-resource">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="gs-button" data-name="add-resource" id="add-resource-id">+ Add items</a>
+
+            </div>
+            <div class="gs-formbuttons">
+                <input type="submit" class="gs-button"/>
+                <input type="reset" class="gs-button"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+<footer class="gs-menucause">
+    <div>
+        <ul class="gs-container">
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+        </ul>
+    </div>
+</footer>
+<!-- javascript -->
+<script src="/js/script.js"></script>
+<script src="/scripts/angular.js"></script>
+<script src="/scripts/angular-animate.js"></script>
+<script src="/scripts/angular-route.js"></script>
+<script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="/scripts/underscore.js"></script>
+<script src="/scripts/cause/cause.js"></script>
+<script src="/scripts/cause/contributors.js"></script>
+<script src="/scripts/cause/followers.js"></script>
+
+</body>
+</html>
