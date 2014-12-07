@@ -84,11 +84,11 @@
                 <div>
                     <div>
                         <span>Oganizer:</span>
-                        <span><a href="#"></a></span>
+                        <span><a href="#">{{cause.organizer}}</a></span>
                     </div>
                     <div>
                         <span>Location:</span>
-                        <span>Location name</span>
+                        <span>{{cause.location}}, {{cause.country}}</span>
                     </div>
                     <div ng-show="cause.beneficiary != undefinied">
                         <span>Beneficiaries:</span>
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <span>Tags:</span>
-                        <span ng-repeat="tag in cause.tags">{{tag}}</span>
+                        <span ng-repeat="tag in cause.tags">{{tag}} </span>
                     </div>
                     <div>
                         <span>Coordination:</span>
