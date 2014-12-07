@@ -131,14 +131,14 @@
                         <div class="gs-progressbar">
                             <span ng-style="{'width': calcTotalPercentageCommitted()+'%'}"></span>
                         </div>
-                        <div>{{calcTotalPercentageCommitted()}}%</div>
+                        <div>{{calcTotalPercentageCommitted() | number:2}}%</div>
                     </div>
                     <div class="gs-barcontainer">
                         <div>Delivered</div>
                         <div class="gs-progressbar">
                             <span ng-style="{'width': calcTotalPercentageDelivered()+'%'}"></span>
                         </div>
-                        <div>{{calcTotalPercentageDelivered()}}%</div>
+                        <div>{{calcTotalPercentageDelivered() | number:2}}%</div>
                     </div>
                 </div>
                 <h3>Specific</h3>
@@ -159,14 +159,14 @@
                                     <div class="gs-progressbar">
                                         <span ng-style="{'width': calcPercentageCommitted(resource)+'%'}"></span>
                                     </div>
-                                    <div>{{calcPercentageCommitted(resource)}}%</div>
+                                    <div>{{calcPercentageCommitted(resource) | number:2}}%</div>
                                 </div>
                                 <div class="gs-barcontainer">
                                     <span>Delivered</span>
                                     <div class="gs-progressbar">
                                         <span ng-style="{'width': calcPercentageDelivered(resource)+'%'}"></span>
                                     </div>
-                                    <div>{{calcPercentageDelivered(resource)}}%</div>
+                                    <div>{{calcPercentageDelivered(resource) | number:2}}%</div>
                                 </div>
                             </div>
                             <a href="#" ng-click="showDetails(resource, $event)" ng-show="!resource.showDetails" class="gs-fright">View Details</a>

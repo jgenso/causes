@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/css/html5reset-1.6.1.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/custom-styles.css" type="text/css" media="screen" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+</head>
+<body ng-app="CauseDashboard" data-lift="CauseDashboard">
+<header>
+    <div class="gs-container">
+        <div class="gs-fleft">
+            <div>App Name</div>
+            <div>
+                <a href="" class="gs-button">Crear</a>
+            </div>
+        </div>
+        <div class="gs-fright">
+            <div>
+                <input type="search"/>
+            </div>
+            <div class="gs-usermenu">
+                <div>
+                    <img src="/images/sample/avatar.jpg" alt="" class="gs-avatar"/>
+                    <img src="/images/arrow-down.png" class="gs-arrow" alt=""/>
+                </div>
+            </div>
+
+        </div>
+        <div class="gs-clearboth"></div>
+    </div>
+</header>
+<div class="gs-body">
+    <h1 class="gs-container">
+        Computación para todos
+    </h1>
+    <div class="gs-imagecause">
+        <div class="gs-container ">
+            <img src="/images/sample/causeimage.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="gs-menucause">
+        <ul class="gs-container">
+            <li><a href="#">Actualizaciones</a></li>
+            <li><a href="#">Historia</a></li>
+            <li><a href="#">Participantes</a></li>
+            <li class="active"><a href="#">Seguidores</a></li>
+            <li><a href="#">Comentarios</a></li>
+            <li><a href="#">Bitácora</a></li>
+        </ul>
+    </div>
+    <div class="gs-content gs-container gs-dashboard" id="causedashboard" ng-controller="CauseDashboardController">
+        <div class="gs-header">
+            <h2>Dashboard</h2>
+        </div>
+        <div class="gs-fleft">
+            <div>
+                <h3>
+                    General Info
+                </h3>
+                <div>
+                    <ul class="gs-nostylelist gs-labeltxtlist">
+                        <li>
+                            <span>Name:</span>
+                            <span>{{cause.name}}</span>
+                        </li>
+                        <li>
+                            <span>Location:</span>
+                            <span>{{cause.location}}, {{cause.country}}</span>
+                        </li>
+                        <li>
+                            <span>Tags:</span>
+                            <span ng-repeat="tag in cause.tags">{{tag}}</span>
+                        </li>
+                        <li>
+                            <span>Coordination:</span>
+                            <span>{{cause.endCoorDate.$dt | date : 'medium' }}</span>
+                        </li>
+                        <li>
+                            <span>Implementation:</span>
+                            <span>{{cause.endExeDate.$dt | date : 'medium'}}</span>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+            <div>
+                <h3>Objectives</h3>
+                <div>
+                    <h4>General</h4>
+                    <div class="gs-datas">
+                        <div>
+                            <span>Committed</span>
+                            <span>{{calcTotalPercentageCommitted() | number:2}}%</span>
+                        </div>
+                        <div>
+                            <ul class="gs-nostylelist gs-labeltxtlist">
+                                <li>
+                                    <span>Total committed resources</span>
+                                    <span>{{calcTotalCommitted()}}</span>
+                                </li>
+                                <li>
+                                    <span>Total missing resources</span>
+                                    <span>{{total() - calcTotalCommitted()}}</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="gs-datas">
+                        <div>
+                            <span>Delivered</span>
+                            <span>{{calcTotalPercentageDelivered() | number:2}}%</span>
+                        </div>
+                        <div>
+                            <ul class="gs-nostylelist gs-labeltxtlist">
+                                <li>
+                                    <span>Total delivered resources</span>
+                                    <span>{{calcTotalDelivered()}}</span>
+                                </li>
+                                <li>
+                                    <span>Total missing resources</span>
+                                    <span>{{total() - calcTotalDelivered()}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="gs-specificgoals">
+                    <h4>Specific</h4>
+                    <ul class="gs-nostylelist">
+                        <li class="gs-datas" ng-repeat="resource in cause.resources">
+                            <h5>{{resource.quantity}} {{resource.name}}</h5>
+                            <div>
+                                <ul class="gs-nostylelist gs-labeltxtlist">
+                                    <li>
+                                        <span>Committed:</span>
+                                        <span>{{calcPercentageCommitted(resource) | number:2}}%</span>
+                                    </li>
+                                </ul>
+                                <ul class="gs-nostylelist gs-labeltxtlist">
+                                    <li>
+                                        <span>Total committed resources</span>
+                                        <span>{{calcTotalCommitted(resource)}}</span>
+                                    </li>
+                                    <li>
+                                        <span>Total missing resources</span>
+                                        <span>{{resource.quantity - calcTotalCommitted(resource)}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="gs-nostylelist gs-labeltxtlist">
+                                    <li>
+                                        <span>Delivered:</span>
+                                        <span>{{calcPercentageDelivered(resource) | number:2}}%</span>
+                                    </li>
+                                </ul>
+                                <ul class="gs-nostylelist gs-labeltxtlist">
+                                    <li>
+                                        <span>Total delivered resources</span>
+                                        <span>{{calcTotalDelivered(resource)}}</span>
+                                    </li>
+                                    <li>
+                                        <span>Total missing resources</span>
+                                        <span>{{resource.quantity - calcTotalDelivered(resource)}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="gs-fright">
+            <div>
+                <h3>Aprobaciones pendientes</h3>
+                <div>
+                    <ul class="gs-imgtxtlist">
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="gs-bgblue">Ver más</a>
+            </div>
+            <div>
+                <h3>Solicitudes de aprobación</h3>
+                <div>
+                    <ul class="gs-imgtxtlist">
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <div>
+                                <h4>Nombre apellido</h4>
+                                <div class="gs-date">Hace 24 horas</div>
+                                <div>10 cables de red</div>
+                            </div>
+                            <div class="gs-groupbuttons">
+                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
+                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="gs-bgblue">Ver más</a>
+            </div>
+
+        </div>
+        <div class="gs-clearboth"></div>
+    </div>
+
+</div>
+<footer class="gs-menucause">
+    <div>
+        <ul class="gs-container">
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+            <li><a href="">Option</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="/js/script.js"></script>
+<script src="/scripts/angular.js"></script>
+<script src="/scripts/angular-animate.js"></script>
+<script src="/scripts/angular-route.js"></script>
+<script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="/scripts/underscore.js"></script>
+<script src="/scripts/cause/dashboard.js"></script>
+</body>
+</html>

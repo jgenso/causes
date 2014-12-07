@@ -2,7 +2,7 @@ package code
 package model
 
 import com.mongodb.gridfs.GridFS
-import net.liftweb.common.Full
+import net.liftweb.common.{Box, Full}
 import net.liftweb.http.{FileParamHolder, SHtml}
 import net.liftweb.json.JsonAST.JObject
 import net.liftweb.mongodb.MongoDB
@@ -155,6 +155,11 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
   def isFollower(user: User, inst: Cause): Boolean = {
     CauseFollower.where(_.follower eqs user.id.get).and(_.cause eqs inst.id.get).count() > 0
   }
+
+  def findForOrganizer(causeId: String, user: Box[User]): Box[Cause] = for {
+    cause <- Cause.find(causeId)
+    if user.map(_.id.get) === cause.organizer.get
+  } yield cause
 
 }
 

@@ -10,7 +10,7 @@ import common._
 import http._
 import sitemap._
 import Loc._
-import model.Cause
+import model.{Cause, User}
 import scala.xml._
 
 object CauseMenus {
@@ -34,5 +34,9 @@ object CauseMenus {
   val causeLog =
     Menu.param[Cause]("Cause Log", "Cause Log", Cause.find(_), c => c.id.get.toString) / "cause" / * / "log" >>
       TemplateBox(() => Templates("cause" :: "log" :: Nil))
+
+  val causeDashBoard =
+    Menu.param[Cause]("Cause Dashboard", "Cause Dashboard", Cause.findForOrganizer(_, User.currentUser), c => c.id.get.toString) /
+      "cause" / * / "dashboard" >> TemplateBox(() => Templates("cause" :: "dashboard" :: Nil))
 
 }
