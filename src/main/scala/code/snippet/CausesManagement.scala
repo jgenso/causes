@@ -23,6 +23,7 @@ object CausesManagement {
 
   def add: CssSel = {
     val cause = Cause.createRecord
+    resourcesRequestVar.set(Nil)
     "data-name=name" #> cause.name.toAjaxForm &
     "data-name=slogan" #> cause.slogan.toAjaxForm &
     "data-name=description" #> cause.description.toAjaxForm &
@@ -75,5 +76,6 @@ object CausesManagement {
         Noop
     }
   }
+
 
 }

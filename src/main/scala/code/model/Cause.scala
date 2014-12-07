@@ -212,6 +212,10 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
     if user.map(_.id.get) === cause.organizer.get
   } yield cause
 
+  def lastCauses: List[Cause] = {
+    Cause.orderDesc(_.id).fetch()
+  }
+
 }
 
 object CauseStatus extends Enumeration {
