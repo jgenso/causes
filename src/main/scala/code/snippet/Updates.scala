@@ -2,6 +2,7 @@ package code
 package snippet
 
 import code.lib.snippet.PaginatorSnippet
+import code.lib.util.DateHelper
 import code.menu.CauseMenus
 import code.model.{Cause, News}
 import net.liftmodules.extras.SnippetHelper
@@ -16,18 +17,18 @@ import scala.xml.NodeSeq
  */
 object Updates extends SnippetHelper with PaginatorSnippet[News] {
 
-  def page: List[News] = News.page(CauseMenus.causeMenu.currentValue openOr Cause.createRecord, offset, itemsPerPage)
+  def page: List[News] = News.page(CauseMenus.causeMenu.currentValue openOr Cause.createRecord, curPage, itemsPerPage)
 
   def count: Long = News.count(CauseMenus.causeMenu.currentValue openOr Cause.createRecord)
 
   def list: CssSel = {
-    ".title *" #> S.?("Updates") &
-      ".list" #> page.map(news => {
-          ".register-date *" #> news.registerDate.formatted("dd/MM/yyyy") &
-          ".tittle *" #> news.tittle.get &
-          ".description *" #> news.description.get
-          ".photo" #> news.photo.photoHtml
-      })
+    "data-name=slogan *" #> (CauseMenus.causeMenu.currentValue openOr Cause.createRecord).slogan.get &
+    "data-name=list *" #> page.map(news => {
+      "data-name=register-date *" #> DateHelper.format(news.registerDate.get) &
+      "data-name=title *" #> news.title.get &
+      "data-name=description *" #> news.description.get &
+      "data-name=photo" #> news.photo.photoHtml
+    })
   }
 
 }

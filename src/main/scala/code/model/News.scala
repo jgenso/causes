@@ -18,7 +18,7 @@ import scala.xml.NodeSeq
 class News private() extends MongoRecord[News] with ObjectIdPk[News] {
   def meta = News
 
-  object tittle extends StringField(this, 64) {
+  object title extends StringField(this, 64) {
     override def displayName = "Tittle"
 
     override def validations =
@@ -70,7 +70,7 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
 
   object cause extends ObjectIdRefField(this, Cause)
 
-
+  object user extends ObjectIdRefField(this, User)
 }
 
 object News extends News with MongoMetaRecord[News] {

@@ -13,9 +13,13 @@ trait PaginatorSnippet[T] extends LiftPaginatorSnippet[T] {
 
   lazy val baseURL = S.uri
 
-  def offset: Int = (curPage - 1) * itemsPerPage
+  override def itemsPerPage = 1
 
-  override def firstXml: NodeSeq = Text(S ? "1")
+  // override def curPage = first.toInt
+
+  override def first = S.param(offsetParam).map(toLong) openOr 1
+
+  // override def firstXml: NodeSeq = Text(S ? "1")
 
   def firstLink: NodeSeq = {
     curPage match {
@@ -27,7 +31,7 @@ trait PaginatorSnippet[T] extends LiftPaginatorSnippet[T] {
   def prevLink: NodeSeq = {
     curPage match {
       case 1 => <li class="active"><a href="#">{prevXml}</a></li>
-      case _ => <li>{pageXml(curPage-1 max 1, prevXml)}</li>
+      case _ => <li>{pageXml(curPage max 1, prevXml)}</li>
     }
   }
 

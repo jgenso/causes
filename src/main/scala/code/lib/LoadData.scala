@@ -60,9 +60,20 @@ object LoadData extends Logger {
     endExeDate.set(java.util.Calendar.MONTH, 11)
     endExeDate.set(java.util.Calendar.DAY_OF_MONTH, 6)
 
+    val azul = User.findByUsername("azul").getOrElse(User.createRecord)
+    val violeta = User.findByUsername("violeta").getOrElse(User.createRecord)
+    val camila = User.findByUsername("camih").getOrElse(User.createRecord)
+    val j2 = User.findByUsername("j2").getOrElse(User.createRecord)
+    val marcelo = User.findByUsername("marcelorodcla").getOrElse(User.createRecord)
+    val tatiana = User.findByUsername("tatianam").getOrElse(User.createRecord)
+    val henry = User.findByUsername("molle").getOrElse(User.createRecord)
+
+
     // cause 1
     val cause1 = Cause.createRecord
+
     cause1.name("Let's help Miriam and her 2 children")
+    cause1.organizer(henry.id.get)
     cause1.slogan("Miriam we need! join now!")
     cause1.description("Miriam Veizaga and her 2 young children are seriously injured, " +
       " with burns of second and third degree due to a gas leak in her home, in the town of Vinto." +
@@ -98,29 +109,39 @@ object LoadData extends Logger {
         loadResource(cause,"Internment by day", 500, "Bs.")
 
         // followers
-        val azul = User.findByUsername("azul").getOrElse(User.createRecord)
         loadCauseFollower(cause, azul,true, true)
-
-        val violeta = User.findByUsername("violeta").getOrElse(User.createRecord)
         loadCauseFollower(cause, violeta, true, true)
-
-        val camila = User.findByUsername("camih").getOrElse(User.createRecord)
         loadCauseFollower(cause, camila, true, true)
 
         // joined
-        val j2 = User.findByUsername("j2").getOrElse(User.createRecord)
         val cream = Resource.findByName("Quemacurán cream").headOption.map(r => r).getOrElse(Resource.createRecord)
         loadCommittedResource(cause: Cause, j2, cream, 15, CommittedResourceStatus.Executed, date.getTime)
 
-        val marcelo = User.findByUsername("marcelorodcla").getOrElse(User.createRecord)
         val soothing = Resource.findByName("Soothing").headOption.map(r => r).getOrElse(Resource.createRecord)
         loadCommittedResource(cause, marcelo, soothing, 10, CommittedResourceStatus.Committed, date.getTime)
+
+        // updates
+        loadUpdate(cause, cause.organizer.obj.getOrElse(User.createRecord),"Do not be indifferent, Miriam needs us!",
+          "Miriam is going a very difficult situation right now, she lives alone and is in the care of their young " +
+            " children, she do not have an own home  and before the accident she worked as a street vendor. " +
+            " Her first words were to regain consciousness was \"Please help my children.\" We can not remain " +
+            " indifferent to this situation, join the cause now!", date.getTime)
+
+        loadUpdate(cause, cause.organizer.obj.getOrElse(User.createRecord),"Miriam health worsens",
+          "With only 23 years, she's going a very difficult stage, his father Juan says Miriam's health is getting worse," +
+            " but they have hope, she asks for her children and thanked all those who so far have offered their help", date.getTime)
+
+        loadUpdate(cause, cause.organizer.obj.getOrElse(User.createRecord),"Abigail was successfully recovered.",
+          "The sweet little Abigail is successfully recovering, thanks to good medical monitoring and support of people." +
+            " She's out of intensive care and a group of volunteers is processed on a journey to reconstructive surgery " +
+            " of his burns. Thank you!", date.getTime)
       }
     }
 
     // cause 2
     val cause2 = Cause.createRecord
     cause2.name("Construction of houses for stray dogs")
+    cause2.organizer(camila.id.get)
     cause2.slogan("I ALSO NEED A ROOF SHELTER ME OF COLD, WILL I BE MAKING A SMALL HELPS? ")
     cause2.description("Have you ever given even thought to how cold it gets at night?. Can you imagine what it's like " +
       "on the streets with nowhere shelter?. You are not the only one who needed shelter and protection ... " +
@@ -166,21 +187,14 @@ object LoadData extends Logger {
 
 
         // followers
-        val azul = User.findByUsername("azul").getOrElse(User.createRecord)
         loadCauseFollower(cause, azul,true, true)
-
-        val violeta = User.findByUsername("violeta").getOrElse(User.createRecord)
         loadCauseFollower(cause, violeta, true, true)
-
-        val camila = User.findByUsername("camih").getOrElse(User.createRecord)
-        loadCauseFollower(cause, camila, true, true)
+        loadCauseFollower(cause, tatiana, true, true)
 
         // joined
-        val j2 = User.findByUsername("j2").getOrElse(User.createRecord)
         val pallet = Resource.findByName("Pallet or wood").headOption.map(r => r).getOrElse(Resource.createRecord)
         loadCommittedResource(cause: Cause, j2, pallet, 3, CommittedResourceStatus.Committed, date.getTime)
 
-        val marcelo = User.findByUsername("marcelorodcla").getOrElse(User.createRecord)
         val screwdriver = Resource.findByName("Screwdriver").headOption.map(r => r).getOrElse(Resource.createRecord)
         loadCommittedResource(cause, marcelo, screwdriver, 5, CommittedResourceStatus.Executed, date.getTime)
 
@@ -253,6 +267,21 @@ object LoadData extends Logger {
       case Empty => error("Commited resource of cause  not saved!")
       case Failure(msg, _, _) => error("Commited resource of cause  not saved! " + msg)
       case Full(_) => info("Commited resource of cause saved")
+    }
+  }
+
+  private def loadUpdate(cause: Cause, user: User,  title: String, description: String, date: java.util.Date) = {
+    val update = News.createRecord
+    update.title(title)
+    update.description(description)
+    update.registerDate(date)
+    update.cause(cause.id.get)
+    update.user(user.id.get)
+
+    update.saveBox() match {
+      case Empty => error("News of cause  not saved!")
+      case Failure(msg, _, _) => error("News of cause  not saved! " + msg)
+      case Full(_) => info("News of cause saved")
     }
   }
 
