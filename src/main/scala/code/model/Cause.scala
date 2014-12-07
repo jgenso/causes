@@ -112,9 +112,9 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 
   object photo extends StringField(this, 500) {
     override def displayName = "Photo"
-    private def photoHtml =
+    def photoHtml =
       <div class="image">
-        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${owner.name.get}'s photo"}/>
+        <img class="img-responsive" src={s"/images/cause/${id.get}"} alt={s"${owner.name.get}'s photo"}/>
       </div>
     private def elem = {
       (value.trim match {
