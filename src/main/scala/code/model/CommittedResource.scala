@@ -54,6 +54,10 @@ object CommittedResource extends  CommittedResource with MongoMetaRecord[Committ
     CommittedResource.where(_.cause eqs cause.id.get).paginate(limit).setPage(page).fetch()
   }
 
+  def findAllByCause(cause: Cause): List[CommittedResource] = {
+    CommittedResource.where(_.cause eqs cause.id.get).fetch()
+  }
+
   def countAllByCause(cause: Cause): Long = {
     CommittedResource.where(_.cause eqs cause.id.get).count()
   }
