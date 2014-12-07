@@ -7,6 +7,7 @@
     $log.log("CALLED");
     $scope.cause = ServerParams.cause;
     $scope.isFollower = ServerParams.isFollower;
+    $scope.isLogged = ServerParams.isLogged;
     $scope.sms = false;
     $scope.email = false;
 

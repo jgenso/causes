@@ -38,7 +38,10 @@ object Causes extends SnippetHelper {
         user <- User.currentUser
       } yield {
         CauseFollower.deleteByCauseAndFollower(cause, user)
-        NgBroadcast(elementId, "after-unfollow", Cause.find(cause.id.get).map(_.asJValue))
+        val inst = Cause.find(cause.id.get)
+        val res = ("isFollower" -> (inst.map(s => JBool(Cause.isFollower(user, cause))) openOr JBool(false))) ~
+          ("cause" -> inst.map(_.asJValue))
+        NgBroadcast(elementId, "after-unfollow", Full(res))
       }
     }
 
@@ -80,12 +83,14 @@ object Causes extends SnippetHelper {
 
     val params: JValue =
       ("cause" -> CauseMenus.causeMenu.currentValue.map(_.asJValue)) ~
+        ("isLogged" -> User.currentUser.dmap(false)(s => true)) ~ // ToDo move this to another place available for all the app
         ("isFollower" -> CauseMenus.causeMenu.currentValue.dmap(false)(cause => User.currentUser.dmap(false)(Cause.isFollower(_, cause))))
 
     val funcs = JsObj(
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),
       "contribute" -> JsExtras.JsonCallbackAnonFunc(contribute),
-      "follow" -> JsExtras.JsonCallbackAnonFunc(follow)
+      "follow" -> JsExtras.JsonCallbackAnonFunc(follow),
+      "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow)
     )
 
     val onload =
