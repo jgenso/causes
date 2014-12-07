@@ -17,7 +17,7 @@ object FileApi extends RestHelper with Loggable {
     case "images" :: "user"  :: "profile" :: AsUser(user) ::  Nil Get    req => serveFile(user.photo.get)
     case "images" :: "media" :: AsMedia(media) ::  Nil Get    req => serveFile(media.mediaFile.get)
     case "images" :: "cause" :: AsCause(cause) ::  Nil Get    req => serveFile(cause.photo.get)
-    case "images" :: "news" :: AsNews(news) ::  Nil Get    req => serveFile(news.photo.get)
+    case "images" :: "news" :: AsNews(news) ::  Nil Get    req => serveFile(news.photo.get getOrElse "")
   }
 
   def serveFile(fileName: String): LiftResponse = {

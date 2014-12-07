@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
+<configuration debug="true">
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-      <pattern>[%level] %logger{36} - %msg%n%nopex</pattern>
+      <pattern>[%level] %logger{36} - %msg%n%ex{20}</pattern>
     </encoder>
   </appender>
 
+  <logger name="net.liftweb.util.TimeHelpers" level="WARN" />
+
   <root level="INFO">
     <appender-ref ref="STDOUT" />
+    <appender-ref ref="EMAIL" />
   </root>
 </configuration>

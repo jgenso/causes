@@ -3,6 +3,7 @@ package model
 
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefField, ObjectIdRefListField, ObjectIdPk}
+import com.foursquare.rogue.LiftRogue._
 
 /**
  * Created by andrea on 12/6/14.
@@ -15,5 +16,4 @@ class UserFollower private() extends MongoRecord[UserFollower] with ObjectIdPk[U
 }
 
 object UserFollower extends UserFollower with MongoMetaRecord[UserFollower] {
-
 }

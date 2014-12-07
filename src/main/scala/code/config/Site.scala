@@ -8,6 +8,8 @@ import common._
 import http.S
 import sitemap._
 import sitemap.Loc._
+import menu._
+import CauseMenus._
 
 import net.liftmodules.mongoauth.Locs
 
@@ -52,6 +54,11 @@ object Site extends Locs {
     account.menu,
     password.menu,
     editProfile.menu,
+    causeMenu,
+    causeStory,
+    causeContributors,
+    causeFollowers,
+    causeLog,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))
