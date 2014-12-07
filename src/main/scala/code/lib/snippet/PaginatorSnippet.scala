@@ -13,13 +13,13 @@ trait PaginatorSnippet[T] extends LiftPaginatorSnippet[T] {
 
   lazy val baseURL = S.uri
 
-  override def itemsPerPage = 1
+  override def itemsPerPage = 10
 
-  // override def curPage = first.toInt
+  override def curPage = first.toInt
 
   override def first = S.param(offsetParam).map(toLong) openOr 1
 
-  // override def firstXml: NodeSeq = Text(S ? "1")
+  override def firstXml: NodeSeq = Text(S ? "1")
 
   def firstLink: NodeSeq = {
     curPage match {

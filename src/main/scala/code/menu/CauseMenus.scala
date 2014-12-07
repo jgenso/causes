@@ -39,4 +39,8 @@ object CauseMenus {
     Menu.param[Cause]("Cause Dashboard", "Cause Dashboard", Cause.findForOrganizer(_, User.currentUser), c => c.id.get.toString) /
       "cause" / * / "dashboard" >> TemplateBox(() => Templates("cause" :: "dashboard" :: Nil))
 
+  val causeComments =
+    Menu.param[Cause]("Cause Comments", "Cause Comments", Cause.find(_), c => c.id.get.toString) /
+      "cause" / * / "comments" >> TemplateBox(() => Templates("cause" :: "comments" :: Nil))
+
 }

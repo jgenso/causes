@@ -15,14 +15,14 @@ import scala.xml.NodeSeq
 /**
  * Created by andrea on 12/7/14.
  */
-object Updates extends SnippetHelper with PaginatorSnippet[News] {
+class Updates(cause: Cause) extends SnippetHelper with PaginatorSnippet[News] {
 
-  def page: List[News] = News.page(CauseMenus.causeMenu.currentValue openOr Cause.createRecord, curPage, itemsPerPage)
+  def page: List[News] = News.page(cause, curPage, itemsPerPage)
 
-  def count: Long = News.count(CauseMenus.causeMenu.currentValue openOr Cause.createRecord)
+  def count: Long = News.count(cause)
 
   def list: CssSel = {
-    "data-name=slogan *" #> (CauseMenus.causeMenu.currentValue openOr Cause.createRecord).slogan.get &
+    "data-name=slogan *" #> cause.slogan.get &
     "data-name=list *" #> page.map(news => {
       "data-name=register-date *" #> DateHelper.format(news.registerDate.get) &
       "data-name=title *" #> news.title.get &
