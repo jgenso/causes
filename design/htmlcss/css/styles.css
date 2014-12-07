@@ -219,6 +219,14 @@ a.gs-button {
     margin-bottom: 7px;
 }
 
+.gs-labeltxtlist     > li {
+    margin-bottom: 10px;
+}
+
+.gs-labeltxtlist  li > span:first-child {
+    font-weight: bold;
+}
+
 
 /*------------------------------*\
     $TABLES
@@ -435,18 +443,10 @@ body > header .gs-usermenu img.gs-arrow {
     width: 40%;
 }
 
-.gs-content > .gs-fright .gs-infocause > div {
+.gs-content > .gs-fright .gs-infocause ul {
     background: #DFF8FF;
     padding: 20px;
     margin-bottom: 20px;
-}
-
-.gs-content > .gs-fright .gs-infocause > div > div {
-    margin-bottom: 10px;
-}
-
-.gs-content > .gs-fright .gs-infocause > div > div > span:first-child{
-    font-weight: bold;
 }
 
 .gs-content > .gs-fright .gs-people {
