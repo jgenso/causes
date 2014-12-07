@@ -3,11 +3,11 @@ package model
 
 import com.mongodb.gridfs.GridFS
 import net.liftweb.common.Full
-import net.liftweb.http.{FileParamHolder, SHtml}
+import net.liftweb.http.{SHtml, FileParamHolder}
 import net.liftweb.mongodb.MongoDB
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
-import net.liftweb.mongodb.record.field.{ObjectIdRefField, DateField, ObjectIdPk}
-import net.liftweb.record.field.{OptionalStringField, TextareaField, StringField}
+import net.liftweb.mongodb.record.field.{ObjectIdRefField, ObjectIdPk}
+import net.liftweb.record.field.{TextareaField, StringField}
 import net.liftweb.util.DefaultConnectionIdentifier
 
 import scala.xml.NodeSeq
@@ -15,29 +15,29 @@ import scala.xml.NodeSeq
 /**
  * Created by andrea on 12/6/14.
  */
-class News private() extends MongoRecord[News] with ObjectIdPk[News] {
-  def meta = News
+class MediaFile private() extends MongoRecord[MediaFile] with ObjectIdPk[MediaFile] {
+  def meta = MediaFile
 
-  object description extends TextareaField(this, 1000) {
+  object tittle extends StringField(this, 50) {
+    override def displayName = "Tittle"
+
+    override def optional_? = true
+  }
+
+  object description extends StringField(this, 500) {
     override def displayName = "Description"
 
-    override def validations =
-      valMaxLen(1000, "Description must be 1000 characters or less") _ ::
-        super.validations
+    override def optional_? = true
   }
 
-  object registerDate extends DateField(this) {
-    override def displayName = "Register date"
-  }
-
-  object photo extends OptionalStringField(this, 500) {
+  object mediaFile extends StringField(this, 500) {
     override def displayName = "Photo"
     private def photoHtml =
       <div class="image">
-        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${id.get}'s news photo"}/>
+        <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${owner.tittle.get}'s photo"}/>
       </div>
     private def elem = {
-      (value.headOption.map(v => v).getOrElse("").trim match {
+      (value.trim match {
         case "" =>
           NodeSeq.Empty
         case other =>
@@ -45,7 +45,7 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
       }) ++
         SHtml.fileUpload(
           fph => {
-            set(Some(savePhoto(fph)))
+            set(savePhoto(fph))
           }
         )
     }
@@ -61,10 +61,9 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
     }
   }
 
-  object cause extends ObjectIdRefField(this, Cause)
-
+  object albumLogBook extends ObjectIdRefField(this, AlbumLogBook)
 }
 
-object News extends News with MongoMetaRecord[News] {
+object MediaFile extends MediaFile with MongoMetaRecord[MediaFile] {
 
 }

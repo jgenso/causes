@@ -52,7 +52,7 @@ class User private () extends ProtoAuthUser[User] with ObjectIdPk[User] {
       valMaxLen(64, "Location must be 64 characters or less") _ ::
       super.validations
   }
-  object cellPhone extends LongField(this) {
+  object cellPhone extends StringField(this,50) {
     override def displayName = "Cell Phone"
   }
 
