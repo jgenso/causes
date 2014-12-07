@@ -14,7 +14,10 @@ import net.liftweb.util.DefaultConnectionIdentifier
 object FileApi extends RestHelper with Loggable {
 
   serve {
-    case "images" :: "user" :: "profile" :: AsUser(user) ::  Nil Get    req => serveFile(user.photo.get)
+    case "images" :: "user"  :: "profile" :: AsUser(user) ::  Nil Get    req => serveFile(user.photo.get)
+    case "images" :: "media" :: AsMedia(media) ::  Nil Get    req => serveFile(media.mediaFile.get)
+    case "images" :: "cause" :: AsCause(cause) ::  Nil Get    req => serveFile(cause.photo.get)
+    case "images" :: "news" :: AsNews(news) ::  Nil Get    req => serveFile(news.photo.get)
   }
 
   def serveFile(fileName: String): LiftResponse = {
@@ -47,4 +50,12 @@ object AsUser {
 
 object AsCause {
   def unapply(in: String): Option[Cause] = Cause.find(in)
+}
+
+object AsNews {
+  def unapply(in: String): Option[News] = News.find(in)
+}
+
+object AsMedia {
+  def unapply(in: String): Option[MediaFile] = MediaFile.find(in)
 }
