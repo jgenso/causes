@@ -605,17 +605,22 @@ body > header .gs-usermenu img.gs-arrow {
     $PAGE - CAUSE - DASHBOARD
 \*----------------------------*/
 
-.gs-dashboard > div {
+.gs-dashboard > .gs-fleft > div,
+.gs-dashboard > .gs-fright > div{
     border: 1px solid #ccc;
     margin-bottom: 30px;
 }
 
+.gs-dashboard > .gs-fleft > div.gs-header {
+    border: none;
+}
 .gs-dashboard > div h3 {
     border-bottom: 1px solid #ccc;
     margin: 0;
     padding: 15px;
 }
-.gs-dashboard > div > div {
+.gs-dashboard > .gs-fleft > div > div,
+.gs-dashboard > .gs-fright > div > div{
     padding: 15px;
 }
 
