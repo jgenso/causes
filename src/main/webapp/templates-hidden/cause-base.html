@@ -8,29 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="Cause" data-lift="Causes">
-<header>
-    <div class="gs-container">
-        <div class="gs-fleft">
-            <div>App Name</div>
-            <div>
-                <a href="" class="gs-button">Crear</a>
-            </div>
-        </div>
-        <div class="gs-fright">
-            <div>
-                <input type="search"/>
-            </div>
-            <div class="gs-usermenu">
-                <div>
-                    <img src="/images/sample/avatar.jpg" alt="" class="gs-avatar"/>
-                    <img src="/images/arrow-down.png" class="gs-arrow" alt=""/>
-                </div>
-            </div>
-
-        </div>
-        <div class="gs-clearboth"></div>
-    </div>
-</header>
+<div data-lift="embed?what=/templates-hidden/parts/header"></div>
 <div class="gs-body" id="cause" ng-controller="CauseController">
     <h1 class="gs-container" data-name="name" data-lift="Story.name">
         Computación para todos
@@ -200,16 +178,7 @@
 </script>
 
 </div>
-<footer class="gs-menucause">
-    <div>
-        <ul class="gs-container">
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-        </ul>
-    </div>
-</footer>
+<div data-lift="embed?what=/templates-hidden/parts/footer"></div>
 <!-- javascript -->
 <script src="/js/script.js"></script>
 <script src="/scripts/angular.js"></script>
