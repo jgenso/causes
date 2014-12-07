@@ -17,7 +17,16 @@ import org.bson.types.ObjectId
 
 import scala.xml.NodeSeq
 
-object Causes extends SnippetHelper {
+class Causes(cause: Cause) extends SnippetHelper {
+
+  def menus = {
+    "data-name=updates [href]" #> CauseMenus.causeMenu.calcHref(cause) &
+    "data-name=story [href]" #> CauseMenus.causeStory.calcHref(cause) &
+    "data-name=contributors [href]" #> CauseMenus.causeContributors.calcHref(cause) &
+    "data-name=followers [href]" #> CauseMenus.causeFollowers.calcHref(cause) &
+    "data-name=comments [href]" #> CauseMenus.causeComments.calcHref(cause) &
+    "data-name=log [href]" #> CauseMenus.causeLog.calcHref(cause)
+  }
 
   def render(in: NodeSeq): NodeSeq = {
     implicit val formats = DefaultFormats
@@ -25,8 +34,7 @@ object Causes extends SnippetHelper {
 
     def fetchCause() = {
       for {
-        causeId <- CauseMenus.causeMenu.currentValue.map(_.id.get)
-        cause   <- Cause.find(causeId)
+        cause   <- Cause.find(cause.id.get)
       } yield {
         NgBroadcast(elementId, "after-fetch-cause", Full(cause.asJValue))
       }
@@ -34,7 +42,6 @@ object Causes extends SnippetHelper {
 
     def unfollow() = {
       for {
-        cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
       } yield {
         CauseFollower.deleteByCauseAndFollower(cause, user)
@@ -49,7 +56,6 @@ object Causes extends SnippetHelper {
       for {
         allowSms <- tryo((json \ "sms").extract[Boolean])
         allowEmail <- tryo((json \ "email").extract[Boolean])
-        cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
         cf <- CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
           .cause(cause.id.get).follower(user.id.get).saveBox()
@@ -65,12 +71,10 @@ object Causes extends SnippetHelper {
       for {
         quantity <- tryo((json \ "quantity").extract[Int])
         resourceId <- tryo((json \ "resource").extract[ObjectId])
-        cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
         cr <- createCommittedResource(quantity, resourceId, cause, user)
         res <- Cause.find(cause.id.get)
       } yield {
-
         NgBroadcast(elementId, "after-contribute", Full(res.asJValue))
       }
     }
@@ -81,8 +85,36 @@ object Causes extends SnippetHelper {
       resource.saveBox()
     }
 
+    def fetchContributorsPage(json: JValue) = {
+      val elementId = "contributors"
+      for {
+        page <- tryo((json \ "page").extract[Int])
+        itemsPerPage <- tryo((json \ "itemsPerPage").extract[Int])
+      } yield {
+        val items = CommittedResource.findAllByCausePaginate(cause, page, itemsPerPage)
+        val count = CommittedResource.countAllByCause(cause)
+        val res = ("count" -> count) ~ ("items" -> items.map(_.asJValue))
+
+        NgBroadcast(elementId, "after-fetch-page", Full(res))
+      }
+    }
+
+    def fetchFollowersPage(json: JValue) = {
+      val elementId = "followers"
+      for {
+        page <- tryo((json \ "page").extract[Int])
+        itemsPerPage <- tryo((json \ "itemsPerPage").extract[Int])
+      } yield {
+        val items = CauseFollower.findAllByCausePaginate(cause, page)
+        val count = CauseFollower.countAllByCause(cause)
+        val res = ("count" -> count) ~ ("items" -> items.map(_.asJValue))
+
+        NgBroadcast(elementId, "after-fetch-page", Full(res))
+      }
+    }
+
     val params: JValue =
-      ("cause" -> CauseMenus.causeMenu.currentValue.map(_.asJValue)) ~
+      ("cause" -> cause.asJValue) ~
         ("isLogged" -> User.currentUser.dmap(false)(s => true)) ~ // ToDo move this to another place available for all the app
         ("isFollower" -> CauseMenus.causeMenu.currentValue.dmap(false)(cause => User.currentUser.dmap(false)(Cause.isFollower(_, cause))))
 
@@ -90,7 +122,9 @@ object Causes extends SnippetHelper {
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),
       "contribute" -> JsExtras.JsonCallbackAnonFunc(contribute),
       "follow" -> JsExtras.JsonCallbackAnonFunc(follow),
-      "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow)
+      "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow),
+      "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage),
+      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage)
     )
 
     val onload =

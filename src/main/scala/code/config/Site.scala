@@ -60,6 +60,8 @@ object Site extends Locs {
     causeFollowers,
     causeLog,
     causeManagement,
+    causeDashBoard,
+    causeComments,
     Menu.i("Error") / "error" >> Hidden,
     Menu.i("404") / "404" >> Hidden,
     Menu.i("Throw") / "throw"  >> EarlyResponse(() => throw new Exception("This is only a test."))

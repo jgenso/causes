@@ -1,6 +1,7 @@
 package code
 package model
 
+import net.liftweb.json.JsonAST.{JNothing, JValue}
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefListField, ObjectIdPk, ObjectIdRefField}
 import net.liftweb.record.field.BooleanField
@@ -23,7 +24,9 @@ class CauseFollower private() extends MongoRecord[CauseFollower] with ObjectIdPk
 
   object cause extends ObjectIdRefField(this, Cause)
 
-  object follower extends ObjectIdRefField(this, User)
+  object follower extends ObjectIdRefField(this, User) {
+    override def asJValue: JValue = this.obj.dmap[JValue](JNothing)(_.asJValue)
+  }
 }
 
 object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {

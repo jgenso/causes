@@ -8,25 +8,20 @@ import util.Helpers._
  * Created by andrea on 12/6/14.
  */
 
-object Story {
+class Story(cause: Cause) {
 
-  def image() = {
-    val cause = CauseMenus.causeStory.currentValue openOr Cause.createRecord
+  def image = {
     "data-name=photo *" #> cause.photo.photoHtml
   }
-  def story() =  {
-    val cause = CauseMenus.causeStory.currentValue openOr Cause.createRecord
+  def story =  {
     "data-name=description *" #> cause.description.get
   }
 
-  def slogan() = {
-    val cause = CauseMenus.causeStory.currentValue openOr Cause.createRecord
+  def slogan = {
     "data-name=slogan *" #> cause.slogan.get
   }
 
-  def name() = {
-    val cause = CauseMenus.causeStory.currentValue openOr Cause.createRecord
-
+  def name = {
     "data-name=name *" #> cause.name.get
   }
 

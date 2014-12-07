@@ -1,13 +1,14 @@
-<div data-lift="surround?with=base-wrap;at=content" ng-app="Followers">
-    <lift:head>
-        <title data-lift="Menu.title">causes: %*%</title>
-    </lift:head>
-    <div class="main-content" ng-controller="FollowersController">
-        <div data-lift="Notices"></div>
-        <div class="container" id="followers">
-            {{items}}
-            <pagination total-items="count" ng-model="page" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
-        </div>
+<div data-lift="surround?with=cause-base;at=content">
+    <h2>Followers</h2>
+    <div class="gs-followers" id="followers" ng-controller="FollowersController">
+        <ul class="gs-nostylelist gs-imgtxtlist">
+            <li ng-repeat="item in items">
+                <img src="/images/user/profile/{{item.follower._id}}" alt="{{item.joinedUser.name}}"/>
+                <div class="gs-fleft">
+                    <h3><a href="/user/{{item.follower.username}}">{{item.follower.name}}</a></h3>
+                </div>
+            </li>
+        </ul>
+        <pagination total-items="count" ng-model="page" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
     </div>
-    <span data-lift="embed?what=/templates-hidden/parts/footer"></span>
 </div>

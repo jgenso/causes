@@ -1,17 +1,17 @@
 (function(angular){
   'use strict';
 
-  var appContributors = angular.module('Contributors', ['ContributorsServer', 'ui.bootstrap']);
+  var appCause = angular.module('Cause');
 
-  appContributors.controller("ContributorsController", function($scope, ServerFuncs, $filter, $log) {
+  appCause.controller("ContributorsController", function($scope, ServerFuncs, $filter, $log) {
     $log.log("CALLED");
-    $scope.page = 0;
+    $scope.page = 1;
     $scope.count = 0;
     $scope.itemsPerPage = 10;
     $scope.items = [];
 
     $scope.fetchPage = function() {
-      ServerFuncs.fetchPage(page);
+      ServerFuncs.fetchContributorsPage({page: $scope.page, itemsPerPage: $scope.itemsPerPage});
     };
 
     $scope.pageChanged = function() {

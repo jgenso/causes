@@ -1,224 +1,33 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8" />
-    <title>Cause</title>
-    <link rel="stylesheet" href="/css/html5reset-1.6.1.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/css/custom-styles.css" type="text/css" media="screen" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-</head>
-<body ng-app="Cause" data-lift="Causes">
-<header>
-    <div class="gs-container">
-        <div class="gs-fleft">
-            <div>App Name</div>
-            <div>
-                <a href="" class="gs-button">Crear</a>
+<div data-lift="surround?with=cause-base;at=content">
+    <div class="gs-wellcomewords" data-name="slogan" data-lift="Updates.list">
+        Descripción breve, debe ser atrayente y motivar a ue las peronas paticipen.
+    </div>
+    <h2>Updates</h2>
+    <div class="gs-updatelist" data-lift="Updates.list">
+        <div class="gs-update" data-name="list">
+            <div data-name="register-date">13 de septiembre de 2015</div>
+            <h3 data-name="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+            <div data-name="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui. </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui.
+                </p>
             </div>
         </div>
-        <div class="gs-fright">
-            <div>
-                <input type="search"/>
-            </div>
-            <div class="gs-usermenu">
-                <div>
-                    <img src="/images/sample/avatar.jpg" alt="" class="gs-avatar"/>
-                    <img src="/images/arrow-down.png" class="gs-arrow" alt=""/>
-                </div>
-            </div>
+    </div>
 
-        </div>
-        <div class="gs-clearboth"></div>
-    </div>
-</header>
-<div class="gs-body" id="cause" ng-controller="CauseController">
-    <h1 class="gs-container">
-        Computación para todos
-    </h1>
-    <div class="gs-imagecause">
-        <div class="gs-container ">
-            <img src="/images/sample/causeimage.jpg" alt=""/>
-        </div>
-    </div>
-    <div class="gs-menucause">
-        <ul class="gs-container">
-            <li class="active"><a href="#">Updates</a></li>
-            <li><a href="#">Story</a></li>
-            <li><a href="#">Contributors</a></li>
-            <li><a href="#">Followers</a></li>
-            <li><a href="#">Comments</a></li>
-            <li><a href="#">Log</a></li>
+    <!--<div data-lift="lift:Updates.paginate">
+        <ul class="pagination">
+            <li class="prev"><a href="#">Prev</a></li>
+            <li class="first"><a href="#">First</a></li>
+            <li class="zoompagesleft disabled"><a href="#">...</a></li>
+            <li class="prevpages"><a class="page" href="#">2</a></li>
+            <li class="active"><a id="records" href="#">1</a> </li>
+            <li class="nextpages"><a class="page" href="#">2</a></li>
+            <li class="zoompagesright disabled"><a href="#">...</a></li>
+            <li class="last"><a href="#">Last</a></li>
+            <li class="next"><a href="#">Next</a></li>
         </ul>
-    </div>
-    <div class="gs-content gs-container" data-lift="Updates.list">
-        <div class="gs-fleft">
-            <div class="gs-wellcomewords" data-name="slogan">
-                Descripción breve, debe ser atrayente y motivar a ue las peronas paticipen.
-            </div>
-            <h2>Updates</h2>
-            <div class="gs-updatelist">
-                <div class="gs-update" data-name="list">
-                    <div data-name="register-date">13 de septiembre de 2015</div>
-                    <h3 data-name="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-                    <div data-name="description">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui. </p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div data-lift="lift:Updates.paginate">
-                <ul class="pagination">
-                    <li class="prev"><a href="#">Prev</a></li>
-                    <li class="first"><a href="#">First</a></li>
-                    <li class="zoompagesleft disabled"><a href="#">...</a></li>
-                    <li class="prevpages"><a class="page" href="#">2</a></li>
-                    <li class="active"><a id="records" href="#">1</a> </li>
-                    <li class="nextpages"><a class="page" href="#">2</a></li>
-                    <li class="zoompagesright disabled"><a href="#">...</a></li>
-                    <li class="last"><a href="#">Last</a></li>
-                    <li class="next"><a href="#">Next</a></li>
-                </ul>
-            </div>
-
-        </div>
-        <div class="gs-fright">
-            <div class="gs-infocause">
-                <div>
-                    <div>
-                        <span>Oganizer:</span>
-                        <span><a href="#">{{cause.organizer}}</a></span>
-                    </div>
-                    <div>
-                        <span>Location:</span>
-                        <span>{{cause.location}}, {{cause.country}}</span>
-                    </div>
-                    <div ng-show="cause.beneficiary != undefinied">
-                        <span>Beneficiaries:</span>
-                        <span>{{cause.beneficiary}}</span>
-                    </div>
-                    <div>
-                        <span>Tags:</span>
-                        <span ng-repeat="tag in cause.tags">{{tag}} </span>
-                    </div>
-                    <div>
-                        <span>Coordination:</span>
-                        <span>{{cause.endCoorDate.$dt | date : 'medium' }}</span>
-                    </div>
-                    <div>
-                        <span>Implementation</span>
-                        <span>{{cause.endExeDate.$dt | date : 'medium'}}</span>
-                    </div>
-                </div>
-                <div class="gs-people">
-                    <div>
-                        <span>Contributors:</span>
-                        <span>{{cause.totalContributors}}</span>
-                    </div>
-                    <div>
-                        <span>Followers:</span>
-                        <span>{{cause.totalFollowers}}</span>
-                        <div class="gs-fright">
-                            <a href="" class="gs-button" ng-show="!isFollower && isLogged" ng-click="openFollowModal()">Follow</a>
-                            <a href="" class="gs-button" ng-show="isFollower && isLogged" ng-click="unfollow()">UnFollow</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="gs-goals">
-                <h2>Objetives</h2>
-                <h3>General</h3>
-                <div class="gs-generalgoals">
-                    <div class="gs-barcontainer">
-                        <div>Committed</div>
-                        <div class="gs-progressbar">
-                            <span ng-style="{'width': calcTotalPercentageCommitted()+'%'}"></span>
-                        </div>
-                        <div>{{calcTotalPercentageCommitted()}}%</div>
-                    </div>
-                    <div class="gs-barcontainer">
-                        <div>Delivered</div>
-                        <div class="gs-progressbar">
-                            <span ng-style="{'width': calcTotalPercentageDelivered()+'%'}"></span>
-                        </div>
-                        <div>{{calcTotalPercentageDelivered()}}%</div>
-                    </div>
-                </div>
-                <h3>Specific</h3>
-                <ul class="gs-goalslist">
-                    <li class="gs-goal" ng-repeat="resource in cause.resources">
-                        <div>
-                            <div class="gs-fleft">
-                                {{resource.quantity}} {{resource.name}}
-                            </div>
-                            <div class="gs-fright">
-                                <a href="" class="gs-button" ng-show="isLogged">Contribute</a>
-                            </div>
-                        </div>
-                        <div>
-                            <div ng-show="resource.showDetails">
-                                <div class="gs-barcontainer">
-                                    <div>Committed</div>
-                                    <div class="gs-progressbar">
-                                        <span ng-style="{'width': calcPercentageCommitted(resource)+'%'}"></span>
-                                    </div>
-                                    <div>{{calcPercentageCommitted(resource)}}%</div>
-                                </div>
-                                <div class="gs-barcontainer">
-                                    <span>Delivered</span>
-                                    <div class="gs-progressbar">
-                                        <span ng-style="{'width': calcPercentageDelivered(resource)+'%'}"></span>
-                                    </div>
-                                    <div>{{calcPercentageDelivered(resource)}}%</div>
-                                </div>
-                            </div>
-                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="!resource.showDetails" class="gs-fright">View Details</a>
-                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="resource.showDetails" class="gs-fright">Hide Details</a>
-                            <div class="gs-clearboth"></div>
-                        </div>
-                    </li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-        <div class="gs-clearboth"></div>
-    </div>
-    <script type="text/ng-template" id="followModal.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Follow options</h3>
-        </div>
-        <div class="modal-body">
-            <input type="checkbox" ng-model="sms"> Sms notifications
-            <input type="checkbox" ng-model="email"> Email notifications
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
+    </div>-->
 
 </div>
-<footer class="gs-menucause">
-    <div>
-        <ul class="gs-container">
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-            <li><a href="">Option</a></li>
-        </ul>
-    </div>
-</footer>
-<!-- javascript -->
-<script src="/js/script.js"></script>
-<script src="/scripts/angular.js"></script>
-<script src="/scripts/angular-animate.js"></script>
-<script src="/scripts/angular-route.js"></script>
-<script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
-<script src="/scripts/underscore.js"></script>
-<script src="/scripts/cause/cause.js"></script>
-<script src="/scripts/cause/contributors.js"></script>
-<script src="/scripts/cause/followers.js"></script>
-</body>
-</html>
