@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div>
-                            <div>
+                            <div ng-show="resource.showDetails">
                                 <div class="gs-barcontainer">
                                     <div>Committed</div>
                                     <div class="gs-progressbar">
@@ -169,7 +169,8 @@
                                     <div>{{calcPercentageDelivered(resource)}}%</div>
                                 </div>
                             </div>
-                            <a href="#" class="gs-fright">Ver estado</a>
+                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="!resource.showDetails" class="gs-fright">View Details</a>
+                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="resource.showDetails" class="gs-fright">Hide Details</a>
                             <div class="gs-clearboth"></div>
                         </div>
                     </li>

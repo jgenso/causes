@@ -27,6 +27,15 @@
       ) * 100.0 / resource.quantity;
     };
 
+    $scope.showDetails = function(resource, $event) {
+      if (resource.showDetails) {
+          resource.showDetails = false;
+      } else {
+          resource.showDetails = true;
+      }
+      $event.preventDefault();
+    };
+
     $scope.fetchCause = function() {
       ServerFuncs.fetchCause(ServerParams.cause);
     };
