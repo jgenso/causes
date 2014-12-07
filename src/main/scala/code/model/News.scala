@@ -9,7 +9,7 @@ import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefField, DateField, ObjectIdPk}
 import net.liftweb.record.field.{OptionalStringField, TextareaField, StringField}
 import net.liftweb.util.DefaultConnectionIdentifier
-
+import com.foursquare.rogue.LiftRogue._
 import scala.xml.NodeSeq
 
 /**
@@ -18,6 +18,13 @@ import scala.xml.NodeSeq
 class News private() extends MongoRecord[News] with ObjectIdPk[News] {
   def meta = News
 
+  object tittle extends StringField(this, 64) {
+    override def displayName = "Tittle"
+
+    override def validations =
+      valMaxLen(64, "Tittle must be 64 characters or less") _ ::
+        super.validations
+  }
   object description extends TextareaField(this, 1000) {
     override def displayName = "Description"
 
@@ -32,7 +39,7 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
 
   object photo extends OptionalStringField(this, 500) {
     override def displayName = "Photo"
-    private def photoHtml =
+    def photoHtml =
       <div class="image">
         <img class="img-responsive" src={s"/images/user/profile/${id.get}"} alt={s"${id.get}'s news photo"}/>
       </div>
@@ -63,8 +70,14 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
 
   object cause extends ObjectIdRefField(this, Cause)
 
+
 }
 
 object News extends News with MongoMetaRecord[News] {
+
+  def page(cause: Cause, curPage: Int, itemsPerPage: Int): List[News] =
+    News.where(_.cause eqs cause.id.get).paginate(itemsPerPage).setPage(curPage).fetch()
+
+  def count(cause: Cause): Long = News.where(_.cause eqs cause.id.get).count()
 
 }
