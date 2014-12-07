@@ -1,10 +1,13 @@
 package code
 package model
 
+import code.lib.util.DateHelper
 import com.mongodb.gridfs.GridFS
 import net.liftweb.common.{Empty, Box, Full}
-import net.liftweb.http.{FileParamHolder, SHtml}
+import net.liftweb.http.S.SFuncHolder
+import net.liftweb.http.{S, FileParamHolder, SHtml}
 import net.liftweb.json.JsonAST.JObject
+import net.liftweb.http.js.JsCmds.Noop
 import net.liftweb.mongodb.MongoDB
 import net.liftweb.mongodb.record.field.{ObjectIdRefField, MongoListField, DateField, ObjectIdPk}
 import net.liftweb.mongodb.record.{MongoRecord, MongoMetaRecord}
@@ -14,6 +17,7 @@ import org.bson.types.ObjectId
 import net.liftweb.json.JsonDSL._
 import net.liftweb.json._
 import com.foursquare.rogue.LiftRogue._
+import net.liftweb.util.Helpers._
 
 import scala.xml.NodeSeq
 
@@ -30,6 +34,8 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
     override def validations =
       valMaxLen(50, "Name must be 50 characters or less") _ ::
         super.validations
+
+    def toAjaxForm() = SHtml.ajaxText(this.value, v => {set(v.trim); Noop})
   }
 
   object organizer extends ObjectIdRefField(this, User) {
@@ -47,6 +53,8 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
     override def validations =
       valMaxLen(32, "Description must be 32 characters or less") _ ::
         super.validations
+
+    def toAjaxForm() = SHtml.ajaxText(this.value, v => {set(v.trim); Noop})
   }
 
   object description extends TextareaField(this, 1000) {
@@ -55,6 +63,8 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
     override def validations =
       valMaxLen(1000, "Description must be 1000 characters or less") _ ::
         super.validations
+
+    def toAjaxForm() = SHtml.ajaxTextarea(this.value, v => {set(v.trim); Noop})
   }
 
   object slogan extends StringField(this, 100) {
@@ -63,24 +73,51 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
     override def validations =
       valMaxLen(100, "Name must be 100 characters or less") _ ::
         super.validations
+
+    def toAjaxForm() = SHtml.ajaxText(this.value, v => {set(v.trim); Noop})
   }
 
   object status extends EnumNameField(this, CauseStatus)
 
   object startCoorDate extends DateField(this) {
     override def displayName = "Start coordination date"
+    override def defaultValue = java.util.Calendar.getInstance().getTime
+
+    def toAjaxForm() = SHtml.ajaxText(DateHelper.dateFormat_yyyyMMdd.format(this.value),
+      v => {
+        val date = tryo(DateHelper.dateFormat_yyyyMMdd.parse(v)).getOrElse(defaultValue)
+        set(date); Noop
+      }, "type" -> "date")
   }
 
   object endCoorDate extends DateField(this) {
     override def displayName = "End coordination date"
+    override def defaultValue = java.util.Calendar.getInstance().getTime
+    def toAjaxForm() = SHtml.ajaxText(DateHelper.dateFormat_yyyyMMdd.format(this.value),
+      v => {
+        val date = tryo(DateHelper.dateFormat_yyyyMMdd.parse(v)).getOrElse(defaultValue)
+        set(date); Noop
+      }, "type" -> "date")
   }
 
   object startExeDate extends DateField(this) {
     override def displayName = "Start execution date"
+    override def defaultValue = java.util.Calendar.getInstance().getTime
+    def toAjaxForm() = SHtml.ajaxText(DateHelper.dateFormat_yyyyMMdd.format(this.value),
+      v => {
+        val date = tryo(DateHelper.dateFormat_yyyyMMdd.parse(v)).getOrElse(defaultValue)
+        set(date); Noop
+      }, "type" -> "date")
   }
 
   object endExeDate extends DateField(this) {
     override def displayName = "End execution date"
+    override def defaultValue = java.util.Calendar.getInstance().getTime
+    def toAjaxForm() = SHtml.ajaxText(DateHelper.dateFormat_yyyyMMdd.format(this.value),
+      v => {
+        val date = tryo(DateHelper.dateFormat_yyyyMMdd.parse(v)).getOrElse(defaultValue)
+        set(date); Noop
+      }, "type" -> "date")
   }
 
   object isInmedCoor extends BooleanField(this) {
@@ -104,12 +141,14 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
       valMaxLen(1000, "Beneficiary must be 500 characters or less") _ ::
         super.validations
 
+    def toAjaxForm() = SHtml.ajaxText(this.value, v => {set(v.trim); Noop})
   }
 
   object tags extends MongoListField[Cause, String](this) {
 
     private def elem = {
-      def elem0 = SHtml.text(this.value.mkString,v => set(v.split(",").filter(v => v.trim.size > 0).map(v => v.trim).toList))
+      def elem0 = SHtml.ajaxText(this.value.mkString,
+        v => {set(v.split(",").filter(v => v.trim.size > 0).map(v => v.trim).toList); Noop})
 
       SHtml.hidden(() => set(Nil)) ++ (uniqueFieldId match {
         case Full(id) => (elem0)
@@ -117,7 +156,7 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
       })
     }
 
-    override def toForm: Box[NodeSeq] =  Full(elem)
+    def toAjaxForm: Box[NodeSeq] =  Full(elem)
   }
 
   object rate extends IntField(this)
