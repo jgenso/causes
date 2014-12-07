@@ -59,7 +59,7 @@ h2 {
     border-bottom: 1px solid #9ae012;
     font-size: 40px;
     margin-bottom: 30px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     padding-bottom: 15px
 }
 
@@ -192,10 +192,6 @@ input.gs-big {
 a {
     text-decoration: none;
     color: #00A9E0 ;
-}
-
-a:visited {
-    color: #7C7C7C;
 }
 
 a:active,
@@ -456,6 +452,18 @@ body > header input {
 .gs-body > h1 {
     text-align: center;
 }
+
+.gs-titlebutton {
+    overflow: hidden;
+    border-bottom: 1px solid #9ae012;
+    margin-bottom: 30px;
+}
+
+.gs-titlebutton h2 {
+    border: none;
+    margin-bottom: 0;
+}
+
 
 
 /*----------------------------*\
