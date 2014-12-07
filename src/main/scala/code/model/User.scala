@@ -219,6 +219,7 @@ object User extends User with ProtoAuthUserMeta[User] with RogueMetaRecord[User]
   // used during login process
   object loginCredentials extends SessionVar[LoginCredentials](LoginCredentials(""))
   object regUser extends SessionVar[User](createRecord.email(loginCredentials.is.email))
+
 }
 
 case class LoginCredentials(email: String, isRememberMe: Boolean = false)
