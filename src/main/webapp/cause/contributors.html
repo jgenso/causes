@@ -1,0 +1,13 @@
+<div data-lift="surround?with=base-wrap;at=content" ng-app="Contributors">
+    <lift:head>
+        <title data-lift="Menu.title">causes: %*%</title>
+    </lift:head>
+    <div class="main-content" ng-controller="ContributorsController">
+        <div data-lift="Notices"></div>
+        <div class="container" id="contributors">
+            {{items}}
+            <pagination total-items="count" ng-model="page" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+        </div>
+    </div>
+    <span data-lift="embed?what=/templates-hidden/parts/footer"></span>
+</div>

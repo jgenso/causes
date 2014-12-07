@@ -39,4 +39,8 @@ object Resource extends  Resource with MongoMetaRecord[Resource] {
   def findByName(name: String): List[Resource] = {
     Resource.where(_.name eqs name).fetch()
   }
+  
+  def findAllByCause(cause: Cause): List[Resource] = {
+    Resource.where(_.cause eqs cause.id.get).fetch()
+  }
 }
