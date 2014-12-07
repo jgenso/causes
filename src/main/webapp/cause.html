@@ -157,16 +157,16 @@
                                 <div class="gs-barcontainer">
                                     <div>Committed</div>
                                     <div class="gs-progressbar">
-                                        <span style="width: 50%"></span>
+                                        <span ng-style="{'width': calcPercentageCommitted(resource)+'%'}"></span>
                                     </div>
-                                    <div>30%</div>
+                                    <div>{{calcPercentageCommitted(resource)}}%</div>
                                 </div>
                                 <div class="gs-barcontainer">
                                     <span>Delivered</span>
                                     <div class="gs-progressbar">
-                                        <span style="width: 50%"></span>
+                                        <span ng-style="{'width': calcPercentageDelivered(resource)+'%'}"></span>
                                     </div>
-                                    <div>30%</div>
+                                    <div>{{calcPercentageDelivered(resource)}}%</div>
                                 </div>
                             </div>
                             <a href="#" class="gs-fright">Ver estado</a>
@@ -210,6 +210,7 @@
 <script src="/scripts/angular-animate.js"></script>
 <script src="/scripts/angular-route.js"></script>
 <script src="/scripts/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="/scripts/underscore.js"></script>
 <script src="/scripts/cause/cause.js"></script>
 <script src="/scripts/cause/contributors.js"></script>
 <script src="/scripts/cause/followers.js"></script>

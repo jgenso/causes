@@ -30,9 +30,7 @@ class CommittedResource private() extends MongoRecord[CommittedResource] with Ob
 
   object cause extends ObjectIdRefField(this, Cause)
 
-  object resource extends ObjectIdRefField(this, Resource) {
-    override def asJValue: JValue = this.obj.map(_.asJValue) openOr (JNothing: JValue)
-  }
+  object resource extends ObjectIdRefField(this, Resource)
 
   object joinedUser extends ObjectIdRefField(this, User) {
     override def asJValue: JValue = this.obj.map(_.asJValue) openOr (JNothing: JValue)

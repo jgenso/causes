@@ -11,6 +11,22 @@
     $scope.sms = false;
     $scope.email = false;
 
+    $scope.calcPercentageCommitted = function(resource) {
+     return _.reduce(
+        _.filter(
+          $scope.cause.committedResources, function(cr){ return cr.resource === resource._id; }
+        ), function(base, cr){ return base  + cr.quantity}, 0
+      ) * 100.0 / resource.quantity;
+    };
+
+    $scope.calcPercentageDelivered = function(resource) {
+     return _.reduce(
+        _.filter(
+          $scope.cause.committedResources, function(cr){ return cr.resource === resource._id && cr.status === 'Executed'; }
+        ), function(base, cr){ return base  + cr.quantity}, 0
+      ) * 100.0 / resource.quantity;
+    };
+
     $scope.fetchCause = function() {
       ServerFuncs.fetchCause(ServerParams.cause);
     };
