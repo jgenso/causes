@@ -6,7 +6,7 @@ import net.liftweb.common.Full
 import net.liftweb.http.{FileParamHolder, SHtml}
 import net.liftweb.json.JsonAST.JObject
 import net.liftweb.mongodb.MongoDB
-import net.liftweb.mongodb.record.field.{MongoListField, DateField, ObjectIdPk}
+import net.liftweb.mongodb.record.field.{ObjectIdRefField, MongoListField, DateField, ObjectIdPk}
 import net.liftweb.mongodb.record.{MongoRecord, MongoMetaRecord}
 import net.liftweb.record.field._
 import net.liftweb.util.DefaultConnectionIdentifier
@@ -29,6 +29,22 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 
     override def validations =
       valMaxLen(50, "Name must be 50 characters or less") _ ::
+        super.validations
+  }
+
+  object organizer extends ObjectIdRefField(this, User) {
+    override def defaultValue = User.currentUser.dmap(User.createRecord.id.get)(_.id.get)
+  }
+
+  object country extends CountryField(this) {
+    override def displayName = "Country"
+    override def asJValue: JValue = valueBox.dmap[JValue](JNothing)(s => JString(s.toString))
+  }
+
+  object location extends StringField(this, 32) {
+    override def displayName = "Location"
+    override def validations =
+      valMaxLen(32, "Description must be 32 characters or less") _ ::
         super.validations
   }
 
@@ -89,7 +105,7 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 
   }
 
-  object tags extends MongoListField[Cause, ObjectId](this)
+  object tags extends MongoListField[Cause, String](this)
 
   object rate extends IntField(this)
 
