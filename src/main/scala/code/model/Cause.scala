@@ -2,7 +2,7 @@ package code
 package model
 
 import com.mongodb.gridfs.GridFS
-import net.liftweb.common.Full
+import net.liftweb.common.{Empty, Box, Full}
 import net.liftweb.http.{FileParamHolder, SHtml}
 import net.liftweb.json.JsonAST.JObject
 import net.liftweb.mongodb.MongoDB
@@ -106,7 +106,19 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 
   }
 
-  object tags extends MongoListField[Cause, String](this)
+  object tags extends MongoListField[Cause, String](this) {
+
+    private def elem = {
+      def elem0 = SHtml.text(this.value.mkString,v => set(v.split(",").filter(v => v.trim.size > 0).map(v => v.trim).toList))
+
+      SHtml.hidden(() => set(Nil)) ++ (uniqueFieldId match {
+        case Full(id) => (elem0)
+        case _ => elem0
+      })
+    }
+
+    override def toForm: Box[NodeSeq] =  Full(elem)
+  }
 
   object rate extends IntField(this)
 

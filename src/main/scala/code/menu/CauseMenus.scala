@@ -35,4 +35,7 @@ object CauseMenus {
     Menu.param[Cause]("Cause Log", "Cause Log", Cause.find(_), c => c.id.get.toString) / "cause" / * / "log" >>
       TemplateBox(() => Templates("cause" :: "log" :: Nil))
 
+  val causeManagement =
+    Menu("Cause Management", "Create cause") / "cause" / "add"
+
 }

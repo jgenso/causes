@@ -1,0 +1,58 @@
+<div id="main" class="lift:surround?with=default;at=content">
+    <div class="row col-md-11" data-lift="CausesManagement.add">
+        <div>
+            <div>
+                <form method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div>
+                        <h1><span class="title">Add cause</span></h1>
+                        <div class="controls btn-group options">
+                            <button type="submit" name="save" class="btn gs--btn-save"><span data-lift="lift:Loc.locid">Save</span></button>
+                            <button type="button" name="cancel" class="btn gs--btn-cancel">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="block-body">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label code" for="name">Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="name" data-name="name" class="form-control input-sm ini">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label name" for="slogan">Slogan</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="slogan" data-name="slogan" class="form-control input-sm ini">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label description" for="description">Description</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="description" data-name="description" class="form-control input-sm ini">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label description" for="tags">Tags</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="tags" data-name="tags" class="form-control input-sm ini">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label photo" for="photo">Image Cause</label>
+                            <div class="col-sm-6">
+                                <input type="text" id="photo" data-name="photo">
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" name="save" class="btn gs--btn-save"><span data-lift="lift:Loc.locid">Save</span></button>
+                            <input type="hidden" name="process" id="process">
+                            <button type="button" name="cancel" class="btn gs--btn-cancel">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
