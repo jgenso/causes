@@ -14,14 +14,6 @@ class CommittedResource private() extends MongoRecord[CommittedResource] with Ob
 
   object  quantity extends IntField(this)
 
-  object unit extends StringField(this, 50) {
-    override def displayName = "Unit"
-
-    override def validations =
-      valMaxLen(50, "Name must be 50 characters or less") _ ::
-        super.validations
-  }
-
   object registerDate extends DateField(this) {
     override def displayName = "Register date"
   }
@@ -44,4 +36,3 @@ object CommittedResourceStatus extends Enumeration {
   type CommittedResourceStatus  = Value
   val Committed, WaitingExecuted, Executed = Value
 }
-

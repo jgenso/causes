@@ -22,7 +22,7 @@ class CauseFollower private() extends MongoRecord[CauseFollower] with ObjectIdPk
 
   object cause extends ObjectIdRefField(this, Cause)
 
-  object follower extends ObjectIdRefListField(this, User)
+  object follower extends ObjectIdRefField(this, User)
 }
 
 object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {
