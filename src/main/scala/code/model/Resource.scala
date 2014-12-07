@@ -4,6 +4,7 @@ package model
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{IntField, StringField}
+import com.foursquare.rogue.LiftRogue._
 
 /**
  * Created by andrea on 12/6/14.
@@ -35,5 +36,7 @@ class Resource private() extends MongoRecord[Resource] with ObjectIdPk[Resource]
 }
 
 object Resource extends  Resource with MongoMetaRecord[Resource] {
-
+  def findByName(name: String): List[Resource] = {
+    Resource.where(_.name eqs name).fetch()
+  }
 }
