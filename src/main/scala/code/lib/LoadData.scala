@@ -4,6 +4,7 @@ package code.lib
 import code.model._
 import net.liftweb.common._
 import net.liftweb.record.field.Countries
+import org.bson.types.ObjectId
 
 /**
  * Created by andrea on 12/6/14.
@@ -78,9 +79,13 @@ object LoadData extends Logger {
     cause1.endCoorDate(endCoorDate.getTime)
     cause1.startExeDate(startExeDate.getTime)
     cause1.endExeDate(endExeDate.getTime)
+    cause1.country(Countries.USA)
+    cause1.location("Maine")
+    cause1.tags(List("children", "medical assitance"))
 
     cause1.isInmedCoor(true)
     cause1.isInmedExe(true)
+    cause1.organizer(User.findAll.headOption.map(_.id.get) getOrElse ObjectId.get())
 
     cause1.saveBox() match {
       case Empty => error("Cause 2 not saved!")
@@ -130,9 +135,14 @@ object LoadData extends Logger {
     cause2.endCoorDate(endCoorDate.getTime)
     cause2.startExeDate(startExeDate.getTime)
     cause2.endExeDate(endExeDate.getTime)
+    cause2.country(Countries.Australia)
+    cause2.location("Sydney")
+    cause2.tags(List("dogs", "animals", "house"))
 
     cause2.isInmedCoor(false)
     cause2.isInmedExe(false)
+    cause2.organizer(User.findAll.headOption.map(_.id.get) getOrElse ObjectId.get())
+
     cause2.saveBox() match {
       case Empty => error("Cause 2 not saved!")
       case Failure(msg, _, _) => error("Cause 2 not saved!")
