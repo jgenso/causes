@@ -13,7 +13,9 @@ class Comment private() extends MongoRecord[Comment] with ObjectIdPk[Comment] {
 
   object cause extends ObjectIdRefField(this, Cause)
 
-  object user extends ObjectIdRefField(this, User)
+  object user extends ObjectIdRefField(this, User) {
+    override def defaultValue = User.currentUser.dmap(User.createRecord.id.get)(_.id.get)
+  }
 
   object comment extends TextareaField(this, 500) {
     override def displayName = "Comment"
@@ -34,6 +36,9 @@ class Comment private() extends MongoRecord[Comment] with ObjectIdPk[Comment] {
 }
 
 object Comment extends Comment with MongoMetaRecord[Comment] {
+  /*def page(cause: Cause, curPage: Int, itemsPerPage: Int): List[Comment] =
+    Comment.where(_.cause eqs cause.id.get).paginate(itemsPerPage).setPage(curPage).fetch()
 
+  def count(cause: Cause): Long = Comment.where(_.cause eqs cause.id.get).count()*/
 }
 
