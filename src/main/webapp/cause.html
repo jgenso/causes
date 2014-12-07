@@ -50,27 +50,17 @@
             <li><a href="#">Log</a></li>
         </ul>
     </div>
-    <div class="gs-content gs-container">
+    <div class="gs-content gs-container" data-lift="Updates.list">
         <div class="gs-fleft">
-            <div class="gs-wellcomewords">
+            <div class="gs-wellcomewords" data-name="slogan">
                 Descripción breve, debe ser atrayente y motivar a ue las peronas paticipen.
             </div>
             <h2>Updates</h2>
             <div class="gs-updatelist">
-                <div class="gs-update">
-                    <div>13 de septiembre de 2015</div>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-                    <div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui. </p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui.
-                        </p>
-                    </div>
-                </div>
-                <div class="gs-update">
-                    <div>13 de septiembre de 2015</div>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
-                    <div>
+                <div class="gs-update" data-name="list">
+                    <div data-name="register-date">13 de septiembre de 2015</div>
+                    <h3 data-name="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                    <div data-name="description">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui. </p>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium, felis eget fringilla feugiat, tortor orci tincidunt odio, id egestas lacus neque sit amet justo. Nunc euismod quam eu arcu molestie, at dictum odio facilisis. Integer et enim augue. Maecenas vitae neque elit. Nam sit amet purus dui. Sed ac pharetra nisl, vitae pretium dui.
@@ -78,6 +68,21 @@
                     </div>
                 </div>
             </div>
+
+            <div data-lift="lift:Updates.paginate">
+                <ul class="pagination">
+                    <li class="prev"><a href="#">Prev</a></li>
+                    <li class="first"><a href="#">First</a></li>
+                    <li class="zoompagesleft disabled"><a href="#">...</a></li>
+                    <li class="prevpages"><a class="page" href="#">2</a></li>
+                    <li class="active"><a id="records" href="#">1</a> </li>
+                    <li class="nextpages"><a class="page" href="#">2</a></li>
+                    <li class="zoompagesright disabled"><a href="#">...</a></li>
+                    <li class="last"><a href="#">Last</a></li>
+                    <li class="next"><a href="#">Next</a></li>
+                </ul>
+            </div>
+
         </div>
         <div class="gs-fright">
             <div class="gs-infocause">
