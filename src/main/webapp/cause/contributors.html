@@ -5,7 +5,7 @@
             <li ng-repeat="item in items">
                 <img src="/images/user/profile/{{item.joinedUser._id}}" alt="{{item.joinedUser.name}}"/>
                 <div>
-                    <h3><a href="#">{{item.joinedUser.name}}</a></h3>
+                    <h3><a href="/user/{{item.joinedUser.username}}">{{item.joinedUser.name}}</a></h3>
                     <div class="gs-date">Hace 24 horas</div>
                     <div class="gs-status">
                         <div>10 cables</div>

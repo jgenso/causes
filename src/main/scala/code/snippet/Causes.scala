@@ -99,6 +99,20 @@ class Causes(cause: Cause) extends SnippetHelper {
       }
     }
 
+    def fetchFollowersPage(json: JValue) = {
+      val elementId = "followers"
+      for {
+        page <- tryo((json \ "page").extract[Int])
+        itemsPerPage <- tryo((json \ "itemsPerPage").extract[Int])
+      } yield {
+        val items = CauseFollower.findAllByCausePaginate(cause, page)
+        val count = CauseFollower.countAllByCause(cause)
+        val res = ("count" -> count) ~ ("items" -> items.map(_.asJValue))
+
+        NgBroadcast(elementId, "after-fetch-page", Full(res))
+      }
+    }
+
     val params: JValue =
       ("cause" -> cause.asJValue) ~
         ("isLogged" -> User.currentUser.dmap(false)(s => true)) ~ // ToDo move this to another place available for all the app
@@ -109,7 +123,8 @@ class Causes(cause: Cause) extends SnippetHelper {
       "contribute" -> JsExtras.JsonCallbackAnonFunc(contribute),
       "follow" -> JsExtras.JsonCallbackAnonFunc(follow),
       "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow),
-      "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage)
+      "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage),
+      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage)
     )
 
     val onload =

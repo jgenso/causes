@@ -34,7 +34,7 @@ class Cause private() extends MongoRecord[Cause] with ObjectIdPk[Cause] {
 
   object organizer extends ObjectIdRefField(this, User) {
     override def defaultValue = User.currentUser.dmap(User.createRecord.id.get)(_.id.get)
-    override def asJValue: JValue = this.obj.dmap[JValue](JNothing)(s => JString(s.name.get))
+    override def asJValue: JValue = this.obj.dmap[JValue](JNothing)(s => s.asJValue)
   }
 
   object country extends CountryField(this) {
