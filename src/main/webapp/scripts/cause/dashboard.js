@@ -6,9 +6,14 @@
   appCause.controller("CauseDashboardController", function($scope, ServerParams, ServerFuncs, $filter, $log, $modal) {
     $log.log("CALLED");
     $scope.cause = ServerParams.cause;
+    $scope.pendingLimit = 10;
 
     $scope.approve = function(req) {
-      ServerFuncs.approve({req: req});
+      ServerFuncs.approve({resource: req._id});
+    };
+
+    $scope.cancel = function(req) {
+      ServerFuncs.cancel({resource: req._id});
     };
 
     $scope.calcPercentageCommitted = function(resource) {
@@ -79,9 +84,35 @@
       ServerFuncs.fetchCause(ServerParams.cause);
     };
 
+    $scope.filterPending = function(item) {
+        return item.status === 'WaitingExecuted' || item.status === 'Committed';
+    };
+
+    $scope.showMorePendingApprovals = function($event) {
+      $scope.pendingLimit = $scope.pendingLimit + 10;
+      $event.preventDefault();
+    };
+
+    $scope.pendingTotal = function() {
+      return _.size(_.filter($scope.cause.committedResources, function(item) { return item.status === 'Executed'; }));
+    };
+
     $scope.$on('after-fetch-cause', function (event, data) {
-      $scope.$apply(function () {
+      $scope.$apply(function() {
         $scope.cause = data;
+      });
+    });
+
+    $scope.$on('after-approve', function (event, data) {
+      $scope.$apply(function() {
+        var item = _.find($scope.cause.committedResources, function(cr) { return cr._id === data._id;})
+        item.status = data.status;
+      });
+    });
+
+    $scope.$on('after-cancel', function (event, data) {
+      $scope.$apply(function() {
+        $scope.cause.committedResources = _.filter($scope.cause.committedResources, function(cr) { return cr._id === data._id;});
       });
     });
   });

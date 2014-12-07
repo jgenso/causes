@@ -33,14 +33,25 @@ object CauseDashboard extends SnippetHelper {
 
     def approve(json: JValue) = {
       for {
-        quantity <- tryo((json \ "quantity").extract[Int])
-        resourceId <- tryo((json \ "resource").extract[ObjectId])
-        cause <- CauseMenus.causeMenu.currentValue
+        resourceId <- tryo((json \ "resource").extract[String])
+        cause <- CauseMenus.causeDashBoard.currentValue
         user <- User.currentUser
-        res <- Cause.find(cause.id.get)
+        cr <- CommittedResource.findByCauseAndId(cause, resourceId)
       } yield {
+        val res = cr.status(CommittedResourceStatus.Executed).saveBox()
+        NgBroadcast(elementId, "after-approve", res.map(_.asJValue))
+      }
+    }
 
-        NgBroadcast(elementId, "after-contribute", Full(res.asJValue))
+    def cancel(json: JValue) = {
+      for {
+        resourceId <- tryo((json \ "resource").extract[String])
+        cause <- CauseMenus.causeDashBoard.currentValue
+        user <- User.currentUser
+        cr <- CommittedResource.findByCauseAndId(cause, resourceId)
+      } yield {
+        val res = cr.deleteBox_!
+        NgBroadcast(elementId, "after-cancel", Full(cr.asJValue))
       }
     }
 
@@ -49,7 +60,8 @@ object CauseDashboard extends SnippetHelper {
 
     val funcs = JsObj(
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),
-      "approve" -> JsExtras.JsonCallbackAnonFunc(approve)
+      "approve" -> JsExtras.JsonCallbackAnonFunc(approve),
+      "cancel" -> JsExtras.JsonCallbackAnonFunc(cancel)
     )
 
     val onload =

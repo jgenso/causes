@@ -176,10 +176,10 @@
         </div>
         <div class="gs-fright">
             <div>
-                <h3>Aprobaciones pendientes</h3>
+                <h3>Pending approvals</h3>
                 <div>
                     <ul class="gs-imgtxtlist">
-                        <li>
+                        <li ng-repeat="cr in cause.committedResources | filter: filterPending | limitTo: pendingLimit">
                             <img src="/images/sample/avatar.jpg" alt=""/>
                             <div>
                                 <h4>Nombre apellido</h4>
@@ -187,39 +187,16 @@
                                 <div>10 cables de red</div>
                             </div>
                             <div class="gs-groupbuttons">
-                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
-                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
+                                <a href="#" class="gs-fright gs-bgblue" ng-click="approve(cr)">Approve</a>
+                                <a href="#" class="gs-fright gs-bgred" ng-click="cancel(cr)">Cancel</a>
                             </div>
                         </li>
-                        <li>
-                            <img src="/images/sample/avatar.jpg" alt=""/>
-                            <div>
-                                <h4>Nombre apellido</h4>
-                                <div class="gs-date">Hace 24 horas</div>
-                                <div>10 cables de red</div>
-                            </div>
-                            <div class="gs-groupbuttons">
-                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
-                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="/images/sample/avatar.jpg" alt=""/>
-                            <div>
-                                <h4>Nombre apellido</h4>
-                                <div class="gs-date">Hace 24 horas</div>
-                                <div>10 cables de red</div>
-                            </div>
-                            <div class="gs-groupbuttons">
-                                <a href="#" class="gs-fright gs-bgblue">Aprobar</a>
-                                <a href="#" class="gs-fright gs-bgred">Cancelar</a>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
-                <a href="#" class="gs-bgblue">Ver más</a>
+                <a href="#" class="gs-bgblue" ng-click="showMorePendingApprovals($event)" ng-show="pendingTotal() > pendingLimit">Ver más</a>
             </div>
-            <div>
+            <!--<div>
                 <h3>Solicitudes de aprobación</h3>
                 <div>
                     <ul class="gs-imgtxtlist">
@@ -262,7 +239,7 @@
                     </ul>
                 </div>
                 <a href="#" class="gs-bgblue">Ver más</a>
-            </div>
+            </div>-->
 
         </div>
         <div class="gs-clearboth"></div>

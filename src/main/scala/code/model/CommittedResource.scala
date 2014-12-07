@@ -1,12 +1,14 @@
 package code
 package model
 
+import net.liftweb.common.Box
 import net.liftweb.json.JsonAST._
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.{EnumNameField, IntField, StringField}
 import com.foursquare.rogue.LiftRogue._
 import org.joda.time.DateTime
+import org.bson.types.ObjectId
 
 /**
  * Created by andrea on 12/6/14.
@@ -50,6 +52,10 @@ object CommittedResource extends  CommittedResource with MongoMetaRecord[Committ
 
   def countAllByCause(cause: Cause): Long = {
     CommittedResource.where(_.cause eqs cause.id.get).count()
+  }
+
+  def findByCauseAndId(cause: Cause, id: String): Box[CommittedResource] = {
+    CommittedResource.find(id).filter(_.cause.get == cause.id.get)
   }
 }
 
