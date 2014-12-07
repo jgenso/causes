@@ -130,6 +130,10 @@ p:last-child {
     font-size: 14px;
 }
 
+.gs-txtcenter {
+    text-align: center;
+}
+
 
 /*------------------------------*\
     $LAYOUT
@@ -153,6 +157,18 @@ textarea {
     height: 35px;
     min-width: 300px;
     padding: 3px 15px;
+}
+
+input.gs-block {
+    width: 100%;
+}
+
+input.gs-big {
+    height: 50px;
+}
+
+.gs-generic input {
+    margin-bottom: 10px;
 }
 
 /*------------------------------*\
@@ -394,6 +410,53 @@ body > header input {
 \*------------------------------------*/
 .gs-body > h1 {
     text-align: center;
+}
+
+
+/*----------------------------*\
+    $PAGE - HOME
+\*----------------------------*/
+
+.gs-home .gs-logincontent {
+    margin: 100px 0 50px;
+}
+.gs-home .gs-calltoaction {
+    font-size: 30px;
+    text-align: center;
+}
+
+.gs-home .gs-fleft {
+    width: 40%;
+}
+
+
+.gs-home .gs-causelist {
+    width: 100%;
+    overflow: hidden;
+}
+
+.gs-home .gs-cause {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    width: 49%;
+    float: left;
+}
+
+.gs-home .gs-cause:nth-child(2n) {
+    float: right;
+}
+
+.gs-home .gs-cause div {
+    text-align: center;
+    padding: 10px;
+}
+
+.gs-home .gs-cause img {
+    width: 100%;
+}
+
+.gs-home .gs-fright {
+    width: 48%;
 }
 
 /*----------------------------*\
@@ -844,8 +907,92 @@ body > header input {
     padding: 5px;
 }
 
+/*----------------------------*\
+    $PAGE - USER PROFILE
+\*----------------------------*/
 
+.gs-userprofile .gs-fleft {
+    width: 30%;
+}
 
+.gs-userprofile .gs-fleft img {
+    width: 100%;
+}
+
+.gs-userprofile .gs-fright {
+    width: 60%;
+}
+
+.gs-userprofile .gs-fright h3 {
+    margin-top: 0;
+}
+
+.gs-userprofile .gs-fright .gs-notification {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+/*----------------------------*\
+    $PAGE - USER FOLLOWERS
+\*----------------------------*/
+.gs-userfollowers h2 {
+    margin-top: 0;
+}
+
+.gs-follower img {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.gs-follower {
+    float: left;
+    width: 30%;
+    margin-right: 2%;
+    margin-bottom: 20px;
+}
+
+.gs-follower a {
+   display: block;
+    text-align: center;
+}
+
+/*----------------------------*\
+    $PAGE - USER CAUSES
+\*----------------------------*/
+.gs-usercauses .gs-fright .gs-menucause {
+    border-bottom: none;
+    border-top: none;
+    margin-bottom: 25px;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.gs-usercauses .gs-fright .gs-menucause li {
+    width: auto;
+    margin-right: 20px;
+}
+
+.gs-usercauses .gs-fright .gs-cause {
+    width: 49%;
+    float: left;
+}
+
+.gs-usercauses .gs-fright .gs-cause img {
+    width: 100%;
+}
+
+.gs-usercauses .gs-fright .gs-cause {
+    border: 1px solid #ccc;
+    margin-right: 2%;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+.gs-usercauses .gs-fright .gs-cause:nth-child(2n) {
+    margin-right: 0;
+}
 
 /*------------------------------------*\
     $FOOTER
