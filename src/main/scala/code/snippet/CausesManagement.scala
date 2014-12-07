@@ -1,6 +1,7 @@
 package code.snippet
 
 import code.config.Site
+import code.menu.CauseMenus
 import code.model.{Resource, Cause}
 import net.liftweb.common.{Box, Full, Empty, Failure}
 import net.liftweb.http.js.JsCmds.{Focus, RedirectTo, Noop}
@@ -55,7 +56,7 @@ object CausesManagement {
         case Failure(msg, _, _) => S.error(msg)
         case Full(c: Cause) => {
           resourcesRequestVar.foreach(r => r.saveBox())
-          RedirectTo(Site.home.url, () => S.notice("Cause saved"))
+          RedirectTo(CauseMenus.causeDashBoard.calcHref(c), () => S.notice("Cause saved"))
         }
       }
     })

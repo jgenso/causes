@@ -12,8 +12,9 @@ import sitemap._
 import Loc._
 import model.{Cause, User}
 import scala.xml._
+import net.liftmodules.mongoauth.Locs
 
-object CauseMenus {
+object CauseMenus extends Locs {
 
   val causeMenu =
     Menu.param[Cause]("Cause", "Cause", Cause.find(_), c => c.id.get.toString) / "cause" / * >>
@@ -44,6 +45,6 @@ object CauseMenus {
       "cause" / * / "comments" >> TemplateBox(() => Templates("cause" :: "comments" :: Nil))
 
   val causeManagement =
-    Menu("Cause Management", "Create cause") / "cause" / "add"
+    Menu("Cause Management", "Create cause") / "cause" / "add"  >> RequireLoggedIn
 
 }
