@@ -25,6 +25,6 @@
         $scope.count = data.count;
       });
     });
+    $scope.fetchPage();
   });
-  $scope.fetchPage();
-})
+})(window.angular);

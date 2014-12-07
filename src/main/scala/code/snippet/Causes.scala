@@ -32,16 +32,28 @@ object Causes extends SnippetHelper {
       }
     }
 
+    def unfollow() = {
+      for {
+        cause <- CauseMenus.causeMenu.currentValue
+        user <- User.currentUser
+      } yield {
+        CauseFollower.deleteByCauseAndFollower(cause, user)
+        NgBroadcast(elementId, "after-unfollow", Cause.find(cause.id.get).map(_.asJValue))
+      }
+    }
+
     def follow(json: JValue) = {
       for {
         allowSms <- tryo((json \ "sms").extract[Boolean])
         allowEmail <- tryo((json \ "email").extract[Boolean])
         cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
+        cf <- CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
+          .cause(cause.id.get).follower(user.id.get).saveBox()
       } yield {
-        val inst = CauseFollower.createRecord.receiptEmail(allowEmail).receiptSms(allowSms)
-          .cause(cause.id.get).follower(user.id.get).saveBox().map(_.asJValue)
-        val res = "isFollower" -> (inst.map(s => JBool(Cause.isFollower(user, cause))) openOr JBool(false))
+        val inst = Cause.find(cause.id.get)
+        val res = ("isFollower" -> (inst.map(s => JBool(Cause.isFollower(user, cause))) openOr JBool(false))) ~
+          ("cause" -> inst.map(_.asJValue))
         NgBroadcast(elementId, "after-follow", Full(res))
       }
     }
@@ -53,8 +65,10 @@ object Causes extends SnippetHelper {
         cause <- CauseMenus.causeMenu.currentValue
         user <- User.currentUser
         cr <- createCommittedResource(quantity, resourceId, cause, user)
+        res <- Cause.find(cause.id.get)
       } yield {
-        NgBroadcast(elementId, "after-contribute", Empty)
+
+        NgBroadcast(elementId, "after-contribute", Full(res.asJValue))
       }
     }
 
@@ -75,7 +89,7 @@ object Causes extends SnippetHelper {
     )
 
     val onload =
-      NgModule("ContributorsServer", Nil) ~>
+      NgModule("CauseServer", Nil) ~>
         NgConstant("ServerParams", params) ~>
         NgFactory("ServerFuncs", AnonFunc(JsReturn(funcs)))
 

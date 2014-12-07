@@ -130,7 +130,9 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
   override def asJValue(inst: Cause): JObject = {
     super.asJValue(inst) ~
       ("resources" -> Resource.findAllByCause(inst).map(_.asJValue)) ~
-      ("committedResources" -> CommittedResource.findAllByCause(inst).map(_.asJValue))
+      ("committedResources" -> CommittedResource.findAllByCause(inst).map(_.asJValue)) ~
+      ("totalContributors" -> CommittedResource.countAllByCause(inst)) ~
+      ("totalFollowers" -> CauseFollower.countAllByCause(inst))
   }
 
   def isFollower(user: User, inst: Cause): Boolean = {

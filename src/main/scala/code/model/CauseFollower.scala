@@ -34,4 +34,10 @@ object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {
   def countAllByCause(cause: Cause): Long = {
     CauseFollower.where(_.cause eqs cause.id.get).count()
   }
+
+  def deleteByCauseAndFollower(cause: Cause, follower: User) = {
+    CauseFollower.where(_.cause eqs cause.id.get)
+      .and(_.follower eqs follower.id.get)
+      .foreach(cf => CauseFollower.delete_!(cf))
+  }
 }
