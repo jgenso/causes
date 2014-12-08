@@ -1,5 +1,8 @@
 package bootstrap.liftweb
 
+
+import java.io.FileInputStream
+
 import code.lib.LoadData
 import code.lib.rest.FileApi
 
@@ -25,6 +28,9 @@ import net.liftmodules.mongoauth.MongoAuth
 class Boot extends Loggable {
   def boot {
     logger.info("Run Mode: "+Props.mode.toString)
+
+    val filename = "/home/jotajota/j2.props"
+    Props.whereToLook = () => ((filename, () => Helpers.tryo(new FileInputStream(filename))) :: Nil)
 
     // init mongodb
     MongoConfig.init()
