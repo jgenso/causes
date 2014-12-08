@@ -136,6 +136,13 @@ object LoadData extends Logger {
             " She's out of intensive care and a group of volunteers is processed on a journey to reconstructive surgery " +
             " of his burns. Thank you!", date.getTime)
       }
+
+      // comments
+        loadComment(cause, marcelo, "Hey! I have similar cream, Do you think will be usable? ", date.getTime, Comment.createRecord.id.get)
+        loadComment(cause, violeta, "Babies are bad :'( . Tomorrow is birthday of Abigail, We can go and to organize" +
+          " a little party in hospital what do you think?", date.getTime, Comment.createRecord.id.get)
+        loadComment(cause, camila, "Hello all, I am new here, How are Miriam> and babies?", date.getTime, Comment.createRecord.id.get)
+
     }
 
     // cause 2
@@ -282,6 +289,21 @@ object LoadData extends Logger {
       case Empty => error("News of cause  not saved!")
       case Failure(msg, _, _) => error("News of cause  not saved! " + msg)
       case Full(_) => info("News of cause saved")
+    }
+  }
+
+  private def loadComment(cause: Cause, user: User, com: String, date: java.util.Date, parent: ObjectId) = {
+    val comment =Comment.createRecord
+    comment.comment(com)
+    comment.registerDate(date)
+    comment.cause(cause.id.get)
+    comment.user(user.id.get)
+    comment.parentComment(parent)
+
+    comment.saveBox() match {
+      case Empty => error("Comment of cause  not saved!")
+      case Failure(msg, _, _) => error("Comment of cause  not saved! " + msg)
+      case Full(_) => info("Comment of cause saved")
     }
   }
 

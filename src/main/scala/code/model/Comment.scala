@@ -1,8 +1,10 @@
 package code.model
 
+import net.liftweb.common.Empty
 import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.TextareaField
+import com.foursquare.rogue.LiftRogue._
 
 /**
  * Created by andrea on 12/6/14.
@@ -36,9 +38,24 @@ class Comment private() extends MongoRecord[Comment] with ObjectIdPk[Comment] {
 }
 
 object Comment extends Comment with MongoMetaRecord[Comment] {
-  /*def page(cause: Cause, curPage: Int, itemsPerPage: Int): List[Comment] =
+  /*def page(cause: Cause, curPage: Int, itemsPerPage: Int): List[Comment] = {
+    val parents: List[Comment] = Comment.where(_.cause eqs cause.id.get).and(_.parentComment exists false).fetch()
+
+    def children(comment: Comment): List[Comment] = {
+      Comment.where(_.parentComment eqs comment.id.get).fetch() match {
+        case Nil => Nil
+        case (childs: List[Comment]) => comment :: childs.
+          foldLeft(Nil:List[Comment]){(lst, ch) => children(ch) ::: lst}
+      }
+    }
+
+    val comments = parents.foldLeft(Nil: List[Comment]){(childrens,comment) => children(comment) ::: childrens}.
+      take(itemsPerPage)
+    comments
+  }*/
+  def page(cause: Cause, curPage: Int, itemsPerPage: Int): List[Comment] =
     Comment.where(_.cause eqs cause.id.get).paginate(itemsPerPage).setPage(curPage).fetch()
 
-  def count(cause: Cause): Long = Comment.where(_.cause eqs cause.id.get).count()*/
+  def count(cause: Cause): Long = Comment.where(_.cause eqs cause.id.get).count()
 }
 
