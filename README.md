@@ -1,5 +1,8 @@
 #Causes
 ##Description
+Every day we encounter many problems afflicting society in general. Similarly,
+there are people or institutions that collaborate in solving these problems, or at least manage them better.
+
 One difficulty in this task is the coordination of resources and results. "Causes" is an social networking service which helps on organization causes and resources, allowing to organizers to create a cause, and request contributions of any kind (objects, people and others) to comply with the cause.
 
 ![Causes](/screenshots/home.jpg "Home page")
