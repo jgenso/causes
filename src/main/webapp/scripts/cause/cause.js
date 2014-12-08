@@ -55,7 +55,7 @@
     };
 
     $scope.contribute = function(quantity, resource) {
-      ServerFuncs.contribute({quantity: quantity, resource: resource});
+      ServerFuncs.contribute({quantity: parseInt(quantity), resource: resource._id});
     };
 
     $scope.follow = function(sms, email) {
@@ -68,7 +68,7 @@
 
     $scope.$on('after-fetch-cause', function (event, data) {
       $scope.$apply(function () {
-        $scope.cause = data;
+        $scope.cause = data.cause;
       });
     });
 
@@ -110,6 +110,24 @@
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
+
+    $scope.openContributeModal = function (resource) {
+      var modalInstance = $modal.open({
+        templateUrl: 'contributeModal.html',
+        controller: 'ContributeModalInstanceCtrl',
+        resolve: {
+          data: function() {
+            return {quantity: resource.quantity, resource: resource};
+          }
+        }
+      });
+
+      modalInstance.result.then(function (data) {
+        $scope.contribute(data.quantity, data.resource);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
   });
 
   appCause.controller('FollowModalInstanceCtrl', function ($scope, $modalInstance, $log) {
@@ -119,6 +137,20 @@
 
     $scope.ok = function () {
       $modalInstance.close({sms: $scope.sms, email: $scope.email});
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  });
+
+  appCause.controller('ContributeModalInstanceCtrl', function ($scope, $modalInstance, $log, data) {
+
+    $scope.quantity = data.quantity;
+    $scope.resource = data.resource;
+
+    $scope.ok = function () {
+      $modalInstance.close({quantity: $scope.quantity, resource: $scope.resource});
     };
 
     $scope.cancel = function () {

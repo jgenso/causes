@@ -70,19 +70,21 @@ class Causes(cause: Cause) extends SnippetHelper {
     def contribute(json: JValue) = {
       for {
         quantity <- tryo((json \ "quantity").extract[Int])
-        resourceId <- tryo((json \ "resource").extract[ObjectId])
+        resourceId <- tryo((json \ "resource").extract[String])
+        resource <- Resource.find(resourceId)
         user <- User.currentUser
-        cr <- createCommittedResource(quantity, resourceId, cause, user)
-        res <- Cause.find(cause.id.get)
+        cr <- createCommittedResource(quantity, resource, cause, user)
+        inst <- Cause.find(cause.id.get)
       } yield {
-        NgBroadcast(elementId, "after-contribute", Full(res.asJValue))
+        val res = ("cause" -> inst.asJValue)
+        NgBroadcast(elementId, "after-contribute", Full(res))
       }
     }
 
-    def createCommittedResource(quantity: Int, resourceId: ObjectId, cause: Cause, user: User): Box[CommittedResource] = {
-      val resource = CommittedResource.createRecord.quantity(quantity)
-        .cause(cause.id.get).resource(resourceId).joinedUser(user.id.get)
-      resource.saveBox()
+    def createCommittedResource(quantity: Int, resource: Resource, cause: Cause, user: User): Box[CommittedResource] = {
+      val cr = CommittedResource.createRecord.quantity(quantity)
+        .cause(cause.id.get).resource(resource.id.get).joinedUser(user.id.get)
+      cr.saveBox()
     }
 
     def fetchContributorsPage(json: JValue) = {

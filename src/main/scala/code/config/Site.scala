@@ -30,7 +30,7 @@ object Site extends Locs {
   import MenuGroups._
 
   // locations (menu entries)
-  val home = MenuLoc(Menu.i("Home") / "index" >> TopBarGroup)
+  val home = MenuLoc(Menu.i("Home") / "index")
   val loginToken = MenuLoc(buildLoginTokenMenu)
   val logout = MenuLoc(buildLogoutMenu)
   private val profileParamMenu = Menu.param[User]("User", "Profile",

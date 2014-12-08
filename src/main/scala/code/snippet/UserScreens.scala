@@ -119,9 +119,9 @@ object RegisterScreen extends BaseRegisterScreen with BasePasswordScreen {
     Referer(Site.home.url)
   }
 
-  override def finishButton = super.finishButton % ("class" -> "gs-button")
+  override def finishButton = super.finishButton % ("class" -> "gs-button gs-bblue gs-bbig")
 
-  override def cancelButton = <input type="reset" class="gs-button"/>
+  override def cancelButton = <input type="reset" class="gs-button gs-bred gs-bbig"/>
 
   def finish() {
     val user = userVar.is
