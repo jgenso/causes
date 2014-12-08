@@ -94,8 +94,8 @@ class Boot extends Loggable {
     Mailer.testModeSend.default.set((m: MimeMessage) => logger.info("Test mode message:\n" + prettyPrintMime(m)))
     LiftRules.statelessDispatch.append(FileApi)
 
-    LoadData.loadUsers()
-    LoadData.loadCauses()
+    //LoadData.loadUsers()
+    //LoadData.loadCauses()
   }
 
   private def prettyPrintMime(m: MimeMessage): String = {
