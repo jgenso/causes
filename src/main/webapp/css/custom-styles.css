@@ -591,6 +591,8 @@ body > header input[type="text"]{
     margin-bottom: 15px;
     width: 49%;
     float: left;
+    padding: 15px;
+    box-shadow: 0px 10px 0px -8px rgba(148, 148, 148, 0.5);
 }
 
 .gs-home .gs-cause:nth-child(2n) {
@@ -599,7 +601,11 @@ body > header input[type="text"]{
 
 .gs-home .gs-cause div {
     text-align: center;
-    padding: 10px;
+}
+
+.gs-home .gs-cause .image {
+    height: 180px;
+    margin-bottom: 20px;
 }
 
 .gs-home .gs-cause img {
