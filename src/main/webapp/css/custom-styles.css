@@ -37,12 +37,13 @@
 body {
     font-family: 'Roboto', sans-serif;
     color: #3B3B3D;
-    font-size: 15px;
-    line-height: 1.3;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: justify;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #98C73D;
+    color: #9ae012;
     font-weight: normal;
     font-family: 'Open Sans', sans-serif;
     line-height: 1.1;
@@ -55,13 +56,15 @@ h1 {
 }
 
 h2 {
-    font-size: 35px;
-    margin-top: 25px;
-    margin-bottom:20px;
+    border-bottom: 1px solid #9ae012;
+    font-size: 40px;
+    margin-bottom: 30px;
+    /*margin-top: 25px;*/
+    padding-bottom: 15px
 }
 
 h3 {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 h4 {
@@ -111,10 +114,6 @@ p:last-child {
     list-style: none;
 }
 
-.gs-bgblue {
-    background: #00a9e0;
-}
-
 .gs-bggreen {
     background: #98c73d;
 }
@@ -139,7 +138,7 @@ p:last-child {
     $LAYOUT
 \*------------------------------*/
 .gs-container {
-    width: 900px;
+    width: 990px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -171,40 +170,95 @@ input.gs-big {
     margin-bottom: 10px;
 }
 
+.gs-tag {
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    margin-left: 10px;
+    padding: 5px
+}
+
+.gs-tag.gs-tcblue {
+    background: none repeat scroll 0 0 #00a9e0;
+}
+
+
+
 /*------------------------------*\
     $LINKS AND BUTTONS
 \*------------------------------*/
-
 
 a {
     text-decoration: none;
     color: #00A9E0 ;
 }
 
-
 a:active,
 a:hover,
 a:focus {
-    color: #00A5D5 ;
+    color: #00A5D5;
 }
 
-a:visited {
-    color: #7C7C7C
-}
-
-a.gs-button,
 .gs-button {
-    background: #00A5D5 ;
-    border:1px solid #0086B3;
-    border-radius: 5px;
     cursor: pointer;
     display: inline-block;
-    color: #ffffff;
+    text-align: center;
+    box-shadow: none;
+}
+
+.gs-button.gs-bbig {
     min-height: 40px;
     min-width: 150px;
-    text-align: center;
     padding: 10px;
 }
+
+.gs-button.gs-bcontent {
+    height: auto;
+    width: auto;
+    padding: 5px;
+}
+
+.gs-button.gs-bsmall {
+    font-size: 12px;
+    height: auto;
+    width: auto;
+    padding: 5px;
+}
+
+.gs-bblue,
+.gs-button.gs-bblue {
+    background: #4d90fe; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRkOTBmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGE1ZDUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4d90fe 0%, #00a5d5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#00a5d5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4d90fe 0%,#00a5d5 100%); /* W3C */
+    border: 1px solid #3079ed;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#00a5d5',GradientType=0 ); /* IE6-8 */
+    color: #ffffff;
+}
+
+.gs-bred,
+.gs-button.gs-bred{
+    background: #c9302c; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M5MzAyYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkOTUzNGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #c9302c 0%, #d9534f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9302c), color-stop(100%,#d9534f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #c9302c 0%,#d9534f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9302c', endColorstr='#d9534f',GradientType=0 ); /* IE6-8 */
+    border: 1px solid #ac2925;
+    color: #fff;
+}
+
+
 
 
 /*------------------------------*\
@@ -354,7 +408,8 @@ table td {
 \*------------------------------------*/
 
 body > header {
-    background:#98C73D ;
+    border-bottom: 1px solid #98C73D;
+    background:#9ae012;
     width: 100%;
     height: 50px;
 }
@@ -369,7 +424,11 @@ body > header .gs-container .gs-fleft > div:first-child {
 }
 
 body > header .gs-container .gs-fleft > div .gs-button {
-    margin-top: 3px;
+    border-radius: 0;
+    height: 40px;
+    line-height: 1;
+    margin-top: 4px;
+    padding: 10px;
 }
 
 body > header .gs-container .gs-fright > div input {
@@ -382,7 +441,6 @@ body > header .gs-container .gs-fright > div input {
 }
 
 body > header .gs-usermenu {
-    background: #00a5d5;
     padding: 5px;
     height: 50px;
     width: 70px;
@@ -400,7 +458,8 @@ body > header .gs-usermenu img.gs-arrow {
     margin-bottom: 10px;
 }
 
-body > header input {
+body > header input[type="search"],
+body > header input[type="text"]{
     border: none;
     border-radius:50px;
 }
@@ -412,6 +471,98 @@ body > header input {
     text-align: center;
 }
 
+.gs-titlebutton {
+    overflow: hidden;
+    border-bottom: 1px solid #9ae012;
+    margin-bottom: 30px;
+}
+
+.gs-titlebutton h2 {
+    border: none;
+    margin-bottom: 0;
+}
+
+.modal-backdrop {
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.modal {
+    bottom: 0;
+    display: none;
+    left: 0;
+    outline: 0 none;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1040;
+}
+.modal-dialog {
+    background: none repeat scroll 0 0 #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 20px;
+    position: relative;
+    transform: translate(0px, 0px);
+    width: 600px;
+}
+
+.modal h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #9ae012;
+}
+
+.modal-content .btn {
+    color: #ffffff;
+    cursor: pointer;
+    min-height: 40px;
+    min-width: 150px;
+    padding: 10px;
+}
+
+.modal-content .btn-primary {
+    background: #4d90fe; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRkOTBmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGE1ZDUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4d90fe 0%, #00a5d5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#00a5d5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4d90fe 0%,#00a5d5 100%); /* W3C */
+    border: 1px solid #3079ed;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#00a5d5',GradientType=0 ); /* IE6-8 */
+}
+
+.modal-content .btn-warning {
+    background: #c9302c; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M5MzAyYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkOTUzNGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #c9302c 0%, #d9534f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9302c), color-stop(100%,#d9534f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #c9302c 0%,#d9534f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9302c', endColorstr='#d9534f',GradientType=0 ); /* IE6-8 */
+    border: 1px solid #ac2925;
+}
+
+.modal-body  input {
+    min-width: 0;
+    width: auto !important;
+}
+
+.modal-footer {
+    margin-top: 20px;
+}
 
 /*----------------------------*\
     $PAGE - HOME
@@ -440,6 +591,8 @@ body > header input {
     margin-bottom: 15px;
     width: 49%;
     float: left;
+    padding: 15px;
+    box-shadow: 0px 10px 0px -8px rgba(148, 148, 148, 0.5);
 }
 
 .gs-home .gs-cause:nth-child(2n) {
@@ -448,7 +601,11 @@ body > header input {
 
 .gs-home .gs-cause div {
     text-align: center;
-    padding: 10px;
+}
+
+.gs-home .gs-cause .image {
+    height: 180px;
+    margin-bottom: 20px;
 }
 
 .gs-home .gs-cause img {
@@ -463,7 +620,7 @@ body > header input {
     $PAGE - CAUSE
 \*----------------------------*/
 .gs-imagecause  {
-    background: #EAEAEA;
+    background: #f9f9f9;
     padding: 20px;
 }
 .gs-menucause {
@@ -481,8 +638,8 @@ body > header input {
     text-align: center;
 }
 
-.gs-menucause li.active a,
-.gs-menucause li a:hover {
+.gs-menucause li a:hover,
+.gs-menucause li a:active {
     border-bottom: 1px solid #98c73d;
 }
 
@@ -491,10 +648,12 @@ body > header input {
     margin-right: 2%;
 }
 
-.gs-content > .gs-fleft .gs-wellcomewords {
-    text-align: center;
-    font-size: 20px;
+.gs-content > .gs-fleft .gs-introwords {
+    background: #f9f9f9;
+    font-size: 25px;
     margin-bottom: 30px;
+    padding: 15px;
+    text-align: center;
 }
 
 .gs-content > .gs-fleft > h2 {
@@ -525,12 +684,21 @@ body > header input {
     margin-bottom: 20px;
 }
 
+.gs-content > .gs-fright .gs-infocause ul.gs-follcontrib .ng-binding {
+    font-size: 40px;
+}
+
+ul.gs-follcontrib  .gs-buttonfollow {
+    padding-top: 20px;
+}
+
+
 .gs-content > .gs-fright .gs-people {
     padding: 20px;
 }
 
 .gs-content > .gs-fright .gs-goals .gs-progressbar {
-    background: none repeat scroll 0 0 #555;
+    background: none repeat scroll 0 0 #aaaaaa;
     border-radius: 25px;
     height: 20px;
     padding: 10px;
@@ -538,7 +706,17 @@ body > header input {
 }
 
 .gs-content > .gs-fright .gs-goals .gs-progressbar > span {
-    background: none repeat scroll 0 0 red;
+    background: #4d90fe; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRkOTBmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGE1ZDUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4d90fe 0%, #00a5d5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#00a5d5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4d90fe 0%,#00a5d5 100%); /* W3C */
+    border: 1px solid #3079ed;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#00a5d5',GradientType=0 ); /* IE6-8 */
     border-radius: 25px 0 0 25px;
     display: block;
     height: 100%;
@@ -553,7 +731,7 @@ body > header input {
 }
 
 .gs-content > .gs-fright .gs-goals .gs-generalgoals .gs-progressbar+div {
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .gs-barcontainer > div:first-child {
@@ -601,17 +779,6 @@ body > header input {
 
 .gs-participant .gs-imgtxtlist li .gs-status > div {
     float: left;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status > div:first-child {
-    margin-right: 10px;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status > div:last-child {
-    border-radius: 5px;
-    color: #fff;
-    font-size:13px;
-    padding: 5px;
 }
 
 /*----------------------------*\
@@ -992,85 +1159,6 @@ body > header input {
 
 .gs-usercauses .gs-fright .gs-cause:nth-child(2n) {
     margin-right: 0;
-}
-
-/*----------------------------*\
-    $PAGE - CAUSE - PARTICIPANTS
-\*----------------------------*/
-
-.gs-participant .gs-imgtxtlist li img {
-    width: 100px;
-}
-
-.gs-participant .gs-imgtxtlist li h3 {
-    margin-bottom: 5px;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status {
-    overflow: hidden;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status > div {
-    float: left;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status > div:first-child {
-    margin-right: 10px;
-}
-
-.gs-participant .gs-imgtxtlist li .gs-status > div:last-child {
-    border-radius: 5px;
-    color: #fff;
-    font-size:13px;
-    padding: 5px;
-}
-
-/*----------------------------*\
-    $PAGE - CAUSE - FOLLOWERS
-\*----------------------------*/
-
-.gs-followers .gs-imgtxtlist li img {
-    width: 60px;
-}
-
-.gs-followers .gs-imgtxtlist h3 {
-    margin-top: 10px;
-}
-
-/*----------------------------*\
-    $PAGE - CAUSE - COMMENTS
-\*----------------------------*/
-
-.gs-comments .gs-imgtxtlist .gs-parentcomment {
-    float: none;
-    overflow: hidden;
-}
-
-.gs-comments .gs-imgtxtlist .gs-parentcomment > img {
-    float: left;
-    width: 60px;
-}
-
-.gs-comments .gs-imgtxtlist .gs-parentcomment > div {
-    float: left;
-    width: 445px;
-}
-
-.gs-comments .gs-imgtxtlist li h3 {
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-
-.gs-comments .gs-imgtxtlist li > .gs-parentcomment + ul {
-    padding-left: 75px;
-}
-
-.gs-comments .gs-imgtxtlist li > .gs-parentcomment + ul img {
-    width: 45px;
-}
-
-.gs-comments .gs-imgtxtlist li > .gs-parentcomment + ul li > div {
-    width: 385px;
 }
 
 /*----------------------------*\

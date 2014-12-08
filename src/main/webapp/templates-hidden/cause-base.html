@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
-    <title>Etiquetado y Estilos CSS - Tigo.com.bo</title>
+    <title></title>
     <link rel="stylesheet" href="/css/html5reset-1.6.1.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/css/custom-styles.css" type="text/css" media="screen" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
@@ -20,7 +20,7 @@
     </div>
     <div class="gs-menucause">
         <ul class="gs-container" data-lift="Causes.menus">
-            <li class="active"><a data-name="updates" href="#">Updates</a></li>
+            <li><a data-name="updates" href="#">Updates</a></li>
             <li><a href="#" data-name="story">Story</a></li>
             <li><a href="#" data-name="contributors">Contributors</a></li>
             <li><a href="#" data-name="followers">Followers</a></li>
@@ -33,7 +33,10 @@
             <div class="gs-wellcomewords" data-name="slogan">
                 Descripción breve, debe ser atrayente y motivar a ue las peronas paticipen.
             </div>
-            <h2>Updates</h2>
+            <div class="gs-titlebutton">
+                <h2 class="gs-fleft">Updates</h2>
+                <a href="#" class="gs-button gs-bsmall gs-bblue gs-fright">Add update</a>
+            </div>
             <div class="gs-updatelist">
                 <div class="gs-update" data-name="list">
                     <div data-name="register-date">13 de septiembre de 2015</div>
@@ -90,7 +93,7 @@
                         <span>{{cause.endExeDate.$dt | date : 'medium'}}</span>
                     </li>
                 </ul>
-                <ul class="gs-people gs-labeltxtlist gs-nostylelist">
+                <ul class="gs-people gs-labeltxtlist gs-nostylelist gs-follcontrib">
                     <li>
                         <span>Contributors:</span>
                         <span>{{cause.totalContributors}}</span>
@@ -98,9 +101,9 @@
                     <li>
                         <span>Followers:</span>
                         <span>{{cause.totalFollowers}}</span>
-                        <div class="gs-fright">
-                            <a href="" class="gs-button" ng-show="!isFollower && isLogged" ng-click="openFollowModal()">Follow</a>
-                            <a href="" class="gs-button" ng-show="isFollower && isLogged" ng-click="unfollow()">UnFollow</a>
+                        <div class="gs-fright gs-buttonfollow">
+                            <a href="" class="gs-button gs-bcontent gs-bblue" ng-show="!isFollower && isLogged" ng-click="openFollowModal()">Follow</a>
+                            <a href="" class="gs-button gs-bcontent gs-bred" ng-show="isFollower && isLogged" ng-click="unfollow()">UnFollow</a>
                         </div>
                     </li>
                 </ul>
@@ -132,7 +135,7 @@
                                 {{resource.quantity}} {{resource.name}}
                             </div>
                             <div class="gs-fright">
-                                <a href="" class="gs-button" ng-show="isLogged">Contribute</a>
+                                <a href="" class="gs-button gs-bblue gs-bbig" ng-show="isLogged">Contribute</a>
                             </div>
                         </div>
                         <div>
@@ -152,8 +155,8 @@
                                     <div>{{calcPercentageDelivered(resource) | number:2}}%</div>
                                 </div>
                             </div>
-                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="!resource.showDetails" class="gs-fright">View Details</a>
-                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="resource.showDetails" class="gs-fright">Hide Details</a>
+                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="!resource.showDetails" class="gs-fright gs-button gs-bblue gs-bsmall">View Details</a>
+                            <a href="#" ng-click="showDetails(resource, $event)" ng-show="resource.showDetails" class="gs-fright gs-button gs-bblue gs-bsmall">Hide Details</a>
                             <div class="gs-clearboth"></div>
                         </div>
                     </li>
