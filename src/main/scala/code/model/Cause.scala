@@ -219,6 +219,10 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
   def resourcesByCause(cause: Cause): List[Resource] = {
     Resource.where(_.cause eqs cause.id.get).fetch()
   }
+  
+  def isOrganizer(cause: Cause, user: Box[User]) = {
+    user.map(_.id.get) === cause.organizer.get
+  }
 
 }
 

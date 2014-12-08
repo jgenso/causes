@@ -25,7 +25,14 @@ class Causes(cause: Cause) extends SnippetHelper {
     "data-name=contributors [href]" #> CauseMenus.causeContributors.calcHref(cause) &
     "data-name=followers [href]" #> CauseMenus.causeFollowers.calcHref(cause) &
     "data-name=comments [href]" #> CauseMenus.causeComments.calcHref(cause) &
-    "data-name=log [href]" #> CauseMenus.causeLog.calcHref(cause)
+    "data-name=log [href]" #> CauseMenus.causeLog.calcHref(cause) &
+    dashboardMenuCss
+  }
+
+  def dashboardMenuCss = Cause.isOrganizer(cause, User.currentUser) match {
+    case true => "data-name=dashboard [href]" #> CauseMenus.causeDashBoard.calcHref(cause)
+    case false => "data-name=dashboard" #> NodeSeq.Empty
+
   }
 
   def render(in: NodeSeq): NodeSeq = {
@@ -70,19 +77,38 @@ class Causes(cause: Cause) extends SnippetHelper {
     def contribute(json: JValue) = {
       for {
         quantity <- tryo((json \ "quantity").extract[Int])
-        resourceId <- tryo((json \ "resource").extract[ObjectId])
+        resourceId <- tryo((json \ "resource").extract[String])
+        resource <- Resource.find(resourceId)
         user <- User.currentUser
-        cr <- createCommittedResource(quantity, resourceId, cause, user)
-        res <- Cause.find(cause.id.get)
+        cr <- createCommittedResource(quantity, resource, cause, user)
+        inst <- Cause.find(cause.id.get)
       } yield {
-        NgBroadcast(elementId, "after-contribute", Full(res.asJValue))
+        val res = ("cause" -> inst.asJValue)
+        NgBroadcast(elementId, "after-contribute", Full(res))
       }
     }
 
-    def createCommittedResource(quantity: Int, resourceId: ObjectId, cause: Cause, user: User): Box[CommittedResource] = {
-      val resource = CommittedResource.createRecord.quantity(quantity)
-        .cause(cause.id.get).resource(resourceId).joinedUser(user.id.get)
-      resource.saveBox()
+    def addComment(json: JValue) = {
+      for {
+        text <- tryo((json \ "text").extract[String])
+        user <- User.currentUser
+        comment <- createComment(text, cause, user)
+        inst <- Cause.find(cause.id.get)
+      } yield {
+        NgBroadcast(elementId, "after-add-comment", Empty)
+      }
+    }
+
+    def createCommittedResource(quantity: Int, resource: Resource, cause: Cause, user: User): Box[CommittedResource] = {
+      val cr = CommittedResource.createRecord.quantity(quantity)
+        .cause(cause.id.get).resource(resource.id.get).joinedUser(user.id.get)
+      cr.saveBox()
+    }
+
+    def createComment(text: String, cause: Cause, user: User): Box[Comment] = {
+      val comment = Comment.createRecord.comment(text)
+        .cause(cause.id.get).user(user.id.get)
+      comment.saveBox()
     }
 
     def fetchContributorsPage(json: JValue) = {
@@ -124,7 +150,8 @@ class Causes(cause: Cause) extends SnippetHelper {
       "follow" -> JsExtras.JsonCallbackAnonFunc(follow),
       "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow),
       "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage),
-      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage)
+      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage),
+      "addComment" -> JsExtras.JsonCallbackAnonFunc(addComment)
     )
 
     val onload =

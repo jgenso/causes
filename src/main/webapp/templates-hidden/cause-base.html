@@ -26,6 +26,7 @@
             <li><a href="#" data-name="followers">Followers</a></li>
             <li><a href="#" data-name="comments">Comments</a></li>
             <li><a href="#" data-name="log">Log</a></li>
+            <li><a href="#" data-name="dashboard">Dashboard</a></li>
         </ul>
     </div>
     <div class="gs-content gs-container">
@@ -135,7 +136,7 @@
                                 {{resource.quantity}} {{resource.name}}
                             </div>
                             <div class="gs-fright">
-                                <a href="" class="gs-button gs-bblue gs-bbig" ng-show="isLogged">Contribute</a>
+                                <a href="" class="gs-button gs-bblue gs-bbig" ng-show="isLogged" ng-click="openContributeModal(resource)">Contribute</a>
                             </div>
                         </div>
                         <div>
@@ -173,6 +174,27 @@
     <div class="modal-body">
         <input type="checkbox" ng-model="sms"> Sms notifications
         <input type="checkbox" ng-model="email"> Email notifications
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="contributeModal.html">
+    <div class="modal-body">
+        <input type="text" ng-model="quantity"> {{resource.name}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="commentModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add comment</h3>
+    </div>
+    <div class="modal-body">
+        <textarea ng-model="text" rows="20"></textarea>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">OK</button>
