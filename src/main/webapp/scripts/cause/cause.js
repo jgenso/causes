@@ -12,6 +12,10 @@
     $scope.sms = false;
     $scope.email = false;
 
+    $scope.findResourceForCommittedResource = function(resourceId) {
+      return _.find($scope.cause.resources, function(item) { return item._id === resourceId;});
+    };
+
     $scope.calcPercentageCommitted = function(resource) {
       return _.reduce(
         _.filter(
