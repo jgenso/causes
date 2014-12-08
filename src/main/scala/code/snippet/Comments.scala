@@ -38,7 +38,7 @@ class Comments(cause: Cause) extends SnippetHelper with PaginatorSnippet[Comment
     case Full(u) if u.photo.get.trim != "" =>
       "data-name=avatar [src]" #> s"/images/user/profile/${u.id.get}"
     case _ =>
-      "*" #> PassThru
+      "data-name=avatar" #> PassThru
   }
 
 }
