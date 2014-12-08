@@ -3,7 +3,9 @@
     <div class="gs-participant" id="contributors" ng-controller="ContributorsController">
         <ul class="gs-nostylelist gs-imgtxtlist">
             <li ng-repeat="item in items">
-                <img src="/images/user/profile/{{item.joinedUser._id}}" alt="{{item.joinedUser.name}}"/>
+                <div class="gs-image">
+                    <img src="/images/user/profile/{{item.joinedUser._id}}" alt="{{item.joinedUser.name}}"/>
+                </div>
                 <div>
                     <h3><a href="/user/{{item.joinedUser.username}}">{{item.joinedUser.name}}</a></h3>
                     <div class="gs-date">Hace 24 horas</div>

@@ -3,7 +3,9 @@
     <div class="gs-followers" id="followers" ng-controller="FollowersController">
         <ul class="gs-nostylelist gs-imgtxtlist">
             <li ng-repeat="item in items">
-                <img src="/images/user/profile/{{item.follower._id}}" alt="{{item.joinedUser.name}}"/>
+                <div class="gs-image">
+                    <img src="/images/user/profile/{{item.follower._id}}" alt="{{item.joinedUser.name}}"/>
+                </div>
                 <div class="gs-fleft">
                     <h3><a href="/user/{{item.follower.username}}">{{item.follower.name}}</a></h3>
                 </div>

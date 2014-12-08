@@ -147,8 +147,13 @@ p:last-child {
     $FORMS
 \*------------------------------*/
 
-input,
-textarea {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="search"],
+textarea,
+select {
     background: #fff;
     border: 1px solid #ccc;
     border-radius:5px;
@@ -288,10 +293,15 @@ a:focus {
     margin-bottom: 5px;
 }
 
-.gs-imgtxtlist li img {
+.gs-imgtxtlist li .gs-image {
     border-radius: 100%;
     display: block;
     margin-right: 15px;
+    overflow:hidden;
+}
+
+.gs-imgtxtlist li .gs-image img {
+    width: 100%;
 }
 
 .gs-imgtxtlist li div {
@@ -647,6 +657,7 @@ body > header input[type="text"]{
 .gs-home .gs-cause {
     border: 1px solid #ccc;
     margin-bottom: 15px;
+    height: 290px;
     width: 49%;
     float: left;
     padding: 15px;
@@ -659,11 +670,17 @@ body > header input[type="text"]{
 
 .gs-home .gs-cause div {
     text-align: center;
+    margin-bottom: 10px;
+}
+
+.gs-home .gs-cause div a {
+    font-size: 18px;
 }
 
 .gs-home .gs-cause .image {
     height: 180px;
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .gs-home .gs-cause img {
@@ -690,6 +707,13 @@ body > header input[type="text"]{
     background: #f9f9f9;
     padding: 20px;
 }
+
+.gs-imagecause .image  {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+}
+
 .gs-menucause {
     width: 100%;
     border-bottom: 1px solid #ccc;
@@ -784,12 +808,13 @@ ul.gs-follcontrib  .gs-buttonfollow {
     background: linear-gradient(to bottom,  #4d90fe 0%,#00a5d5 100%); /* W3C */
     border: 1px solid #3079ed;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#00a5d5',GradientType=0 ); /* IE6-8 */
-    border-radius: 25px 0 0 25px;
+    border-radius: 25px;
     display: block;
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
+    max-width: 100%;
 }
 
 .gs-content > .gs-fright .gs-goals .gs-barcontainer {
@@ -831,9 +856,9 @@ ul.gs-follcontrib  .gs-buttonfollow {
 /*----------------------------*\
     $PAGE - CAUSE - PARTICIPANTS
 \*----------------------------*/
-
-.gs-participant .gs-imgtxtlist li img {
+.gs-participant .gs-imgtxtlist li .gs-image {
     width: 100px;
+    height: 100px;
 }
 
 .gs-participant .gs-imgtxtlist li h3 {
@@ -852,8 +877,9 @@ ul.gs-follcontrib  .gs-buttonfollow {
     $PAGE - CAUSE - FOLLOWERS
 \*----------------------------*/
 
-.gs-followers .gs-imgtxtlist li img {
+.gs-followers .gs-imgtxtlist li .gs-image {
     width: 60px;
+    height: 60px;
 }
 
 .gs-followers .gs-imgtxtlist h3 {
@@ -1066,16 +1092,16 @@ ul.gs-follcontrib  .gs-buttonfollow {
     margin-bottom: 10px;
 }
 
-.gs-crudcause form label,
-.gs-crudcause form input {
-    float: left;
-    width: 200px;
-}
+/*.gs-crudcause form label,*/
+/*.gs-crudcause form input {*/
+    /*float: left;*/
+    /*width: 200px;*/
+/*}*/
 
-.gs-crudcause form input,
-.gs-crudcause form textarea {
-    width: 500px;
-}
+/*.gs-crudcause form input,*/
+/*.gs-crudcause form textarea {*/
+    /*width: 500px;*/
+/*}*/
 
 .gs-crudcause form textarea {
     height: 300px;
@@ -1098,10 +1124,10 @@ ul.gs-follcontrib  .gs-buttonfollow {
 }
 
 
-.gs-crudcause .gs-items .gs-item > div {
-    float: left;
-    margin-left: 10px;
-}
+/*.gs-crudcause .gs-items .gs-item > div {*/
+    /*float: left;*/
+    /*margin-left: 10px;*/
+/*}*/
 
 .gs-crudcause .gs-items .gs-item > div.gs-number {
     width: 150px;
@@ -1112,19 +1138,19 @@ ul.gs-follcontrib  .gs-buttonfollow {
     width: 350px;
 }
 
-.gs-crudcause .gs-items .gs-item > div .gs-button {
-    background: #e14646;
-    border: medium none;
-    margin-top: 20px;
-    min-height: 10px;
-    min-width: 75px;
-    padding: 5px;
-}
+/*.gs-crudcause .gs-items .gs-item > div .gs-button {*/
+    /*background: #e14646;*/
+    /*border: medium none;*/
+    /*margin-top: 20px;*/
+    /*min-height: 10px;*/
+    /*min-width: 75px;*/
+    /*padding: 5px;*/
+/*}*/
 
-.gs-crudcause .gs-formbuttons {
-    margin-top: 30px;
-    text-align: center;
-}
+/*.gs-crudcause .gs-formbuttons {*/
+    /*margin-top: 30px;*/
+    /*text-align: center;*/
+/*}*/
 
 /*.gs-crudcause input[type="submit"],*/
 /*.gs-crudcause input[type="reset"] {*/
@@ -1404,10 +1430,19 @@ ul.gs-follcontrib  .gs-buttonfollow {
     width: 200px;
 }
 
-.gs-crudcause form input,
-.gs-crudcause form textarea {
+.gs-crudcause form input[type="text"],
+.gs-crudcause form input[type="email"],
+.gs-crudcause form input[type="date"],
+.gs-crudcause form textarea,
+.gs-crudcause select {
     width: 500px;
 }
+
+.gs-crudcause input[type="date"]+input[type="date"] {
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
 
 .gs-crudcause form textarea {
     height: 300px;
@@ -1432,7 +1467,11 @@ ul.gs-follcontrib  .gs-buttonfollow {
 
 .gs-crudcause .gs-items .gs-item > div {
     float: left;
-    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.gs-crudcause .gs-items .gs-item > div.gs-deletebutton {
+    margin-top: 25px;
 }
 
 .gs-crudcause .gs-items .gs-item > div.gs-number {
@@ -1444,36 +1483,28 @@ ul.gs-follcontrib  .gs-buttonfollow {
     width: 350px;
 }
 
-.gs-crudcause .gs-items .gs-item > div .gs-button {
-    background: #e14646;
-    border: medium none;
-    margin-top: 20px;
-    min-height: 10px;
-    min-width: 75px;
-    padding: 5px;
-}
-
 .gs-crudcause .gs-formbuttons {
     margin-top: 30px;
     text-align: center;
 }
 
-/*.gs-crudcause input[type="submit"],*/
-/*.gs-crudcause input[type="reset"] {*/
-    /*display: inline-block;*/
-    /*width: 200px;*/
-    /*margin-right: 10px;*/
-    /*float: none;*/
-/*}*/
+.gs-crudcause .gs-formbuttons input[type="submit"] {
+    margin-right: 10px;
+}
 
-/*.gs-crudcause input[type="reset"] {*/
-    /*margin-right: 0;*/
-    /*background: none repeat scroll 0 0 #e14646;*/
-    /*border: medium none;*/
-    /*padding: 5px;*/
-/*}*/
+/*----------------------------*\
+    $PAGE - EDIT PROFILE
+\*----------------------------*/
 
+#user-header .image {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
 
+#user-header .image img {
+    width: 100%;
+}
 
 
 /*------------------------------------*\
