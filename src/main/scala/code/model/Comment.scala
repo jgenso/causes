@@ -5,6 +5,7 @@ import net.liftweb.mongodb.record.{MongoMetaRecord, MongoRecord}
 import net.liftweb.mongodb.record.field.{DateField, ObjectIdRefField, ObjectIdPk}
 import net.liftweb.record.field.TextareaField
 import com.foursquare.rogue.LiftRogue._
+import org.joda.time.DateTime
 
 /**
  * Created by andrea on 12/6/14.
@@ -27,7 +28,9 @@ class Comment private() extends MongoRecord[Comment] with ObjectIdPk[Comment] {
         super.validations
   }
 
-  object registerDate extends DateField(this){
+  object registerDate extends DateField(this) {
+    override def defaultValue = DateTime.now.toDate
+
     override def displayName = "Register date"
   }
 
