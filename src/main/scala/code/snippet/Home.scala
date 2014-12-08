@@ -28,7 +28,7 @@ object Home {
     User.currentUser match {
       case Empty =>  "data-name=create-cause" #>  NodeSeq.Empty
       case Failure(msg, _, _) => "data-name=create-cause" #>  NodeSeq.Empty
-      case Full(_) => "data-name=create-cause" #> SHtml.ajaxButton("Create cause",() =>
+      case Full(_) => "data-name=create-cause" #> SHtml.ajaxButton("Create",() =>
         RedirectTo(CauseMenus.causeManagement.toMenu.loc.calcDefaultHref))
     }
   }
