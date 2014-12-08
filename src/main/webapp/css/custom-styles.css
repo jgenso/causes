@@ -415,6 +415,12 @@ body > header {
     height: 50px;
 }
 
+body > header .gs-logo a {
+    color: #fff;
+    display: block;
+    padding: 10px;
+}
+
 body > header .gs-container {
     position: relative;
 }
