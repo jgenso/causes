@@ -18,7 +18,8 @@ object LiftProjectBuild extends Build {
         rogueField,
         rogueCore,
         rogueLift,
-        rogueIndex
+        rogueIndex,
+        twilio
       ) ++
       test(scalatest) ++
       container(jettyWebapp)
