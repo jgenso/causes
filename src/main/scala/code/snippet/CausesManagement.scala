@@ -56,7 +56,10 @@ object CausesManagement {
         case Empty => S.warning("Empty save")
         case Failure(msg, _, _) => S.error(msg)
         case Full(c: Cause) => {
-          resourcesRequestVar.foreach(r => r.saveBox())
+          resourcesRequestVar.foreach(r => {
+            r.cause(c.id.get)
+            r.saveBox()
+          })
           RedirectTo(CauseMenus.causeDashBoard.calcHref(c), () => S.notice("Cause saved"))
         }
       }
