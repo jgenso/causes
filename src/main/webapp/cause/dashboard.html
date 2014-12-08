@@ -162,11 +162,11 @@
                 <div>
                     <ul class="gs-imgtxtlist">
                         <li ng-repeat="cr in cause.committedResources | filter: filterPending | limitTo: pendingLimit">
-                            <img src="/images/sample/avatar.jpg" alt=""/>
+                            <img src="/images/user/profile/{{cr.joinedUser._id}}" alt=""/>
                             <div>
-                                <h4>Nombre apellido</h4>
-                                <div class="gs-date">Hace 24 horas</div>
-                                <div>10 cables de red</div>
+                                <h4>{{cr.joinedUser.name}}</h4>
+                                <div class="gs-date">{{cr.registerDate.$dt | date: 'mediumDate'}}</div>
+                                <div>{{findResourceForCommittedResource(cr.resource).name}}</div>
                             </div>
                             <div class="gs-groupbuttons">
                                 <a href="#" class="gs-fright gs-bblue gs-button" ng-click="approve(cr)">Approve</a>
