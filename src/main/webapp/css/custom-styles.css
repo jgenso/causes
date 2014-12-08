@@ -414,6 +414,10 @@ body > header {
     height: 50px;
 }
 
+body > header .gs-container {
+    position: relative;
+}
+
 body > header .gs-container .gs-fright > div,
 body > header .gs-container .gs-fleft > div {
     float: left;
@@ -454,6 +458,47 @@ body > header .gs-usermenu img.gs-avatar {
     height: 40px;
     width: 40px;
 }
+
+body > header .gs-usermenu > div {
+    display: none;
+}
+
+body > header .gs-usermenu:hover > div.gs-menu,
+body > header .gs-usermenu:hover > div.gs-menu:hover {
+    display: block;
+}
+
+body > header .gs-usermenu > div.gs-menu {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    width: 150px;
+}
+
+body > header .gs-usermenu > div.gs-menu li {
+    list-style: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+body > header .gs-usermenu > div.gs-menu #user > li {
+    border-bottom: none;
+}
+
+body > header .gs-usermenu > div.gs-menu #user > li > a {
+    display: block;
+    text-align: center;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+body > header .gs-usermenu > div.gs-menu li.divider {
+    display: none;
+}
+
 body > header .gs-usermenu img.gs-arrow {
     margin-bottom: 10px;
 }
