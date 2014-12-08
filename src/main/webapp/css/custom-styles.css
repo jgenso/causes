@@ -205,6 +205,7 @@ a:focus {
     display: inline-block;
     text-align: center;
     box-shadow: none;
+    border-radius: 0;
 }
 
 .gs-button.gs-bbig {
@@ -414,6 +415,10 @@ body > header {
     height: 50px;
 }
 
+body > header .gs-container {
+    position: relative;
+}
+
 body > header .gs-container .gs-fright > div,
 body > header .gs-container .gs-fleft > div {
     float: left;
@@ -454,6 +459,50 @@ body > header .gs-usermenu img.gs-avatar {
     height: 40px;
     width: 40px;
 }
+
+body > header .gs-usermenu > div {
+    display: none;
+}
+
+body > header .gs-usermenu:hover > div.gs-menu,
+body > header .gs-usermenu:hover > div.gs-menu:hover {
+    display: block;
+}
+
+body > header .gs-usermenu > div.gs-menu {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    width: 150px;
+}
+
+body > header .gs-usermenu > div.gs-menu li {
+    list-style: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+body > header .gs-usermenu a {
+    display: block;
+}
+
+body > header .gs-usermenu > div.gs-menu #user > li {
+    border-bottom: none;
+}
+
+body > header .gs-usermenu > div.gs-menu #user > li > a {
+    display: block;
+    text-align: center;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+body > header .gs-usermenu > div.gs-menu li.divider {
+    display: none;
+}
+
 body > header .gs-usermenu img.gs-arrow {
     margin-bottom: 10px;
 }
@@ -567,7 +616,10 @@ body > header input[type="text"]{
 /*----------------------------*\
     $PAGE - HOME
 \*----------------------------*/
-
+.gs-home .gs-fright h2 {
+    border: none;
+    padding: 0;
+}
 .gs-home .gs-logincontent {
     margin: 100px 0 50px;
 }
@@ -614,6 +666,15 @@ body > header input[type="text"]{
 
 .gs-home .gs-fright {
     width: 48%;
+}
+
+.gs-home .gs-fright .gs-button {
+    display: block;
+    height: 50px;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
 }
 
 /*----------------------------*\
@@ -1059,20 +1120,20 @@ ul.gs-follcontrib  .gs-buttonfollow {
     text-align: center;
 }
 
-.gs-crudcause input[type="submit"],
-.gs-crudcause input[type="reset"] {
-    display: inline-block;
-    width: 200px;
-    margin-right: 10px;
-    float: none;
-}
+/*.gs-crudcause input[type="submit"],*/
+/*.gs-crudcause input[type="reset"] {*/
+    /*display: inline-block;*/
+    /*width: 200px;*/
+    /*margin-right: 10px;*/
+    /*float: none;*/
+/*}*/
 
-.gs-crudcause input[type="reset"] {
-    margin-right: 0;
-    background: none repeat scroll 0 0 #e14646;
-    border: medium none;
-    padding: 5px;
-}
+/*.gs-crudcause input[type="reset"] {*/
+    /*margin-right: 0;*/
+    /*background: none repeat scroll 0 0 #e14646;*/
+    /*border: medium none;*/
+    /*padding: 5px;*/
+/*}*/
 
 /*----------------------------*\
     $PAGE - USER PROFILE
@@ -1391,20 +1452,20 @@ ul.gs-follcontrib  .gs-buttonfollow {
     text-align: center;
 }
 
-.gs-crudcause input[type="submit"],
-.gs-crudcause input[type="reset"] {
-    display: inline-block;
-    width: 200px;
-    margin-right: 10px;
-    float: none;
-}
+/*.gs-crudcause input[type="submit"],*/
+/*.gs-crudcause input[type="reset"] {*/
+    /*display: inline-block;*/
+    /*width: 200px;*/
+    /*margin-right: 10px;*/
+    /*float: none;*/
+/*}*/
 
-.gs-crudcause input[type="reset"] {
-    margin-right: 0;
-    background: none repeat scroll 0 0 #e14646;
-    border: medium none;
-    padding: 5px;
-}
+/*.gs-crudcause input[type="reset"] {*/
+    /*margin-right: 0;*/
+    /*background: none repeat scroll 0 0 #e14646;*/
+    /*border: medium none;*/
+    /*padding: 5px;*/
+/*}*/
 
 
 
