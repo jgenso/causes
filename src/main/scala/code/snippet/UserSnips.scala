@@ -170,6 +170,13 @@ object UserLogin extends Loggable {
 }
 
 object UserTopbar {
+  def avatar = User.currentUser match {
+    case Full(u) if u.photo.get.trim != "" =>
+      "data-name=avatar [src]" #> s"/images/user/profile/${u.id.get}"
+    case _ =>
+      "*" #> PassThru
+  }
+
   def render = {
     User.currentUser match {
       case Full(user) =>

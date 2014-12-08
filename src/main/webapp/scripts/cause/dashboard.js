@@ -8,6 +8,10 @@
     $scope.cause = ServerParams.cause;
     $scope.pendingLimit = 10;
 
+    $scope.findResourceForCommittedResource = function(resourceId) {
+      return _.find($scope.cause.resources, function(item) { return item._id === resourceId;});
+    };
+
     $scope.approve = function(req) {
       ServerFuncs.approve({resource: req._id});
     };
