@@ -33,11 +33,4 @@ object Home {
     }
   }
 
-  def editCause: CssSel = {
-    User.currentUser match {
-      case Empty =>  "data-name=edit-cause" #>  NodeSeq.Empty
-      case Failure(msg, _, _) => "data-name=edit-cause" #>  NodeSeq.Empty
-      case Full(_) => "data-name=edit-cause" #> SHtml.link(CauseMenus.causeEdit.toMenu.loc.calcDefaultHref,() => (), Text("Edit"))
-    }
-  }
 }

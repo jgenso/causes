@@ -2,7 +2,7 @@ package code.snippet
 
 import code.config.Site
 import code.menu.CauseMenus
-import code.model.{Resource, Cause}
+import code.model.{User, Resource, Cause}
 import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common.{Box, Full, Empty, Failure}
 import net.liftweb.http.js.JsCmds.{Focus, RedirectTo, Noop}
@@ -12,7 +12,7 @@ import net.liftweb.util.{PassThru, CssSel}
 import util.Helpers._
 
 import scala.collection.mutable.ArrayBuffer
-import scala.xml.NodeSeq
+import scala.xml.{Text, NodeSeq}
 
 /**
  * Created by andrea on 12/7/14.

@@ -6,17 +6,18 @@ import net.liftmodules.extras.NgJE._
 import net.liftmodules.extras.NgJsCmds._
 import net.liftmodules.extras.{JsExtras, SnippetHelper}
 import net.liftweb.common._
-import net.liftweb.http.S
+import net.liftweb.http.{SHtml, S}
 import net.liftweb.http.js.JE.{AnonFunc, JsObj}
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.json.JsonDSL._
 import net.liftweb.json._
+import net.liftweb.util.CssSel
 import net.liftweb.util.Helpers._
 import org.bson.types.ObjectId
 
-import scala.xml.NodeSeq
+import scala.xml.{Text, NodeSeq}
 
-object CauseDashboard extends SnippetHelper {
+class CauseDashboard(cause: Cause) extends SnippetHelper {
 
   def render(in: NodeSeq): NodeSeq = {
     implicit val formats = DefaultFormats
@@ -24,8 +25,7 @@ object CauseDashboard extends SnippetHelper {
 
     def fetchCause() = {
       for {
-        causeId <- CauseMenus.causeMenu.currentValue.map(_.id.get)
-        cause   <- Cause.find(causeId)
+        cause   <- Cause.find(cause.id.get)
       } yield {
         NgBroadcast(elementId, "after-fetch-cause", Full(cause.asJValue))
       }
@@ -34,7 +34,6 @@ object CauseDashboard extends SnippetHelper {
     def approve(json: JValue) = {
       for {
         resourceId <- tryo((json \ "resource").extract[String])
-        cause <- CauseMenus.causeDashBoard.currentValue
         user <- User.currentUser
         cr <- CommittedResource.findByCauseAndId(cause, resourceId)
       } yield {
@@ -46,7 +45,6 @@ object CauseDashboard extends SnippetHelper {
     def cancel(json: JValue) = {
       for {
         resourceId <- tryo((json \ "resource").extract[String])
-        cause <- CauseMenus.causeDashBoard.currentValue
         user <- User.currentUser
         cr <- CommittedResource.findByCauseAndId(cause, resourceId)
       } yield {
@@ -56,7 +54,7 @@ object CauseDashboard extends SnippetHelper {
     }
 
     val params: JValue =
-      ("cause" -> CauseMenus.causeDashBoard.currentValue.map(_.asJValue))
+      ("cause" -> cause.asJValue)
 
     val funcs = JsObj(
       "fetchCause" -> JsExtras.AjaxCallbackAnonFunc(fetchCause),
@@ -71,6 +69,13 @@ object CauseDashboard extends SnippetHelper {
 
     S.appendGlobalJs(JsExtras.IIFE(onload))
     in
+  }
+
+
+
+  def editCause: CssSel = Cause.isOrganizer(cause, User.currentUser) match {
+    case false =>  "data-name=edit-cause" #>  NodeSeq.Empty
+    case true => "data-name=edit-cause" #> SHtml.link(CauseMenus.causeEdit.calcHref(cause),() => (), Text("Edit"))
   }
 
 }
