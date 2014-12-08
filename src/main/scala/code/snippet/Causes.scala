@@ -81,10 +81,27 @@ class Causes(cause: Cause) extends SnippetHelper {
       }
     }
 
+    def addComment(json: JValue) = {
+      for {
+        text <- tryo((json \ "text").extract[String])
+        user <- User.currentUser
+        comment <- createComment(text, cause, user)
+        inst <- Cause.find(cause.id.get)
+      } yield {
+        NgBroadcast(elementId, "after-add-comment", Empty)
+      }
+    }
+
     def createCommittedResource(quantity: Int, resource: Resource, cause: Cause, user: User): Box[CommittedResource] = {
       val cr = CommittedResource.createRecord.quantity(quantity)
         .cause(cause.id.get).resource(resource.id.get).joinedUser(user.id.get)
       cr.saveBox()
+    }
+
+    def createComment(text: String, cause: Cause, user: User): Box[Comment] = {
+      val comment = Comment.createRecord.comment(text)
+        .cause(cause.id.get).user(user.id.get)
+      comment.saveBox()
     }
 
     def fetchContributorsPage(json: JValue) = {
@@ -126,7 +143,8 @@ class Causes(cause: Cause) extends SnippetHelper {
       "follow" -> JsExtras.JsonCallbackAnonFunc(follow),
       "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow),
       "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage),
-      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage)
+      "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage),
+      "addComment" -> JsExtras.JsonCallbackAnonFunc(addComment)
     )
 
     val onload =

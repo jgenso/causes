@@ -3,7 +3,7 @@
 
   var appCause = angular.module('Cause', ['CauseServer', 'ui.bootstrap']);
 
-  appCause.controller("CauseController", function($scope, ServerParams, ServerFuncs, $filter, $log, $modal) {
+  appCause.controller("CauseController", function($scope, ServerParams, ServerFuncs, $filter, $log, $modal, $window) {
     $log.log("CALLED");
     $scope.cause = ServerParams.cause;
     $scope.isFollower = ServerParams.isFollower;
@@ -66,6 +66,10 @@
       ServerFuncs.unfollow();
     };
 
+    $scope.addComment = function(text) {
+      ServerFuncs.addComment({text: text});
+    };
+
     $scope.$on('after-fetch-cause', function (event, data) {
       $scope.$apply(function () {
         $scope.cause = data.cause;
@@ -83,6 +87,15 @@
         $scope.cause = data.cause;
       });
     });
+
+    $scope.$on('after-add-comment', function (event, data) {
+      $log.log(data);
+      $scope.reloadPage();
+    });
+
+    $scope.reloadPage = function() {
+       $window.location.reload();
+    }
 
     $scope.$on('after-unfollow', function (event, data) {
       $scope.$apply(function () {
@@ -128,6 +141,26 @@
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
+
+    $scope.openCommentModal = function (size) {
+      var modalInstance = $modal.open({
+        templateUrl: 'commentModal.html',
+        controller: 'CommentModalInstanceCtrl',
+        size: size,
+        resolve: {
+          data: function() {
+            return {text: $scope.text};
+          }
+        }
+      });
+
+      modalInstance.result.then(function (data) {
+        $log.log(data);
+        $scope.addComment(data.text);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
   });
 
   appCause.controller('FollowModalInstanceCtrl', function ($scope, $modalInstance, $log) {
@@ -157,4 +190,18 @@
       $modalInstance.dismiss('cancel');
     };
   });
+
+  appCause.controller('CommentModalInstanceCtrl', function ($scope, $modalInstance, $log) {
+
+    $scope.text = '';
+
+    $scope.ok = function () {
+      $modalInstance.close({text: $scope.text});
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  });
+
 })(window.angular);
