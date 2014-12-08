@@ -216,6 +216,10 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
     Cause.orderDesc(_.id).fetch()
   }
 
+  def isOrganizer(cause: Cause, user: Box[User]) = {
+    user.map(_.id.get) === cause.organizer.get
+  }
+
 }
 
 object CauseStatus extends Enumeration {

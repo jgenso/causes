@@ -25,7 +25,14 @@ class Causes(cause: Cause) extends SnippetHelper {
     "data-name=contributors [href]" #> CauseMenus.causeContributors.calcHref(cause) &
     "data-name=followers [href]" #> CauseMenus.causeFollowers.calcHref(cause) &
     "data-name=comments [href]" #> CauseMenus.causeComments.calcHref(cause) &
-    "data-name=log [href]" #> CauseMenus.causeLog.calcHref(cause)
+    "data-name=log [href]" #> CauseMenus.causeLog.calcHref(cause) &
+    dashboardMenuCss
+  }
+
+  def dashboardMenuCss = Cause.isOrganizer(cause, User.currentUser) match {
+    case true => "data-name=dashboard [href]" #> CauseMenus.causeDashBoard.calcHref(cause)
+    case false => "data-name=dashboard" #> NodeSeq.Empty
+
   }
 
   def render(in: NodeSeq): NodeSeq = {
