@@ -1,7 +1,9 @@
 package code
 package model
 
+import code.config.SmtpMailer
 import com.mongodb.gridfs.GridFS
+import net.liftmodules.mongoauth.MongoAuth
 import net.liftweb.common.Full
 import net.liftweb.http.{FileParamHolder, SHtml}
 import net.liftweb.mongodb.MongoDB
@@ -81,5 +83,30 @@ object News extends News with MongoMetaRecord[News] {
     News.where(_.cause eqs cause.id.get).paginate(itemsPerPage).setPage(curPage).fetch()
 
   def count(cause: Cause): Long = News.where(_.cause eqs cause.id.get).count()
+
+  def broadcast(news: News, cause: Cause): Unit = {
+    sendSms(news, cause)
+    sendEmails(news, cause)
+  }
+
+  private def sendSms(news: News, cause: Cause) = {
+    CauseFollower.findAllByCauseAndSmsNotification(cause)
+  }
+
+  private def sendEmails(news: News, cause: Cause) = {
+    import net.liftweb.util.Mailer._
+
+    CauseFollower.findAllByCauseAndEmailNotification(cause).foreach { follower =>
+
+      val msgTxt = news.description.get.stripMargin
+
+      sendMail(
+        From(MongoAuth.systemFancyEmail),
+        Subject("%s - %s".format(cause.name.get, news.title.get)),
+        To(follower.follower.obj.dmap("")(_.email.get)),
+        PlainMailBodyType(msgTxt)
+      )
+    }
+  }
 
 }

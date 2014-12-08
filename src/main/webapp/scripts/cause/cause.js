@@ -102,6 +102,11 @@
       $scope.reloadPage();
     });
 
+    $scope.$on('after-add-news', function (event, data) {
+      $log.log(data);
+      $scope.reloadPage();
+    });
+
     $scope.reloadPage = function() {
        $window.location.reload();
     }

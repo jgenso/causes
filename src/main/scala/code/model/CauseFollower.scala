@@ -43,4 +43,12 @@ object CauseFollower extends CauseFollower with MongoMetaRecord[CauseFollower] {
       .and(_.follower eqs follower.id.get)
       .foreach(cf => CauseFollower.delete_!(cf))
   }
+
+  def findAllByCauseAndEmailNotification(cause: Cause): List[CauseFollower] = {
+    CauseFollower.where(_.cause eqs cause.id.get).and(_.receiptEmail eqs true).fetch()
+  }
+
+  def findAllByCauseAndSmsNotification(cause: Cause): List[CauseFollower] = {
+    CauseFollower.where(_.cause eqs cause.id.get).and(_.receiptSms eqs true).fetch()
+  }
 }

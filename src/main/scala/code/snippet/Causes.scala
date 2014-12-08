@@ -107,7 +107,8 @@ class Causes(cause: Cause) extends SnippetHelper {
         news <- createNews(title, description, cause, user)
         inst <- Cause.find(cause.id.get)
       } yield {
-        NgBroadcast(elementId, "after-add-comment", Empty)
+        News.broadcast(news, cause)
+        NgBroadcast(elementId, "after-add-news", Empty)
       }
     }
 

@@ -20,4 +20,7 @@ project/plugins/project/
 .idea/*
 .idea_modules/*
 atlassian-ide-plugin.xml
+
 projectFilesBackup/*
+
+j2.props

@@ -41,4 +41,7 @@ object Dependencies {
   // Misc
   val logback = "ch.qos.logback" % "logback-classic" % "1.1.2"
   val scalatest = "org.scalatest" %% "scalatest" % "2.2.1"
+
+  //Twilio
+  val twilio = "com.twilio.sdk" % "twilio-java-sdk" % "3.5.0"
 }
