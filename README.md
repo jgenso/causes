@@ -28,4 +28,15 @@ Causes also be used in other cases as "Construction of homes for stray dogs" whe
 
 ![Causes](/screenshots/dogs.jpg "Dog")
 
-Finally we firmly believe that everyone can help improve our society contributed in various ways. Causes is an application that aims to highlight such contributions. 
+Finally we firmly believe that everyone can help improve our society contributed in various ways. Causes is an application that aims to highlight such contributions.
+
+##Sample account
+You can create own acount and test the service, but here left this sample account.
+User: hackaton@mail.com
+Password:123456
+
+##Credits
+After almost 48 hours of work, we done this first versión. This social network is product of work of:
+* Andrea Moruno
+* Juan José Olivera
+* Marcelo Rodríguez Claros
