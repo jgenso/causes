@@ -8,8 +8,13 @@
     $scope.cause = ServerParams.cause;
     $scope.isFollower = ServerParams.isFollower;
     $scope.isLogged = ServerParams.isLogged;
+    $scope.isOrganizer = ServerParams.isOrganizer;
     $scope.sms = false;
     $scope.email = false;
+
+    $scope.findResourceForCommittedResource = function(resourceId) {
+      return _.find($scope.cause.resources, function(item) { return item._id === resourceId;});
+    };
 
     $scope.calcPercentageCommitted = function(resource) {
       return _.reduce(
@@ -68,6 +73,10 @@
 
     $scope.addComment = function(text) {
       ServerFuncs.addComment({text: text});
+    };
+
+    $scope.addNews = function(title, description) {
+      ServerFuncs.addNews({title: title, description: description});
     };
 
     $scope.$on('after-fetch-cause', function (event, data) {
@@ -161,6 +170,26 @@
         $log.info('Modal dismissed at: ' + new Date());
       });
     };
+
+    $scope.openNewsModal = function (size) {
+      var modalInstance = $modal.open({
+        templateUrl: 'newsModal.html',
+        controller: 'NewsModalInstanceCtrl',
+        size: size,
+        resolve: {
+          data: function() {
+            return {title: $scope.title, description: $scope.description};
+          }
+        }
+      });
+
+      modalInstance.result.then(function (data) {
+        $log.log(data);
+        $scope.addNews(data.title, data.description);
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
   });
 
   appCause.controller('FollowModalInstanceCtrl', function ($scope, $modalInstance, $log) {
@@ -197,6 +226,20 @@
 
     $scope.ok = function () {
       $modalInstance.close({text: $scope.text});
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  });
+
+  appCause.controller('NewsModalInstanceCtrl', function ($scope, $modalInstance, $log) {
+
+    $scope.title = '';
+    $scope.description = '';
+
+    $scope.ok = function () {
+      $modalInstance.close({title: $scope.title, description: $scope.description});
     };
 
     $scope.cancel = function () {

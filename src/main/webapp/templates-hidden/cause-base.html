@@ -201,6 +201,19 @@
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>
+<script type="text/ng-template" id="newsModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add news</h3>
+    </div>
+    <div class="modal-body">
+        <input type="text" ng-model="title" placeholder="Title"><br><br>
+        <textarea ng-model="description" rows="20" placeholder="Description"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
 
 </div>
 <div data-lift="embed?what=/templates-hidden/parts/footer"></div>

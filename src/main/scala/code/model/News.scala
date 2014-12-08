@@ -10,6 +10,7 @@ import net.liftweb.mongodb.record.field.{ObjectIdRefField, DateField, ObjectIdPk
 import net.liftweb.record.field.{OptionalStringField, TextareaField, StringField}
 import net.liftweb.util.DefaultConnectionIdentifier
 import com.foursquare.rogue.LiftRogue._
+import org.joda.time.DateTime
 import scala.xml.NodeSeq
 
 /**
@@ -34,6 +35,7 @@ class News private() extends MongoRecord[News] with ObjectIdPk[News] {
   }
 
   object registerDate extends DateField(this) {
+    override def defaultValue = DateTime.now.toDate
     override def displayName = "Register date"
   }
 

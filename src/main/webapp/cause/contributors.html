@@ -10,12 +10,12 @@
                     <h3><a href="/user/{{item.joinedUser.username}}">{{item.joinedUser.name}}</a></h3>
                     <div class="gs-date">Hace 24 horas</div>
                     <div class="gs-status">
-                        <div>10 cables</div>
-                        <div class="gs-tag gs-tcblue">Comprometido</div>
+                        <div>{{findResourceForCommittedResource(item.resource)}}</div>
+                        <div class="gs-tag gs-tcblue">{{item.status}}</div>
                     </div>
                 </div>
             </li>
         </ul>
-        <pagination total-items="count" ng-model="page" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+        <!--<pagination total-items="count" ng-model="page" max-size="itemsPerPage" class="pagination-sm" boundary-links="true" rotate="false"></pagination>-->
     </div>
 </div>

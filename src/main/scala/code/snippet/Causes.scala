@@ -99,6 +99,18 @@ class Causes(cause: Cause) extends SnippetHelper {
       }
     }
 
+    def addNews(json: JValue) = {
+      for {
+        title <- tryo((json \ "title").extract[String])
+        description <- tryo((json \ "description").extract[String])
+        user <- User.currentUser
+        news <- createNews(title, description, cause, user)
+        inst <- Cause.find(cause.id.get)
+      } yield {
+        NgBroadcast(elementId, "after-add-comment", Empty)
+      }
+    }
+
     def createCommittedResource(quantity: Int, resource: Resource, cause: Cause, user: User): Box[CommittedResource] = {
       val cr = CommittedResource.createRecord.quantity(quantity)
         .cause(cause.id.get).resource(resource.id.get).joinedUser(user.id.get)
@@ -109,6 +121,12 @@ class Causes(cause: Cause) extends SnippetHelper {
       val comment = Comment.createRecord.comment(text)
         .cause(cause.id.get).user(user.id.get)
       comment.saveBox()
+    }
+
+    def createNews(title: String, description: String, cause: Cause, user: User): Box[News] = {
+      val news = News.createRecord.title(title).description(description)
+        .cause(cause.id.get).user(user.id.get)
+      news.saveBox()
     }
 
     def fetchContributorsPage(json: JValue) = {
@@ -142,6 +160,7 @@ class Causes(cause: Cause) extends SnippetHelper {
     val params: JValue =
       ("cause" -> cause.asJValue) ~
         ("isLogged" -> User.currentUser.dmap(false)(s => true)) ~ // ToDo move this to another place available for all the app
+        ("isOrganizer" -> Cause.isOrganizer(cause, User.currentUser)) ~
         ("isFollower" -> CauseMenus.causeMenu.currentValue.dmap(false)(cause => User.currentUser.dmap(false)(Cause.isFollower(_, cause))))
 
     val funcs = JsObj(
@@ -151,7 +170,8 @@ class Causes(cause: Cause) extends SnippetHelper {
       "unfollow" -> JsExtras.AjaxCallbackAnonFunc(unfollow),
       "fetchContributorsPage" -> JsExtras.JsonCallbackAnonFunc(fetchContributorsPage),
       "fetchFollowersPage" -> JsExtras.JsonCallbackAnonFunc(fetchFollowersPage),
-      "addComment" -> JsExtras.JsonCallbackAnonFunc(addComment)
+      "addComment" -> JsExtras.JsonCallbackAnonFunc(addComment),
+      "addNews" -> JsExtras.JsonCallbackAnonFunc(addNews)
     )
 
     val onload =
