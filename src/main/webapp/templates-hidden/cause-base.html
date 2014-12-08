@@ -101,9 +101,9 @@
                     <li>
                         <span>Followers:</span>
                         <span>{{cause.totalFollowers}}</span>
-                        <div class="gs-fright">
-                            <a href="" class="gs-button" ng-show="!isFollower && isLogged" ng-click="openFollowModal()">Follow</a>
-                            <a href="" class="gs-button" ng-show="isFollower && isLogged" ng-click="unfollow()">UnFollow</a>
+                        <div class="gs-fright gs-buttonfollow">
+                            <a href="" class="gs-button gs-bcontent gs-bblue" ng-show="!isFollower && isLogged" ng-click="openFollowModal()">Follow</a>
+                            <a href="" class="gs-button gs-bcontent gs-bred" ng-show="isFollower && isLogged" ng-click="unfollow()">UnFollow</a>
                         </div>
                     </li>
                 </ul>
@@ -135,7 +135,7 @@
                                 {{resource.quantity}} {{resource.name}}
                             </div>
                             <div class="gs-fright">
-                                <a href="" class="gs-button" ng-show="isLogged">Contribute</a>
+                                <a href="" class="gs-button gs-bblue gs-bbig" ng-show="isLogged">Contribute</a>
                             </div>
                         </div>
                         <div>

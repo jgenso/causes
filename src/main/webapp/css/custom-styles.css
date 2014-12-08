@@ -242,6 +242,22 @@ a:focus {
     color: #ffffff;
 }
 
+.gs-bred,
+.gs-button.gs-bred{
+    background: #c9302c; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M5MzAyYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkOTUzNGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #c9302c 0%, #d9534f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9302c), color-stop(100%,#d9534f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #c9302c 0%,#d9534f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9302c', endColorstr='#d9534f',GradientType=0 ); /* IE6-8 */
+    border: 1px solid #ac2925;
+    color: #fff;
+}
+
 
 
 
@@ -408,6 +424,7 @@ body > header .gs-container .gs-fleft > div:first-child {
 }
 
 body > header .gs-container .gs-fleft > div .gs-button {
+    border-radius: 0;
     height: 40px;
     line-height: 1;
     margin-top: 4px;
@@ -441,7 +458,8 @@ body > header .gs-usermenu img.gs-arrow {
     margin-bottom: 10px;
 }
 
-body > header input {
+body > header input[type="search"],
+body > header input[type="text"]{
     border: none;
     border-radius:50px;
 }
@@ -464,7 +482,87 @@ body > header input {
     margin-bottom: 0;
 }
 
+.modal-backdrop {
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.modal {
+    bottom: 0;
+    display: none;
+    left: 0;
+    outline: 0 none;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1040;
+}
+.modal-dialog {
+    background: none repeat scroll 0 0 #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 20px;
+    position: relative;
+    transform: translate(0px, 0px);
+    width: 600px;
+}
 
+.modal h3 {
+    margin-top: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #9ae012;
+}
+
+.modal-content .btn {
+    color: #ffffff;
+    cursor: pointer;
+    min-height: 40px;
+    min-width: 150px;
+    padding: 10px;
+}
+
+.modal-content .btn-primary {
+    background: #4d90fe; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRkOTBmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGE1ZDUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #4d90fe 0%, #00a5d5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#00a5d5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #4d90fe 0%,#00a5d5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #4d90fe 0%,#00a5d5 100%); /* W3C */
+    border: 1px solid #3079ed;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#00a5d5',GradientType=0 ); /* IE6-8 */
+}
+
+.modal-content .btn-warning {
+    background: #c9302c; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M5MzAyYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkOTUzNGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #c9302c 0%, #d9534f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9302c), color-stop(100%,#d9534f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #c9302c 0%,#d9534f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #c9302c 0%,#d9534f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9302c', endColorstr='#d9534f',GradientType=0 ); /* IE6-8 */
+    border: 1px solid #ac2925;
+}
+
+.modal-body  input {
+    min-width: 0;
+    width: auto !important;
+}
+
+.modal-footer {
+    margin-top: 20px;
+}
 
 /*----------------------------*\
     $PAGE - HOME
@@ -582,6 +680,10 @@ body > header input {
 
 .gs-content > .gs-fright .gs-infocause ul.gs-follcontrib .ng-binding {
     font-size: 40px;
+}
+
+ul.gs-follcontrib  .gs-buttonfollow {
+    padding-top: 20px;
 }
 
 
