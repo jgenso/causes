@@ -3,14 +3,16 @@ package code.snippet
 import code.config.Site
 import code.menu.CauseMenus
 import code.model.{Resource, Cause}
+import net.liftmodules.extras.SnippetHelper
 import net.liftweb.common.{Box, Full, Empty, Failure}
 import net.liftweb.http.js.JsCmds.{Focus, RedirectTo, Noop}
 import net.liftweb.http.{IdMemoizeTransform, RequestVar, S, SHtml}
 import net.liftweb.util
-import net.liftweb.util.CssSel
+import net.liftweb.util.{PassThru, CssSel}
 import util.Helpers._
 
 import scala.collection.mutable.ArrayBuffer
+import scala.xml.NodeSeq
 
 /**
  * Created by andrea on 12/7/14.
@@ -21,9 +23,19 @@ object resourceRequestVar extends RequestVar[Box[Resource]](Empty)
 
 object CausesManagement {
 
+  def edit: CssSel = CauseMenus.causeEdit.currentValue.map(cause => {
+    val resources = Cause.resourcesByCause(cause)
+    resourcesRequestVar.set(resources)
+    add(cause)
+  }) openOr ("*" #> PassThru)
+
   def add: CssSel = {
-    val cause = Cause.createRecord
+    val cause = (Cause.createRecord)
     resourcesRequestVar.set(Nil)
+    add(cause)
+  }
+
+  private def add(cause: Cause): CssSel = {
     "data-name=name" #> cause.name.toAjaxForm &
     "data-name=slogan" #> cause.slogan.toAjaxForm &
     "data-name=description" #> cause.description.toAjaxForm &

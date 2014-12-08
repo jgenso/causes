@@ -216,6 +216,10 @@ object Cause extends Cause with MongoMetaRecord[Cause] {
     Cause.orderDesc(_.id).fetch()
   }
 
+  def resourcesByCause(cause: Cause): List[Resource] = {
+    Resource.where(_.cause eqs cause.id.get).fetch()
+  }
+
 }
 
 object CauseStatus extends Enumeration {

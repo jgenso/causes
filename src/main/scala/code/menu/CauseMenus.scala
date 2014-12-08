@@ -47,4 +47,8 @@ object CauseMenus extends Locs {
   val causeManagement =
     Menu("Cause Management", "Create cause") / "cause" / "add"  >> RequireLoggedIn
 
+  val causeEdit =
+    Menu.param[Cause]("Edit Cause", "Edit Cause", Cause.findForOrganizer(_, User.currentUser), c => c.id.get.toString) /
+      "cause" / * / "edit" >> TemplateBox(() => Templates("cause" :: "edit" :: Nil))
+
 }

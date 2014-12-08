@@ -60,6 +60,7 @@ object Site extends Locs {
     causeFollowers,
     causeLog,
     causeManagement,
+    causeEdit,
     causeDashBoard,
     causeComments,
     Menu.i("Error") / "error" >> Hidden,
